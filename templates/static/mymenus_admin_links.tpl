@@ -66,6 +66,9 @@
                                 <td width="17%" class="discrete">
                                     <{$menu.link}>
                                 </td>
+                                <td width="10%" class="discrete">
+                                    <{$menu.css}>
+                                </td>
                                 <td width="6%" class="discrete">
                                     <{$smarty.const._AM_MYMENUS_MENU_GROUPS}>:&nbsp;
                                     <{foreach item=group from=$menu.groups name=groupsloop}>
@@ -110,6 +113,9 @@
                                                 </td>
                                                 <td width="17%" class="discrete">
                                                     <{$smenu.link}>
+                                                </td>
+                                                <td width="10%" class="discrete">
+                                                    <{$smenu.css}>
                                                 </td>
                                                 <td width="6%" class="discrete">
                                                     <{$smarty.const._AM_MYMENUS_MENU_GROUPS}>:&nbsp;
@@ -159,6 +165,9 @@
                                                                 </td>
                                                                 <td width="17%" class="discrete">
                                                                     <{$ssmenu.link}>
+                                                                </td>
+                                                                <td width="10%" class="discrete">
+                                                                    <{$ssmenu.css}>
                                                                 </td>
                                                                 <td width="6%" class="discrete">
                                                                     <{$smarty.const._AM_MYMENUS_MENU_GROUPS}>:&nbsp;
