@@ -16,13 +16,16 @@
  * @since           1.0
  * @author          trabis <lusopoemas@gmail.com>
  */
-
 defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 use XoopsModules\Mymenus;
 
+$moduleDirName      = basename(dirname(__DIR__));
+$moduleDirNameUpper = mb_strtoupper($moduleDirName);
+
 /** @var \XoopsModules\Mymenus\Helper $helper */
 $helper = \XoopsModules\Mymenus\Helper::getInstance();
+$helper->loadLanguage('common');
 
 $pathIcon32 = \Xmf\Module\Admin::menuIconPath('');
 if (is_object($helper->getModule())) {
@@ -33,23 +36,38 @@ $adminmenu = [
     [
         'title' => _MI_MYMENUS_ADMMENU0,
         'link'  => 'admin/index.php',
-        'icon'  => "{$pathIcon32}/home.png"
+        'icon'  => "{$pathIcon32}/home.png",
     ],
     [
         'title' => _MI_MYMENUS_MENUSMANAGER,
         'link'  => 'admin/menus.php',
-        'icon'  => "{$pathIcon32}/manage.png"
+        'icon'  => "{$pathIcon32}/manage.png",
     ],
     [
         'title' => _MI_MYMENUS_MENUMANAGER,
         'link'  => 'admin/links.php',
-        'icon'  => "{$pathIcon32}/insert_table_row.png"
+        'icon'  => "{$pathIcon32}/insert_table_row.png",
+    ],
+    [
+        //        'title' => _MI_MYMENUS_BLOCKS, //'Block/Group Admin'
+        'title' => constant('CO_' . $moduleDirNameUpper . '_' . 'BLOCKS'),
+        'link'  => 'admin/blocksadmin.php',
+        'icon'  => $pathIcon32 . '/block.png',
+    ],
+    [
+        'title' => _MI_MYMENUS_ADMENU6,  //Permissions,
+        'link'  => 'admin/myblocksadmin.php',
+        'desc'  => constant('CO_' . $moduleDirNameUpper . '_' . 'BLOCKS_DESC'),
+        'icon'  => $pathIcon32 . '/permissions.png',
     ],
     [
         'title' => _MI_MYMENUS_ABOUT,
         'link'  => 'admin/about.php',
-        'icon'  => "{$pathIcon32}/about.png"
-    ]
+        'icon'  => "{$pathIcon32}/about.png",
+    ],
 ];
+
+//constant('CO_' . $moduleDirNameUpper . '_' . 'PERMISSIONS')
+//constant('CO_' . $moduleDirNameUpper . '_' . 'BLOCKS')
 
 //$mymenus_adminmenu = $adminmenu;

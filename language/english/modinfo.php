@@ -14,7 +14,9 @@ define('_MI_MYMENUS_BLK_DSC', '');
 // Admin menu
 define('_MI_MYMENUS_MENUSMANAGER', 'Menus manager');
 define('_MI_MYMENUS_MENUMANAGER', 'Links manager');
+define('_MI_MYMENUS_BLOCKS', 'Blocks Admin');
 define('_MI_MYMENUS_ABOUT', 'About');
+define('_MI_MYMENUS_ADMENU6', 'Permissions');
 
 //Configs
 define('_MI_MYMENUS_CONF_ASSIGN_METHOD', 'Assign method');
