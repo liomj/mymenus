@@ -1,4 +1,6 @@
-<?php namespace XoopsModules\Mymenus;
+<?php
+
+namespace XoopsModules\Mymenus;
 
 /*
  You may not change or alter any portion of this comment or credits

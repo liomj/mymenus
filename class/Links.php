@@ -1,4 +1,6 @@
-<?php namespace XoopsModules\Mymenus;
+<?php
+
+namespace XoopsModules\Mymenus;
 
 /*
  You may not change or alter any portion of this comment or credits
@@ -41,9 +43,9 @@ class Links extends \XoopsObject
      */
     public function __construct()
     {
-        /** @var \XoopsModules\Mymenus\Helper $this->helper */
+        /** @var \XoopsModules\Mymenus\Helper $this ->helper */
         $this->helper = \XoopsModules\Mymenus\Helper::getInstance();
-        $this->db      = \XoopsDatabaseFactory::getDatabaseConnection();
+        $this->db     = \XoopsDatabaseFactory::getDatabaseConnection();
         $this->initVar('id', XOBJ_DTYPE_INT);
         $this->initVar('pid', XOBJ_DTYPE_INT);
         $this->initVar('mid', XOBJ_DTYPE_INT);

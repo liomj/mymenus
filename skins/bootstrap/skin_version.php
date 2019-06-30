@@ -16,28 +16,27 @@
  * @since           1.0
  * @author          trabis <lusopoemas@gmail.com>
  */
-
 $skinVersion['template'] = 'templates/template.tpl';
 
 $skinVersion['css'] = [
     'css/superfish.css',
-    'css/superfish-navbar.css'
+    'css/superfish-navbar.css',
 ];
 
+//$skinVersion['js'] = ['../../../../browse.php?Frameworks/jquery/jquery.js',
 $skinVersion['js'] = [
+    '../../assets/js/jquery.js',
     //        '../../assets/js/jquery-1.11.2.min.js',
-    '../../../../browse.php?Frameworks/jquery/jquery.js',
     '../../assets/js/hoverIntent.js',
-    '../../assets/js/superfish.js'
+    '../../assets/js/superfish.js',
 ];
 
-$header = "\n" . '<script type="text/javascript">';
-$header .= "\n" . '  var $sfnav = jQuery.noConflict()';
-$header .= "\n" . '  $sfnav(function(){';
-$header .= "\n" . '    $sfnav(\'ul.sf-menu\').superfish({';
-$header .= "\n" . '       pathClass:  \'current\'';
-$header .= "\n" . '    });';
-$header .= "\n" . '  });';
-$header .= "\n" . '</script>';
+$header = "\n" . '<script type="text/javascript">
+      $(document).ready(function () {
+          jQuery("ul.sf-menu").superfish();          
+             pathClass:  "current"
+         });
+      })
+</script>';
 
 $skinVersion['header'] = $header;

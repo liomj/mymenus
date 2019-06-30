@@ -23,7 +23,7 @@ use XoopsModules\Mymenus\Utility;
 
 defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
-require  dirname(__DIR__) . '/include/common.php';
+require dirname(__DIR__) . '/include/common.php';
 
 /**
  * @param array $options array(0 => menu, 1 => moduleSkin, 2 => useThemeSkin, 3 => displayMethod, 4 => unique_id, 5 => themeSkin)
@@ -40,7 +40,7 @@ function mymenus_block_show($options)
     $xoopsLogger->startTime('My Menus Block');
     $myts = \MyTextSanitizer::getInstance();
 
-        $registry = Mymenus\Registry::getInstance();
+    $registry = Mymenus\Registry::getInstance();
     $plugin   = Mymenus\Plugin::getInstance();
     $plugin->triggerEvent('Boot');
 
@@ -90,14 +90,13 @@ function mymenus_block_show($options)
     // Get extra files from skins
     $skinInfo = Utility::getSkinInfo($options[1], $options[2], isset($options[5]) ? $options[5] : '');
 
-    //
     if (isset($skinInfo['css'])) {
         $cssArray = array_merge($cssArray, $skinInfo['css']);
     }
     if (isset($skinInfo['js'])) {
         $jsArray = array_merge($jsArray, $skinInfo['js']);
     }
-    //
+
     if ('xoopstpl' === $helper->getConfig('assign_method')) {
         $tpl_vars = '';
         foreach ($cssArray as $file) {
@@ -121,14 +120,14 @@ function mymenus_block_show($options)
             $GLOBALS['xoopsTpl']->assign('xoops_footer', @$GLOBALS['xoopsTpl']->get_template_vars('xoops_footer') . "\n" . $skinInfo['header']);
         }
     }
-    //
+
     $blockTpl = new \XoopsTpl();
     $blockTpl->assign([
                           'block'     => $block,
                           'config'    => $skinInfo['config'],
                           'skinurl'   => $skinInfo['url'],
                           'skinpath'  => $skinInfo['path'],
-                          'xlanguage' => xoops_isActiveModule('xlanguage') ? true : false // xLanguage check
+                          'xlanguage' => xoops_isActiveModule('xlanguage') ? true : false, // xLanguage check
                       ]);
     // Assign ul class
     $menusObj = $helper->getHandler('Menus')->get($mid);
@@ -175,7 +174,7 @@ function mymenus_block_edit($options)
 {
     /** @var \XoopsModules\Mymenus\Helper $helper */
     $helper = \XoopsModules\Mymenus\Helper::getInstance();
-    //
+
     xoops_loadLanguage('admin', 'mymenus');
     xoops_load('XoopsFormLoader');
     // option 0: menu
@@ -216,7 +215,7 @@ function mymenus_block_edit($options)
     // option 3: displayMethod
     $displayMethodsList      = [
         'block'    => _MB_MYMENUS_DISPLAY_METHOD_BLOCK,
-        'template' => _MB_MYMENUS_DISPLAY_METHOD_TEMPLATE
+        'template' => _MB_MYMENUS_DISPLAY_METHOD_TEMPLATE,
     ];
     $form                    .= '<b>' . _MB_MYMENUS_DISPLAY_METHOD . '</b>&nbsp;';
     $formDisplayMethodSelect = new \XoopsFormSelect('', 'options[3]', $options[3], 1);

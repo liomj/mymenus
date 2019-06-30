@@ -1,4 +1,6 @@
-<?php namespace XoopsModules\Mymenus;
+<?php
+
+namespace XoopsModules\Mymenus;
 
 /*
  You may not change or alter any portion of this comment or credits
@@ -24,7 +26,6 @@ defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 //require  dirname(__DIR__) . '/include/common.php';
 
-
 /**
  * Class LinksHandler
  */
@@ -42,7 +43,7 @@ class LinksHandler extends \XoopsPersistableObjectHandler
     public function __construct(\XoopsDatabase $db = null)
     {
         parent::__construct($db, 'mymenus_links', Links::class, 'id', 'title');
-        /** @var \XoopsModules\Mymenus\Helper $this->helper */
+        /** @var \XoopsModules\Mymenus\Helper $this ->helper */
         $this->helper = \XoopsModules\Mymenus\Helper::getInstance();
     }
 
@@ -67,7 +68,7 @@ class LinksHandler extends \XoopsPersistableObjectHandler
         $sql    .= ' ORDER BY weight ASC';
         $result = $this->db->query($sql);
         $i      = 1;  //lets start at 1 please!
-        while (false !== (list($id) = $this->db->fetchRow($result))) {
+        while (list($id) = $this->db->fetchRow($result)) {
             $sql = 'UPDATE ' . $this->table;
             $sql .= " SET weight = {$i}";
             $sql .= " WHERE id = {$id}";

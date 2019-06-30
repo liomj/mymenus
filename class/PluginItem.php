@@ -1,4 +1,6 @@
-<?php namespace XoopsModules\Mymenus;
+<?php
+
+namespace XoopsModules\Mymenus;
 
 /*
  You may not change or alter any portion of this comment or credits
@@ -25,13 +27,11 @@ defined('XOOPS_ROOT_PATH') || die('Restricted access');
 //require  dirname(__DIR__) . '/include/common.php';
 xoops_load('XoopsLists');
 
-
 /**
  * Class PluginItem
  */
 class PluginItem
 {
-
     /**
      * @param string $name
      *
@@ -40,7 +40,7 @@ class PluginItem
     public static function loadLanguage($name)
     {
         /** @var \XoopsModules\Mymenus\Helper $helper */
-        $helper  = \XoopsModules\Mymenus\Helper::getInstance();
+        $helper   = \XoopsModules\Mymenus\Helper::getInstance();
         $language = $GLOBALS['xoopsConfig']['language'];
         //        $path     = $GLOBALS['xoops']->path("modules/{$mymenus->dirname}/plugins/{$name}/language");
         //        if (!($ret = @require "{$path}/{$language}/{$name}.php")) {

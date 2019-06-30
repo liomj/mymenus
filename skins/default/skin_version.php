@@ -16,7 +16,6 @@
  * @since           1.0
  * @author          trabis <lusopoemas@gmail.com>
  */
-
 $skinVersion['template'] = 'templates/template.tpl';
 $skinVersion['css']      = ['css/pro_dropdown_3.css'];
 $skinVersion['js']       = ['stuHover.js'];

@@ -1,4 +1,6 @@
-<?php namespace XoopsModules\Mymenus\Plugins\MyMenus;
+<?php
+
+namespace XoopsModules\Mymenus\Plugins\MyMenus;
 
 /*
  You may not change or alter any portion of this comment or credits
@@ -30,7 +32,7 @@ class PluginItem extends Mymenus\PluginItem
 {
     public static function eventBoot()
     {
-        $registry      = Mymenus\Registry::getInstance();
+        $registry = Mymenus\Registry::getInstance();
         /** @var \XoopsMemberHandler $memberHandler */
         $memberHandler = xoops_getHandler('member');
 
@@ -207,7 +209,7 @@ class PluginItem extends Mymenus\PluginItem
      *
      * @return int
      */
-    public static function getExtraValue($type = 'user', $value)
+    public static function getExtraValue($type, $value)
     {
         $registry = Mymenus\Registry::getInstance();
         $ret      = 0;

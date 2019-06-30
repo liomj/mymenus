@@ -16,19 +16,19 @@
  * @since           1.0
  * @author          trabis <lusopoemas@gmail.com>
  */
-
 $skinVersion['template'] = 'templates/template.tpl';
 
 $skinVersion['css'] = [
     'css/superfish.css',
-    'css/superfish-navbar.css'
+    'css/superfish-navbar.css',
 ];
 
 $skinVersion['js'] = [
-    '../../../../browse.php?Frameworks/jquery/jquery.js',
+//    '../../../../browse.php?Frameworks/jquery/jquery.js',
+    '../../assets/js/jquery.js',
     //                           '../../assets/js/jquery-1.11.2.min.js',
     '../../assets/js/hoverIntent.js',
-    '../../assets/js/superfish.js'
+    '../../assets/js/superfish.js',
 ];
 
 $header = "\n" . '<script type="text/javascript">';

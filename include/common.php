@@ -8,6 +8,7 @@
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  */
+
 /**
  * Mymenus module
  *
@@ -24,8 +25,8 @@ require dirname(__DIR__) . '/preloads/autoloader.php';
 
 //defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
-$moduleDirName = basename(dirname(__DIR__));
-$moduleDirNameUpper   = strtoupper($moduleDirName); //$capsDirName
+$moduleDirName      = basename(dirname(__DIR__));
+$moduleDirNameUpper = mb_strtoupper($moduleDirName); //$capsDirName
 
 /** @var \XoopsDatabase $db */
 /** @var \XoopsModules\Mymenus\Helper $helper */
@@ -37,8 +38,8 @@ $utility = new \XoopsModules\Mymenus\Utility();
 
 $helper->loadLanguage('common');
 
-$pathIcon16    = \Xmf\Module\Admin::iconUrl('', 16);
-$pathIcon32    = \Xmf\Module\Admin::iconUrl('', 32);
+$pathIcon16 = \Xmf\Module\Admin::iconUrl('', 16);
+$pathIcon32 = \Xmf\Module\Admin::iconUrl('', 32);
 if (is_object($helper->getModule())) {
     $pathModIcon16 = $helper->getModule()->getInfo('modicons16');
     $pathModIcon32 = $helper->getModule()->getInfo('modicons32');
@@ -51,7 +52,6 @@ define('MYMENUS_ROOT_PATH', XOOPS_ROOT_PATH . '/modules/' . MYMENUS_DIRNAME);
 define('MYMENUS_IMAGES_URL', MYMENUS_URL . '/assets/images');
 define('MYMENUS_ADMIN_URL', MYMENUS_URL . '/admin');
 define('MYMENUS_ICONS_URL', MYMENUS_URL . '/assets/images/icons');
-
 
 //require MYMENUS_ROOT_PATH . '/include/config.php'; // IN PROGRESS
 require MYMENUS_ROOT_PATH . '/include/constants.php';
@@ -66,9 +66,6 @@ $moduleCopyrightHtml = ''; //"<br><br><a href='' title='' target='_blank'><img s
 // MyTextSanitizer object
 $myts = \MyTextSanitizer::getInstance();
 
-
-
-
 //This is needed or it will not work in blocks.
 global $mymenusIsAdmin;
 
@@ -80,13 +77,13 @@ if (is_object($helper->getModule())) {
 $xoopsModule = $helper->getModule();
 
 // Load Xoops handlers
-/** @var XoopsModuleHandler $moduleHandler */
-$moduleHandler       = xoops_getHandler('module');
-/** @var XoopsMemberHandler $memberHandler */
-$memberHandler       = xoops_getHandler('member');
-/** @var XoopsNotificationHandler $notificationHandler */
+/** @var \XoopsModuleHandler $moduleHandler */
+$moduleHandler = xoops_getHandler('module');
+/** @var \XoopsMemberHandler $memberHandler */
+$memberHandler = xoops_getHandler('member');
+/** @var \XoopsNotificationHandler $notificationHandler */
 $notificationHandler = xoops_getHandler('notification');
-/** @var XoopsGroupPermHandler $grouppermHandler */
-$grouppermHandler        = xoops_getHandler('groupperm');
-/** @var XoopsConfigHandler $configHandler */
-$configHandler       = xoops_getHandler('config');
+/** @var \XoopsGroupPermHandler $grouppermHandler */
+$grouppermHandler = xoops_getHandler('groupperm');
+/** @var \XoopsConfigHandler $configHandler */
+$configHandler = xoops_getHandler('config');

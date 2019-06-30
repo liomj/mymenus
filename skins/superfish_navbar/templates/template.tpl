@@ -8,7 +8,7 @@
         <{/if}>
         <{if $menu.oli}>
         <li<{if $menu.css || $menu.selected}> class="<{/if}>
-            <{if $menu.css}>{<$menu.css}> <{/if}>
+            <{if $menu.css}><{$menu.css}> <{/if}>
             <{if $menu.selected}>current<{/if}>
             <{if $menu.css || $menu.selected}>"<{/if}>>
             <{/if}>

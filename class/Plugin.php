@@ -1,4 +1,6 @@
-<?php namespace XoopsModules\Mymenus;
+<?php
+
+namespace XoopsModules\Mymenus;
 
 /*
  You may not change or alter any portion of this comment or credits
@@ -33,18 +35,15 @@ class Plugin
     protected $registry;
     protected $plugins;
     protected $events;
-    public $helper;
+    public    $helper;
 
-    /**
-     *
-     */
     public function __construct()
     {
         $this->plugins  = [];
         $this->events   = [];
         $this->registry = Mymenus\Registry::getInstance();
-        /** @var \XoopsModules\Mymenus\Helper $this->helper */
-        $this->helper  = \XoopsModules\Mymenus\Helper::getInstance();
+        /** @var \XoopsModules\Mymenus\Helper $this ->helper */
+        $this->helper = \XoopsModules\Mymenus\Helper::getInstance();
         $this->setPlugins();
         $this->setEvents();
     }
@@ -67,8 +66,8 @@ class Plugin
         if (is_dir($dir = $GLOBALS['xoops']->path("modules/{$this->helper->getDirname()}/class/Plugins/"))) {
             $pluginsList = \XoopsLists::getDirListAsArray($dir);
             foreach ($pluginsList as $plugin) {
-//                if (file_exists($GLOBALS['xoops']->path("modules/{$this->helper->getDirname()}/plugins/{$plugin}/{$plugin}.php"))) {
-                $dirname = $this->helper->getDirname();
+                //                if (file_exists($GLOBALS['xoops']->path("modules/{$this->helper->getDirname()}/plugins/{$plugin}/{$plugin}.php"))) {
+                $dirname   = $this->helper->getDirname();
                 $className = "\XoopsModules\{$dirname}\Plugins\{$plugin}\PluginItem";
                 if (class_exists($className)) {
                     $this->plugins[] = $plugin;
@@ -80,16 +79,16 @@ class Plugin
     public function setEvents()
     {
         foreach ($this->plugins as $plugin) {
-//            require $GLOBALS['xoops']->path("modules/{$this->helper->getDirname()}/plugins/{$plugin}/{$plugin}.php");
-            $dirname = $this->helper->getDirname();
+            //            require $GLOBALS['xoops']->path("modules/{$this->helper->getDirname()}/plugins/{$plugin}/{$plugin}.php");
+            $dirname   = $this->helper->getDirname();
             $className = "\XoopsModules\{$dirname}\Plugins\{$plugin}\PluginItem";
             if (!class_exists($className)) {
                 continue;
             }
             $classMethods = get_class_methods($className);
             foreach ($classMethods as $method) {
-                if (0 === strpos($method, 'event')) {
-                    $eventName                  = strtolower(str_replace('event', '', $method));
+                if (0 === mb_strpos($method, 'event')) {
+                    $eventName                  = mb_strtolower(str_replace('event', '', $method));
                     $event                      = ['className' => $className, 'method' => $method];
                     $this->events[$eventName][] = $event;
                 }
@@ -99,7 +98,7 @@ class Plugin
 
     /**
      * @param string $eventName
-     * @param array $args
+     * @param array  $args
      */
     public function triggerEvent($eventName, $args = [])
     {

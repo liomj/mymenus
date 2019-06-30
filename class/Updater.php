@@ -1,4 +1,6 @@
-<?php namespace XoopsModules\Mymenus;
+<?php
+
+namespace XoopsModules\Mymenus;
 
 /**
  * Class Updater
@@ -6,7 +8,6 @@
  */
 class Updater
 {
-
     // =========================================================================================
     // This class updates any existing table of a < 1.50 version to the format used
     // in the release of Mymenus 1.51
@@ -41,7 +42,7 @@ class Updater
         $tables_menus = [
             'id'    => 'int(5) NOT NULL auto_increment',
             'title' => "varchar(255) NOT NULL default ''",
-            'css'   => "varchar(255) NOT NULL default ''"
+            'css'   => "varchar(255) NOT NULL default ''",
         ];
 
         $tables_links = [
@@ -57,7 +58,7 @@ class Updater
             'groups'    => 'text default NULL',
             'hooks'     => 'text default NULL',
             'image'     => 'varchar(255) default NULL',
-            'css'       => 'varchar(255) default NULL'
+            'css'       => 'varchar(255) default NULL',
         ];
 
         /*
@@ -143,8 +144,8 @@ class Updater
     }
 
     /**
-     * @param array       $table
-     * @param string      $tablename
+     * @param array        $table
+     * @param string       $tablename
      * @param \XoopsObject $module
      * @return bool|null
      */

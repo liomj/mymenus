@@ -20,7 +20,7 @@
 use Xmf\Request;
 
 $currentFile = basename(__FILE__);
-require __DIR__   . '/admin_header.php';
+require __DIR__ . '/admin_header.php';
 
 $op = Request::getString('op', 'list');
 switch ($op) {
@@ -37,17 +37,17 @@ switch ($op) {
         }
         $adminObject->addItemButton(_ADD, $currentFile . '?op=edit', 'add');
         $adminObject->displayButton('left');
-        //
+
         $menusCount = $helper->getHandler('Menus')->getCount();
         $GLOBALS['xoopsTpl']->assign('menusCount', $menusCount);
-        //
+
         if ($menusCount > 0) {
             // get filter parameters
             $filter_menus_title_condition = Request::getString('filter_menus_title_condition', '');
             $filter_menus_title           = Request::getString('filter_menus_title', '');
-            //
+
             $menusCriteria = new \CriteriaCompo();
-            //
+
             if (true === $apply_filter) {
                 // evaluate title criteria
                 if ('' !== $filter_menus_title) {
@@ -80,15 +80,15 @@ switch ($op) {
             $GLOBALS['xoopsTpl']->assign('apply_filter', $apply_filter);
             $menusFilterCount = $helper->getHandler('Menus')->getCount($menusCriteria);
             $GLOBALS['xoopsTpl']->assign('menusFilterCount', $menusFilterCount);
-            //
+
             $menusCriteria->setSort('id');
             $menusCriteria->setOrder('ASC');
-            //
+
             $start = Request::getInt('start', 0);
             $limit = $helper->getConfig('admin_perpage');
             $menusCriteria->setStart($start);
             $menusCriteria->setLimit($limit);
-            //
+
             if ($menusFilterCount > $limit) {
                 xoops_load('XoopsPagenav');
                 $linklist   = "op={$op}";
@@ -100,7 +100,7 @@ switch ($op) {
                 $pagenav = '';
             }
             $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav);
-            //
+
             $filter_menus_title_condition_select = new \XoopsFormSelect(_AM_MYMENUS_MENU_TITLE, 'filter_menus_title_condition', $filter_menus_title_condition, 1, false);
             $filter_menus_title_condition_select->addOption('CONTAINS', _CONTAINS);
             $filter_menus_title_condition_select->addOption('MATCHES', _MATCHES);
@@ -109,7 +109,7 @@ switch ($op) {
             $GLOBALS['xoopsTpl']->assign('filter_menus_title_condition_select', $filter_menus_title_condition_select->render());
             $GLOBALS['xoopsTpl']->assign('filter_menus_title_condition', $filter_menus_title_condition);
             $GLOBALS['xoopsTpl']->assign('filter_menus_title', $filter_menus_title);
-            //
+
             $menusObjs = $helper->getHandler('Menus')->getObjects($menusCriteria);
             foreach ($menusObjs as $menusObj) {
                 $menusObjArray = $menusObj->getValues(); // as array
@@ -117,13 +117,12 @@ switch ($op) {
                 unset($menusObjArray);
             }
             unset($menusCriteria, $menusObjs);
-        } else {
-            // NOP
         }
-        $GLOBALS['xoopsTpl']->display($GLOBALS['xoops']->path("modules/{$helper->getDirname()}/templates/static/mymenus_admin_menus.tpl"));
-        require __DIR__   . '/admin_footer.php';
-        break;
+        // NOP
 
+        $GLOBALS['xoopsTpl']->display($GLOBALS['xoops']->path("modules/{$helper->getDirname()}/templates/static/mymenus_admin_menus.tpl"));
+        require __DIR__ . '/admin_footer.php';
+        break;
     case 'add':
     case 'edit':
         //  admin navigation
@@ -133,7 +132,7 @@ switch ($op) {
         // buttons
         $adminObject->addItemButton(_LIST, $currentFile . '?op=list', 'list');
         $adminObject->displayButton('left');
-        //
+
         $id = Request::getInt('id', 0);
         if (!$menusObj = $helper->getHandler('Menus')->get($id)) {
             // ERROR
@@ -141,21 +140,20 @@ switch ($op) {
         }
         $form = $menusObj->getForm();
         $form->display();
-        //
-        require __DIR__   . '/admin_footer.php';
-        break;
 
+        require __DIR__ . '/admin_footer.php';
+        break;
     case 'save':
         if (!$GLOBALS['xoopsSecurity']->check()) {
             redirect_header($currentFile, 3, implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
         }
         $id         = Request::getInt('id', 0, 'POST');
         $isNewMenus = 0 == $id;
-        //
+
         $menusObj = $helper->getHandler('Menus')->get($id);
-        $menusObj->setVar('title',  Request::getString('title', '', 'POST'));
+        $menusObj->setVar('title', Request::getString('title', '', 'POST'));
         $menusObj->setVar('css', Request::getString('css', '', 'POST'));
-        //
+
         if (!$helper->getHandler('Menus')->insert($menusObj)) {
             // ERROR
             xoops_cp_header();
@@ -164,16 +162,14 @@ switch ($op) {
             exit();
         }
         $id = (int)$menusObj->getVar('id');
-        //
+
         if ($isNewMenus) {
             // NOP
-        } else {
-            // NOP
         }
-        //
+        // NOP
+
         redirect_header($currentFile, 3, _AM_MYMENUS_MSG_SUCCESS);
         break;
-
     case 'delete':
         $id       = Request::getInt('id', null);
         $menusObj = $helper->getHandler('Menus')->get($id);
@@ -196,7 +192,7 @@ switch ($op) {
             xoops_cp_header();
             xoops_confirm(['ok' => true, 'id' => $id, 'op' => 'delete'], //                $_SERVER['REQUEST_URI'],
                           Request::getString('REQUEST_URI', '', 'SERVER'), sprintf(_AM_MYMENUS_MENUS_SUREDEL, $menusObj->getVar('title')));
-            require __DIR__   . '/admin_footer.php';
+            require __DIR__ . '/admin_footer.php';
         }
         break;
 }

@@ -16,7 +16,6 @@
  * @since           1.0
  * @author          trabis <lusopoemas@gmail.com>
  */
-
 $skinVersion['template'] = 'templates/template.tpl';
 $skinVersion['css']      = ['treemenu.css'];
 $skinVersion['js']       = ['simpletreemenu.js'];

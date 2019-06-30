@@ -1,4 +1,6 @@
-<?php namespace XoopsModules\Mymenus;
+<?php
+
+namespace XoopsModules\Mymenus;
 
 /*
  You may not change or alter any portion of this comment or credits
@@ -17,7 +19,6 @@
  * @since           1.0
  * @author          trabis <lusopoemas@gmail.com>
  */
-
 defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 /**
@@ -28,9 +29,6 @@ class Registry
     protected $entries;
     protected $locks;
 
-    /**
-     *
-     */
     protected function __construct()
     {
         $this->entries = [];
@@ -51,8 +49,6 @@ class Registry
     }
 
     /**
-     * @TODO: move hard coded language string to language file
-     *
      * @param $key
      * @param $item
      *
@@ -62,7 +58,7 @@ class Registry
     {
         $ret = true;
         if (true === $this->isLocked($key)) {
-            trigger_error("Unable to set entry `{$key}`. Entry is locked.", E_USER_WARNING);
+            trigger_error(_AM_MYMENUS_ENTRY_UNABLE . " `{$key}`." . _AM_MYMENUS_ENTRY_LOCKED, E_USER_WARNING);
 
             $ret = false;
         }
@@ -82,8 +78,6 @@ class Registry
 
     /**
      * @param $key
-     *
-     * @return null
      */
     public function getEntry($key)
     {

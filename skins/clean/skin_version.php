@@ -16,5 +16,4 @@
  * @since           1.0
  * @author          trabis <lusopoemas@gmail.com>
  */
-
 $skinVersion['template'] = 'templates/template.tpl';

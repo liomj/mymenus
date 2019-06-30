@@ -19,10 +19,10 @@
 
 use XoopsModules\Mymenus;
 
-require  dirname(dirname(dirname(__DIR__))) . '/include/cp_header.php';
+require dirname(dirname(dirname(__DIR__))) . '/include/cp_header.php';
 xoops_load('XoopsFormLoader');
 
-require  dirname(__DIR__) . '/include/common.php';
+require dirname(__DIR__) . '/include/common.php';
 
 $moduleDirName = basename(dirname(__DIR__));
 
@@ -42,6 +42,7 @@ if (!isset($GLOBALS['xoopsTpl']) || !($GLOBALS['xoopsTpl'] instanceof \XoopsTpl)
 $helper->loadLanguage('admin');
 $helper->loadLanguage('modinfo');
 $helper->loadLanguage('main');
+$helper->loadLanguage('common');
 
 //Module specific elements
 

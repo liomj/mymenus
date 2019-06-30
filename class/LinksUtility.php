@@ -1,4 +1,6 @@
-<?php namespace XoopsModules\Mymenus;
+<?php
+
+namespace XoopsModules\Mymenus;
 
 /*
  You may not change or alter any portion of this comment or credits
@@ -26,26 +28,25 @@ use XoopsModules\Mymenus;
  */
 class LinksUtility
 {
-
     /**
      * Display the links in a menu
      *
-     * @param integer $start
-     * @param integer $mid
+     * @param int $start
+     * @param int $mid
      *
      * @return bool|mixed|string
      */
-    public static function listLinks($start = 0, $mid)
+    public static function listLinks($start, $mid)
     {
         /** @var \XoopsModules\Mymenus\Helper $helper */
         $helper = \XoopsModules\Mymenus\Helper::getInstance();
 
         global $mymenusTpl;
-        //
+
         $linksCriteria = new \CriteriaCompo(new \Criteria('mid', (int)$mid));
         $linksCount    = $helper->getHandler('Links')->getCount($linksCriteria);
         $mymenusTpl->assign('count', $linksCount);
-        //
+
         $linksCriteria->setSort('weight');
         $linksCriteria->setOrder('ASC');
         //
@@ -58,10 +59,9 @@ class LinksUtility
             $menusArray  = $menuBuilder->render();
             $mymenusTpl->assign('menus', $menusArray); // not 'menus', 'links' shoult be better
         }
-        //
+
         $mymenusTpl->assign('addform', self::editLink(null, null, $mid));
 
-        //
         return $mymenusTpl->fetch($GLOBALS['xoops']->path("modules/{$helper->getDirname()}/templates/static/mymenus_admin_links.tpl"));
     }
 
@@ -72,14 +72,14 @@ class LinksUtility
     {
         /** @var \XoopsModules\Mymenus\Helper $helper */
         $helper = \XoopsModules\Mymenus\Helper::getInstance();
-        //
+
         if (!$GLOBALS['xoopsSecurity']->check()) {
             redirect_header($GLOBALS['mymenusAdminPage'], 3, implode('<br>', $GLOBALS['xoopsSecurity']->getErrors()));
         }
         if (!$mid) {
             redirect_header($GLOBALS['mymenusAdminPage'] . '?op=list', 2, _AM_MYMENUS_MSG_MENU_INVALID_ERROR);
         }
-        //
+
         $linksCiteria = new \CriteriaCompo(new \Criteria('mid', $mid));
         $linksCiteria->setSort('weight');
         $linksCiteria->setOrder('DESC');
@@ -98,22 +98,22 @@ class LinksUtility
             $_POST['hooks'] = [];
         }
         // clean incoming POST vars
-        $newLinksObj->setVar('id', Request::getInt('id',0,'POST'));
-        $newLinksObj->setVar('pid', Request::getInt('pid',0,'POST'));
-        $newLinksObj->setVar('mid', Request::getInt('mid',0,'POST'));
-        $newLinksObj->setVar('title', Request::getString('title','','POST'));
-        $newLinksObj->setVar('alt_title',  Request::getString('alt_title','','POST'));
-        $newLinksObj->setVar('visible', Request::getInt('visible',0,'POST'));
-        $newLinksObj->setVar('link',  Request::getString('link','','POST'));
-        $newLinksObj->setVar('weight', Request::getInt('weight',0,'POST'));
-        $newLinksObj->setVar('target', Request::getString('target','','POST'));
+        $newLinksObj->setVar('id', Request::getInt('id', 0, 'POST'));
+        $newLinksObj->setVar('pid', Request::getInt('pid', 0, 'POST'));
+        $newLinksObj->setVar('mid', Request::getInt('mid', 0, 'POST'));
+        $newLinksObj->setVar('title', Request::getString('title', '', 'POST'));
+        $newLinksObj->setVar('alt_title', Request::getString('alt_title', '', 'POST'));
+        $newLinksObj->setVar('visible', Request::getInt('visible', 0, 'POST'));
+        $newLinksObj->setVar('link', Request::getString('link', '', 'POST'));
+        $newLinksObj->setVar('weight', Request::getInt('weight', 0, 'POST'));
+        $newLinksObj->setVar('target', Request::getString('target', '', 'POST'));
         $newLinksObj->setVar('groups', Request::getArray('groups', [], 'POST'));
         $newLinksObj->setVar('hooks', Request::getArray('hooks', [], 'POST'));
-        $newLinksObj->setVar('image', Request::getString('image','','POST'));
-        $newLinksObj->setVar('css', Request::getString('css','','POST'));
-        
+        $newLinksObj->setVar('image', Request::getString('image', '', 'POST'));
+        $newLinksObj->setVar('css', Request::getString('css', '', 'POST'));
+
         $newLinksObj->setVar('weight', $weight);
-        /** @var  \XoopsModules\Mymenus\LinksHandler $linksHandler */
+        /** @var \XoopsModules\Mymenus\LinksHandler $linksHandler */
         $linksHandler = $helper->getHandler('Links');
         if (!$linksHandler->insert($newLinksObj)) {
             $msg = _AM_MYMENUS_MSG_ERROR;
@@ -126,23 +126,23 @@ class LinksUtility
     }
 
     /**
-     * @param integer $id
-     * @param integer $mid
+     * @param int $id
+     * @param int $mid
      */
     public static function saveLink($id, $mid)
     {
         /** @var \XoopsModules\Mymenus\Helper $helper */
         $helper = \XoopsModules\Mymenus\Helper::getInstance();
-        /** @var  \XoopsModules\Mymenus\LinksHandler $linksHandler */
+        /** @var \XoopsModules\Mymenus\LinksHandler $linksHandler */
         $linksHandler = $helper->getHandler('Links');
-        //
+
         if (!$GLOBALS['xoopsSecurity']->check()) {
             redirect_header($GLOBALS['mymenusAdminPage'], 3, implode('<br>', $GLOBALS['xoopsSecurity']->getErrors()));
         }
         if (!$mid) {
             redirect_header($GLOBALS['mymenusAdminPage'] . '?op=list', 2, _AM_MYMENUS_MSG_MENU_INVALID_ERROR);
         }
-        //
+
         $mid      = (int)$mid;
         $linksObj = $linksHandler->get((int)$id);
 
@@ -190,7 +190,7 @@ class LinksUtility
         $xoopsLogger->activated = false;
         error_reporting(0);
 
-        $pathIcon16      = \Xmf\Module\Admin::iconUrl('', 16);
+        $pathIcon16 = \Xmf\Module\Admin::iconUrl('', 16);
 
         //        $registry = MymenusRegistry::getInstance();
         //        $plugin   = MymenusPlugin::getInstance();
@@ -224,7 +224,7 @@ class LinksUtility
             // display menu options (if more than 1 menu available
             if (!$linksObj->getVar('mid')) { // initial menu value not set
                 //                $menuValues = array_flip($menusList);
-                $formmid = new \XoopsFormSelect(_AM_MYMENUS_MENU_MENU, 'mid', $mid);//array_shift($menuValues));
+                $formmid = new \XoopsFormSelect(_AM_MYMENUS_MENU_MENU, 'mid', $mid); //array_shift($menuValues));
             } else {
                 $formmid = new \XoopsFormSelect(_AM_MYMENUS_MENU_MENU, 'mid', $linksObj->getVar('mid'));
             }
@@ -277,7 +277,7 @@ class LinksUtility
         // links: css
         $formcss = new \XoopsFormText(_AM_MYMENUS_MENU_CSS, 'css', 50, 255, $linksObj->getVar('css'));
         $form->addElement($formcss);
-        //
+
         $buttonTray = new \XoopsFormElementTray('', '');
         $buttonTray->addElement(new \XoopsFormButton('', 'submit_button', _SUBMIT, 'submit'));
         $button = new \XoopsFormButton('', 'reset', _CANCEL, 'button');
@@ -300,11 +300,10 @@ class LinksUtility
     }
 
     /**
-     *
      * Update the {@see MymenusLinks} weight (order)
      *
-     * @param integer $id of links object
-     * @param integer $weight
+     * @param int $id of links object
+     * @param int $weight
      */
     public static function moveLink($id, $weight)
     {
@@ -312,7 +311,7 @@ class LinksUtility
         $helper = \XoopsModules\Mymenus\Helper::getInstance();
         /** @var Mymenus\LinksHandler $linksHandler */
         $linksHandler = $helper->getHandler('Links');
-        //
+
         $linksObj = $linksHandler->get((int)$id);
         $linksObj->setVar('weight', (int)$weight);
         $linksHandler->insert($linksObj);
@@ -327,14 +326,14 @@ class LinksUtility
     {
         /** @var \XoopsModules\Mymenus\Helper $helper */
         $helper = \XoopsModules\Mymenus\Helper::getInstance();
-        /** @var  \XoopsModules\Mymenus\LinksHandler $linksHandler */
+        /** @var \XoopsModules\Mymenus\LinksHandler $linksHandler */
         $linksHandler = $helper->getHandler('Links');
         // Disable xoops debugger in dialog window
         xoops_load('xoopslogger');
         $xoopsLogger            = \XoopsLogger::getInstance();
         $xoopsLogger->activated = false;
         error_reporting(0);
-        //
+
         $linksObj = $linksHandler->get((int)$id);
         $visible  = (1 === $linksObj->getVar('visible')) ? 0 : 1;
         $linksObj->setVar('visible', $visible);

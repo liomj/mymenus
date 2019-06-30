@@ -8,6 +8,7 @@
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  */
+
 /**
  * Mymenus module
  *
@@ -31,7 +32,7 @@ xoops_loadLanguage('admin', $helper->getDirname());
 
 /**
  * @param  object|\XoopsObject $xoopsModule
- * @param  int                $previousVersion
+ * @param  int                 $previousVersion
  * @return bool               FALSE if failed
  */
 function xoops_module_update_mymenus(\XoopsObject $xoopsModule, $previousVersion)
@@ -46,7 +47,6 @@ function xoops_module_update_mymenus(\XoopsObject $xoopsModule, $previousVersion
 
     return true;
 }
-
 
 if (!function_exists('InfoColumnExists')) {
     /**

@@ -20,7 +20,7 @@
 use Xmf\Request;
 use XoopsModules\Mymenus;
 
-require __DIR__   . '/admin_header.php';
+require __DIR__ . '/admin_header.php';
 
 $currentFile = basename(__FILE__);
 
@@ -56,31 +56,27 @@ $visible = Request::getInt('visible', 0);
 
 $op = Request::getString('op', 'list');
 switch ($op) {
-
-/*
-        case 'form':
-            xoops_cp_header();
-            $adminObject  = \Xmf\Module\Admin::getInstance();
-            $adminObject->displayNavigation($currentFile);
-            //
-            echo editLink(null, $pid, $mid);
-            //
-            require __DIR__   . '/admin_footer.php';
-            break;
-*/
+    /*
+            case 'form':
+                xoops_cp_header();
+                $adminObject  = \Xmf\Module\Admin::getInstance();
+                $adminObject->displayNavigation($currentFile);
+                //
+                echo editLink(null, $pid, $mid);
+                //
+                require __DIR__   . '/admin_footer.php';
+                break;
+    */
 
     case 'edit':
         echo Mymenus\LinksUtility::editLink($id, null, $mid);
         break;
-
     case 'add':
         Mymenus\LinksUtility::addLink($mid);
         break;
-
     case 'save':
         Mymenus\LinksUtility::saveLink($id, $mid);
         break;
-
     case 'delete':
         $id       = Request::getInt('id', null);
         $linksObj = $helper->getHandler('Links')->get($id);
@@ -108,25 +104,22 @@ switch ($op) {
             xoops_cp_header();
             xoops_confirm(['ok' => true, 'id' => $id, 'op' => 'delete'], //                $_SERVER['REQUEST_URI'],
                           Request::getString('REQUEST_URI', '', 'SERVER'), sprintf(_AM_MYMENUS_LINKS_SUREDEL, $linksObj->getVar('title')));
-            require __DIR__   . '/admin_footer.php';
+            require __DIR__ . '/admin_footer.php';
         }
         break;
-
     case 'move':
         xoops_cp_header();
         $adminObject = \Xmf\Module\Admin::getInstance();
         $adminObject->displayNavigation($currentFile);
-        //
+
         Mymenus\LinksUtility::moveLink($id, $weight);
         echo Mymenus\LinksUtility::listLinks($start, $mid);
-        //
-        require __DIR__   . '/admin_footer.php';
-        break;
 
+        require __DIR__ . '/admin_footer.php';
+        break;
     case 'toggle':
         Mymenus\LinksUtility::toggleLinkVisibility($id, $visible);
         break;
-
     case 'order':
         $test  = [];
         $order = Request::getString('mod', '', 'POST');
@@ -145,7 +138,6 @@ switch ($op) {
             $helper->getHandler('Links')->updateWeights($linksObj);
         }
         break;
-
     case 'list':
     default:
         xoops_cp_header();
@@ -162,12 +154,12 @@ switch ($op) {
         $GLOBALS['xoTheme']->addScript(XOOPS_URL . "/modules/{$helper->getDirname()}/assets/js/links.js");
         echo Mymenus\LinksUtility::listLinks($start, $mid);
         // Disable xoops debugger in dialog window
-//        require $GLOBALS['xoops']->path('/class/logger/xoopslogger.php');
+        //        require $GLOBALS['xoops']->path('/class/logger/xoopslogger.php');
         xoops_load('xoopslogger');
         $xoopsLogger            = XoopsLogger::getInstance();
         $xoopsLogger->activated = true;
         error_reporting(-1);
-        //
-        require __DIR__   . '/admin_footer.php';
+
+        require __DIR__ . '/admin_footer.php';
         break;
 }

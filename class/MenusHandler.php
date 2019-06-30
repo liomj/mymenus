@@ -1,4 +1,6 @@
-<?php namespace XoopsModules\Mymenus;
+<?php
+
+namespace XoopsModules\Mymenus;
 
 /*
  You may not change or alter any portion of this comment or credits
@@ -18,13 +20,11 @@
  * @author          trabis <lusopoemas@gmail.com>
  */
 
-use Xmf\Request;
 use XoopsModules\Mymenus;
 
 defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 //require  dirname(__DIR__) . '/include/common.php';
-
 
 /**
  * Class MenusHandler
@@ -43,7 +43,7 @@ class MenusHandler extends \XoopsPersistableObjectHandler
     public function __construct(\XoopsDatabase $db = null)
     {
         parent::__construct($db, 'mymenus_menus', Menus::class, 'id', 'title', 'css');
-        /** @var \XoopsModules\Mymenus\Helper $this->helper */
+        /** @var \XoopsModules\Mymenus\Helper $this ->helper */
         $this->helper = \XoopsModules\Mymenus\Helper::getInstance();
     }
 }

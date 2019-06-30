@@ -16,27 +16,26 @@
  * @since           1.0
  * @author          trabis <lusopoemas@gmail.com>
  */
-
 $skinVersion['template'] = 'templates/template.tpl';
-
-$skinVersion['css'] = 'css/superfish.css';
+$skinVersion['css']      = 'css/superfish.css';
 
 $skinVersion['js'] = [
-    '../../../../browse.php?Frameworks/jquery/jquery.js',
-    // '../../assets/js/jquery-1.11.2.min.js',
+//    '../../../../browse.php?Frameworks/jquery/jquery.js',
+    '../../assets/js/jquery.js',
+    //                           '../../assets/js/jquery-1.11.2.min.js',
     '../../assets/js/hoverIntent.js',
-    '../../assets/js/superfish.js'
+    '../../assets/js/superfish.js',
 ];
 
-$header = "\n" . '<script type="text/javascript">';
-$header .= "\n" . '  var $sf = jQuery.noConflict()';
-$header .= "\n" . '  $sf(function () {';
-$header .= "\n" . '    $sf(\'ul.sf-menu\').superfish({';
-$header .= "\n" . '       delay:       1000,';
-$header .= "\n" . '       animation:   {opacity:\'show\',height:\'show\'},';
-$header .= "\n" . '       speed:       \'fast\'';
-$header .= "\n" . '    });';
-$header .= "\n" . '  });';
-$header .= "\n" . '</script>';
+
+$header = "\n" . '<script type="text/javascript">
+    $(document).ready(function() {
+        jQuery("ul.sf-menu").superfish();
+        delay: 1000;
+        animation: {opacity:"show";height: "show" };
+        speed: "fast"
+        })
+</script>';
+
 
 $skinVersion['header'] = $header;

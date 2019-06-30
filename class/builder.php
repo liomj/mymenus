@@ -1,4 +1,6 @@
-<?php namespace XoopsModules\Mymenus;
+<?php
+
+namespace XoopsModules\Mymenus;
 
 /*
  You may not change or alter any portion of this comment or credits
@@ -146,7 +148,7 @@ class Builder
         foreach ($this->output as $idx => $menu) {
             $selected = 0;
             if ($menu['link']) {
-                $selected = (false !== stripos($self, $menu['link'])) ? 1 : $selected;
+                $selected = (false !== mb_stripos($self, $menu['link'])) ? 1 : $selected;
             }
             $selected = ($menu['link'] == $self) ? 1 : $selected;
             $selected = ($menu['link'] == $default) ? 1 : $selected;
@@ -159,7 +161,7 @@ class Builder
         $longlink = '';
         $longidx  = 0;
         foreach ($sel as $idx => $menu) {
-            if (strlen($menu['link']) > strlen($longlink)) {
+            if (mb_strlen($menu['link']) > mb_strlen($longlink)) {
                 $longidx  = $idx;
                 $longlink = $menu['link'];
             }

@@ -1,4 +1,6 @@
-<?php namespace XoopsModules\Mymenus;
+<?php
+
+namespace XoopsModules\Mymenus;
 
 /*
  You may not change or alter any portion of this comment or credits
@@ -42,9 +44,9 @@ class Menus extends \XoopsObject
      */
     public function __construct()
     {
-        /** @var \XoopsModules\Mymenus\Helper $this->helper */
+        /** @var \XoopsModules\Mymenus\Helper $this ->helper */
         $this->helper = \XoopsModules\Mymenus\Helper::getInstance();
-        $this->db      = \XoopsDatabaseFactory::getDatabaseConnection();
+        $this->db     = \XoopsDatabaseFactory::getDatabaseConnection();
         $this->initVar('id', XOBJ_DTYPE_INT);
         $this->initVar('title', XOBJ_DTYPE_TXTBOX);
         $this->initVar('css', XOBJ_DTYPE_TXTBOX);
@@ -61,7 +63,7 @@ class Menus extends \XoopsObject
         //        $grouppermHandler = xoops_getHandler('groupperm');
         //
         xoops_load('XoopsFormLoader');
-        //
+
         if (false === $action) {
             //            $action = $_SERVER['REQUEST_URI'];
             $action = Request::getString('REQUEST_URI', '', 'SERVER');
@@ -71,7 +73,7 @@ class Menus extends \XoopsObject
         //        $groups  = is_object($GLOBALS['xoopsUser']) ? $GLOBALS['xoopsUser']->getGroups() : array(0 => XOOPS_GROUP_ANONYMOUS);
         //
         $title = $this->isNew() ? _AM_MYMENUS_MENUS_ADD : _AM_MYMENUS_MENUS_EDIT;
-        //
+
         $form = new \XoopsThemeForm($title, 'moneusform', $action, 'post', true);
         $form->setExtra('enctype="multipart/form-data"');
         // menus: title
@@ -85,7 +87,7 @@ class Menus extends \XoopsObject
         // form: button tray
         $buttonTray = new \XoopsFormElementTray('', '');
         $buttonTray->addElement(new \XoopsFormHidden('op', 'save'));
-        //
+
         $buttonSubmit = new \XoopsFormButton('', '', _SUBMIT, 'submit');
         $buttonSubmit->setExtra('onclick="this.form.elements.op.value=\'save\'"');
         $buttonTray->addElement($buttonSubmit);
@@ -93,21 +95,20 @@ class Menus extends \XoopsObject
             // NOP
         } else {
             $form->addElement(new \XoopsFormHidden('id', (int)$this->getVar('id')));
-            //
+
             $buttonDelete = new \XoopsFormButton('', '', _DELETE, 'submit');
             $buttonDelete->setExtra('onclick="this.form.elements.op.value=\'delete\'"');
             $buttonTray->addElement($buttonDelete);
         }
         $buttonReset = new \XoopsFormButton('', '', _RESET, 'reset');
         $buttonTray->addElement($buttonReset);
-        //
+
         $buttonCancel = new \XoopsFormButton('', '', _CANCEL, 'button');
         $buttonCancel->setExtra('onclick="history.go(-1)"');
         $buttonTray->addElement($buttonCancel);
-        //
+
         $form->addElement($buttonTray);
 
-        //
         return $form;
     }
 }

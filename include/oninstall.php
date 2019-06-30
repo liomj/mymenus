@@ -22,9 +22,8 @@ use XoopsModules\Mymenus;
 //require __DIR__ . '/setup.php';
 
 /**
- *
  * Prepares system prior to attempting to install module
- * @param XoopsModule $module {@link XoopsModule}
+ * @param \XoopsModule $module {@link XoopsModule}
  *
  * @return bool true if ready to install, false if not
  */
@@ -43,7 +42,7 @@ function xoops_module_pre_install_mymenus(\XoopsModule $module)
         return false;
     }
 
-    $mod_tables =& $module->getInfo('tables');
+    $mod_tables = &$module->getInfo('tables');
     foreach ($mod_tables as $table) {
         $GLOBALS['xoopsDB']->queryF('DROP TABLE IF EXISTS ' . $GLOBALS['xoopsDB']->prefix($table) . ';');
     }
@@ -52,16 +51,15 @@ function xoops_module_pre_install_mymenus(\XoopsModule $module)
 }
 
 /**
- *
  * Performs tasks required during installation of the module
- * @param XoopsModule $module {@link XoopsModule}
+ * @param \XoopsModule $module {@link XoopsModule}
  *
  * @return bool true if installation successful, false if not
  */
 function xoops_module_install_mymenus(\XoopsModule $module)
 {
-    require   dirname(dirname(dirname(__DIR__))) . '/mainfile.php';
-    require   dirname(__DIR__) . '/include/config.php';
+    require dirname(dirname(dirname(__DIR__))) . '/mainfile.php';
+    require dirname(__DIR__) . '/include/config.php';
 
     $moduleDirName = basename(dirname(__DIR__));
     /** @var \XoopsModules\Mymenus\Helper $helper */
@@ -77,8 +75,8 @@ function xoops_module_install_mymenus(\XoopsModule $module)
 
     // default Permission Settings ----------------------
     global $xoopsModule;
-    $moduleId     = $xoopsModule->getVar('mid');
-    $moduleId2    = $helper->getModule()->mid();
+    $moduleId  = $xoopsModule->getVar('mid');
+
     /** @var \XoopsGroupPermHandler $grouppermHandler */
     $grouppermHandler = xoops_getHandler('groupperm');
     // access rights ------------------------------------------
@@ -98,15 +96,15 @@ function xoops_module_install_mymenus(\XoopsModule $module)
 
     //  ---  COPY blank.png FILES ---------------
     if (count($configurator->copyBlankFiles) > 0) {
-        $file =  dirname(__DIR__) . '/assets/images/blank.png';
+        $file = dirname(__DIR__) . '/assets/images/blank.png';
         foreach (array_keys($configurator->copyBlankFiles) as $i) {
             $dest = $configurator->copyBlankFiles[$i] . '/blank.png';
             $utility::copyFile($file, $dest);
         }
     }
     //delete .html entries from the tpl table
-    $sql = 'DELETE FROM ' . $xoopsDB->prefix('tplfile') . " WHERE `tpl_module` = '" . $xoopsModule->getVar('dirname', 'n') . "' AND `tpl_file` LIKE '%.html%'";
-    $xoopsDB->queryF($sql);
+    $sql = 'DELETE FROM ' . $GLOBALS['xoopsDB']->prefix('tplfile') . " WHERE `tpl_module` = '" . $xoopsModule->getVar('dirname', 'n') . "' AND `tpl_file` LIKE '%.html%'";
+    $GLOBALS['xoopsDB']->queryF($sql);
 
     return true;
 }

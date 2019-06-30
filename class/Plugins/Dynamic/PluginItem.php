@@ -1,4 +1,6 @@
-<?php namespace XoopsModules\Mymenus\Plugins\Dynamic;
+<?php
+
+namespace XoopsModules\Mymenus\Plugins\Dynamic;
 
 /*
  You may not change or alter any portion of this comment or credits
@@ -59,7 +61,6 @@ class PluginItem extends Mymenus\PluginItem
         /** @var \XoopsModules\Mymenus\Helper $helper */
         $helper = \XoopsModules\Mymenus\Helper::getInstance();
 
-
         $ret = [];
         //Sanitizing $module
         if (preg_match('/[^a-z0-9\\/\\\\_.:-]/i', $module)) {
@@ -73,7 +74,6 @@ class PluginItem extends Mymenus\PluginItem
             return $ret;
         }
         $helper->loadLanguage('modinfo');
-
 
         $overwrite = false;
         if (true === $force) {  //can set to false for debug
@@ -97,7 +97,7 @@ class PluginItem extends Mymenus\PluginItem
         $modversion['sub'] = [];
         require $file;
 
-        /** @var  \XoopsModules\Mymenus\LinksHandler $linksHandler */
+        /** @var \XoopsModules\Mymenus\LinksHandler $linksHandler */
         $linksHandler = $helper->getHandler('Links');
         foreach ($modversion['sub'] as $links) {
             $obj = $linksHandler->create();
@@ -106,7 +106,7 @@ class PluginItem extends Mymenus\PluginItem
                               'alt_title' => $links['name'],
                               'link'      => $GLOBALS['xoops']->url("{$path}/{$links['url']}"),
                               'id'        => $id,
-                              'pid'       => (int)$pid
+                              'pid'       => (int)$pid,
                           ]);
             $ret[] = $obj->getValues();
             $id--;

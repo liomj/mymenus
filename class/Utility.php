@@ -1,8 +1,6 @@
-<?php namespace XoopsModules\Mymenus;
+<?php
 
-use Xmf\Request;
-use XoopsModules\Mymenus;
-use XoopsModules\Mymenus\Common;
+namespace XoopsModules\Mymenus;
 
 /**
  * Class Utility
@@ -28,7 +26,7 @@ class Utility
         //    require __DIR__ . '/common.php';
         /** @var \XoopsModules\Mymenus\Helper $helper */
         $helper = \XoopsModules\Mymenus\Helper::getInstance();
-        $error   = false;
+        $error  = false;
         if ($useThemeSkin) {
             $path = 'themes/' . $GLOBALS['xoopsConfig']['theme_set'] . '/menu';
             if (!file_exists($GLOBALS['xoops']->path("{$path}/skin_version.php"))) {
