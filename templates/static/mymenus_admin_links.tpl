@@ -94,6 +94,10 @@
                                         <img style="padding: 1px 2px 0 0;" src="<{xoModuleIcons16 delete.png}>"
                                              title="<{$smarty.const._DELETE}>" alt="<{$smarty.const._DELETE}>">
                                     </a>
+                                    <a href="links.php?mid=<{$menu_id}>&amp;op=clone&amp;id=<{$menu.id}>">
+                                        <img style="padding: 1px 2px 0 0;" src="<{xoModuleIcons16 editcopy.png}>"
+                                             title="<{$smarty.const._CLONE}>" alt="<{$smarty.const._CLONE}>">
+                                    </a>
                                 </td>
                             </tr>
                         </table>
@@ -146,6 +150,10 @@
                                                              title="<{$smarty.const._DELETE}>"
                                                              alt="<{$smarty.const._DELETE}>">
                                                     </a>
+                                                    <a href="links.php?mid=<{$smenu_id}>&amp;op=clone&amp;id=<{$smenu.id}>">
+                                                        <img style="padding: 1px 2px 0 0;" src="<{xoModuleIcons16 editcopy.png}>"
+                                                             title="<{$smarty.const._CLONE}>" alt="<{$smarty.const._CLONE}>">
+                                                    </a>
                                                 </td>
                                             </tr>
                                         </table>
@@ -197,6 +205,10 @@
                                                                              src="<{xoModuleIcons16 delete.png}>"
                                                                              title="<{$smarty.const._DELETE}>"
                                                                              alt="<{$smarty.const._DELETE}>">
+                                                                    </a>
+                                                                    <a href="links.php?mid=<{$ssmenu_id}>&amp;op=clone&amp;id=<{$ssmenu.id}>">
+                                                                        <img style="padding: 1px 2px 0 0;" src="<{xoModuleIcons16 editcopy.png}>"
+                                                                             title="<{$smarty.const._CLONE}>" alt="<{$smarty.const._CLONE}>">
                                                                     </a>
                                                                 </td>
                                                             </tr>

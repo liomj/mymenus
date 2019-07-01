@@ -66,7 +66,7 @@ class LinksUtility
     }
 
     /**
-     * @param $mid
+     * @param int $mid
      */
     public static function addLink($mid)
     {
@@ -173,10 +173,10 @@ class LinksUtility
     }
 
     /**
-     * @param null  $id
-     * @param null  $pid
+     * @param null|int  $id
+     * @param null|int  $pid
      *
-     * @param  null $mid
+     * @param  null|int $mid
      * @return string
      */
     public static function editLink($id = null, $pid = null, $mid = null)
@@ -319,7 +319,7 @@ class LinksUtility
     }
 
     /**
-     * @param $id
+     * @param int $id
      * @param $visible
      */
     public static function toggleLinkVisibility($id, $visible)
@@ -339,5 +339,33 @@ class LinksUtility
         $linksObj->setVar('visible', $visible);
         $linksHandler->insert($linksObj);
         echo $linksObj->getVar('visible');
+    }
+
+    public static function cloneLink($id)
+    {
+        /** @var \XoopsModules\Mymenus\Helper $helper */
+        $helper = \XoopsModules\Mymenus\Helper::getInstance();
+        /** @var Mymenus\LinksHandler $linksHandler */
+        $linksHandler = $helper->getHandler('Links');
+
+        $new_id = false;
+        $table  = $GLOBALS['xoopsDB']->prefix('mymenus_links');
+        // copy content of the record you wish to clone
+        $tempTable = $GLOBALS['xoopsDB']->fetchArray($GLOBALS['xoopsDB']->query("SELECT * FROM $table WHERE id='$id' "), MYSQLI_ASSOC) or exit('Could not select record');
+        // set the auto-incremented id's value to blank.
+        unset($tempTable['id']);
+        // insert cloned copy of the original  record
+        $result = $GLOBALS['xoopsDB']->queryF("INSERT INTO $table (" . implode(', ', array_keys($tempTable)) . ") VALUES ('" . implode("', '", array_values($tempTable)) . "')") or exit($GLOBALS['xoopsDB']->error());
+
+        if ($result) {
+            // Return the new id
+            $new_id = $GLOBALS['xoopsDB']->getInsertId();
+            $msg    = _AM_MYMENUS_MSG_SUCCESS;
+
+        } else {
+            $msg = _AM_MYMENUS_MSG_ERROR;
+        }
+
+        redirect_header($GLOBALS['mymenusAdminPage'] . '?op=list&amp;mid=' . $new_id, 2, $msg);
     }
 }

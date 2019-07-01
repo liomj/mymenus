@@ -72,7 +72,10 @@ switch ($op) {
         echo Mymenus\LinksUtility::editLink($id, null, $mid);
         break;
     case 'add':
-        Mymenus\LinksUtility::addLink($mid);
+    Mymenus\LinksUtility::addLink($mid);
+    break;
+    case 'clone':
+        Mymenus\LinksUtility::cloneLink($id);
         break;
     case 'save':
         Mymenus\LinksUtility::saveLink($id, $mid);
