@@ -3,6 +3,7 @@
 - made  menu.css visible in each link (mamba)
 - added blocksadmin (mamba)
 - cosmetics (mamba)
+- hoverIntent v1.10.0 (mamba)
 
 
 <h5>1.54 Beta 2  [2018-07-20]</h5>  Dev: Xoops 2.5.9, PHP 7.2.8
