@@ -13,7 +13,7 @@ CREATE TABLE mymenus_links (
   image     VARCHAR(255)                 DEFAULT NULL,
   css       VARCHAR(255)                 DEFAULT NULL,
   PRIMARY KEY (id),
-  KEY mid (mid)
+  KEY `mid` (mid)
 )
   ENGINE = MyISAM;
 
