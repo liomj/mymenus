@@ -16,7 +16,13 @@
 use Xmf\Request;
 
 require __DIR__ . '/admin_header.php';
-xoops_loadLanguage('admin', 'system');
+
+class Blockform
+{
+    public function Test()
+    {
+    }
+}
 
 $moduleDirName      = basename(dirname(__DIR__));
 $moduleDirNameUpper = mb_strtoupper($moduleDirName); //$capsDirName
@@ -224,8 +230,7 @@ if ($GLOBALS['xoopsUser']->isAdmin($xoopsModule->mid())) {
                  . $i->getVar('bid')
                  . "]' value='"
                  . $i->getVar('weight')
-                 . "' size='5' maxlength='5'></td>
-                <td class='$class' align='center' nowrap><input type='radio' name='visible["
+                 . "' size='5' maxlength='5'></td><td class='$class' align='center' nowrap><input type='radio' name='visible["
                  . $i->getVar('bid')
                  . "]' value='1'$sel1>"
                  . _YES
@@ -410,7 +415,7 @@ if ($GLOBALS['xoopsUser']->isAdmin($xoopsModule->mid())) {
      * @param string            $side
      * @param int               $bcachetime
      */
-    function xtubeSetOrder($bid, $title, $weight, $visible, $side, $bcachetime)
+    function setOrder($bid, $title, $weight, $visible, $side, $bcachetime)
     {
         $myblock = new \XoopsBlock($bid);
         $myblock->setVar('title', $title);
@@ -424,7 +429,7 @@ if ($GLOBALS['xoopsUser']->isAdmin($xoopsModule->mid())) {
     /**
           * @param int               $bid
      */
-    function xtubeEditBlock($bid)
+    function editBlock($bid)
     {
         require_once __DIR__ . '/admin_header.php';
         //require_once __DIR__ . '/admin_header.php';
@@ -480,7 +485,7 @@ if ($GLOBALS['xoopsUser']->isAdmin($xoopsModule->mid())) {
      * @param null|array|string $options
      * @param null|array        $groups
      */
-    function xtubeUpdateBlock($bid, $btitle, $bside, $bweight, $bvisible, $bcachetime, $bmodule, $options, $groups)
+    function updateBlock($bid, $btitle, $bside, $bweight, $bvisible, $bcachetime, $bmodule, $options, $groups)
     {
         $myblock = new \XoopsBlock($bid);
         $myblock->setVar('title', $btitle);
@@ -516,6 +521,7 @@ if ($GLOBALS['xoopsUser']->isAdmin($xoopsModule->mid())) {
 
     if ('list' === $op) {
         xoops_cp_header();
+        //        mpu_adm_menu();
         listBlocks();
         require_once __DIR__ . '/admin_footer.php';
         exit();
@@ -529,7 +535,7 @@ if ($GLOBALS['xoopsUser']->isAdmin($xoopsModule->mid())) {
             if ($oldtitle[$i] !== $title[$i] || $oldweight[$i] !== $weight[$i] || $oldvisible[$i] !== $visible[$i]
                 || $oldside[$i] !== $side[$i]
                 || $oldbcachetime[$i] !== $bcachetime[$i]) {
-                xtubeSetOrder($bid[$i], $title[$i], $weight[$i], $visible[$i], $side[$i], $bcachetime[$i], $bmodule[$i]);
+                SetOrder($bid[$i], $title[$i], $weight[$i], $visible[$i], $side[$i], $bcachetime[$i], $bmodule[$i]);
             }
             if (!empty($bmodule[$i]) && count($bmodule[$i]) > 0) {
                 $sql = sprintf('DELETE FROM `%s` WHERE block_id = %u', $GLOBALS['xoopsDB']->prefix('block_module_link'), $bid[$i]);
@@ -560,11 +566,11 @@ if ($GLOBALS['xoopsUser']->isAdmin($xoopsModule->mid())) {
     }
 
     if ('edit' === $op) {
-        xtubeEditBlock($bid);
+        editBlock($bid);
     }
 
     if ('edit_ok' === $op) {
-        xtubeUpdateBlock($bid, $btitle, $bside, $bweight, $bvisible, $bcachetime, $bmodule, $options, $groups);
+        updateBlock($bid, $btitle, $bside, $bweight, $bvisible, $bcachetime, $bmodule, $options, $groups);
     }
 
     if ('clone_ok' === $op) {

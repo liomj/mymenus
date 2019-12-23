@@ -19,6 +19,8 @@
 
 use XoopsModules\Mymenus;
 
+include dirname(__DIR__) . '/preloads/autoloader.php';
+
 require dirname(dirname(dirname(__DIR__))) . '/include/cp_header.php';
 xoops_load('XoopsFormLoader');
 

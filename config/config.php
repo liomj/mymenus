@@ -16,8 +16,7 @@
  * @since
  * @author       XOOPS Development Team
  */
-function getConfig()
-{
+
     $moduleDirName      = basename(dirname(__DIR__));
     $moduleDirNameUpper = mb_strtoupper($moduleDirName);
 
@@ -45,16 +44,21 @@ function getConfig()
         ],
 
         'copyTestFolders' => [
-            //[
-            //    constant($moduleDirNameUpper . '_PATH') . '/testdata/images',
-            //    XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/images',
-            //]
+            [
+                XOOPS_ROOT_PATH . '/modules/' . $moduleDirName . '/testdata/uploads',
+                XOOPS_UPLOAD_PATH . '/' . $moduleDirName,
+            ],
+            //            [
+            //                XOOPS_ROOT_PATH . '/modules/' . $moduleDirName . '/testdata/thumbs',
+            //                XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/thumbs',
+            //            ],
         ],
 
         'templateFolders' => [
             '/templates/',
             '/templates/blocks/',
-            '/templates/admin/',
+            '/templates/static/',
+            '/templates/static/blocks/',
         ],
         'oldFiles'        => [
             '/class/request.php',
@@ -72,9 +76,14 @@ function getConfig()
             '/tcpdf',
             '/images',
         ],
-        'renameTables'    => [//         'XX_archive'     => 'ZZZZ_archive',
+
+        'renameTables' => [//         'XX_archive'     => 'ZZZZ_archive',
         ],
-        'modCopyright'    => "<a href='https://xoops.org' title='XOOPS Project' target='_blank'>
-                     <img src='" . constant($moduleDirNameUpper . '_AUTHOR_LOGOIMG') . '\' alt=\'XOOPS Project\' /></a>',
+        'moduleStats'     => [
+//            'totalcategories' => $helper->getHandler('Category')->getCategoriesCount(-1),
+//            'totalitems'      => $helper->getHandler('Item')->getItemsCount(),
+//            'totalsubmitted'  => $helper->getHandler('Item')->getItemsCount(-1, [Constants::PUBLISHER_STATUS_SUBMITTED]),
+        ],
+        'modCopyright' => "<a href='https://xoops.org' title='XOOPS Project' target='_blank'>
+                     <img src='" . constant($moduleDirNameUpper . '_AUTHOR_LOGOIMG') . "' alt='XOOPS Project'></a>",
     ];
-}

@@ -31,12 +31,11 @@ $skinVersion['js'] = [
     '../../assets/js/superfish.js',
 ];
 
-$header = "\n" . '<script type="text/javascript">
-      $(document).ready(function () {
+$header = "\n" . '<script type="module">
+      jQuery(document).ready(function () {
           jQuery("ul.sf-menu").superfish();          
              pathClass:  "current"
          });
-      })
 </script>';
 
 $skinVersion['header'] = $header;

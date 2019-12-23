@@ -21,12 +21,13 @@ defined('XOOPS_ROOT_PATH') || die('Restricted access');
 require __DIR__ . '/preloads/autoloader.php';
 
 $moduleDirName = basename(__DIR__);
+$moduleDirNameUpper = mb_strtoupper($moduleDirName);
 
 // ------------------- Informations ------------------- //
 $modversion = [
     'version'             => 1.54,
-    'module_status'       => 'Beta 3',
-    'release_date'        => '2019/06/30', // YYYY/mm/dd
+    'module_status'       => 'Beta 4',
+    'release_date'        => '2019/12/22', // YYYY/mm/dd
     'name'                => _MI_MYMENUS_MD_NAME,
     'description'         => _MI_MYMENUS_MD_DESC,
     'author'              => 'Trabis (www.xuups.com), contributors: Mamba, Bleek, Zyspec, Luciorota',
@@ -77,7 +78,7 @@ $modversion = [
     'hasNotification'     => 0,
 ];
 
-require XOOPS_ROOT_PATH . '/modules/' . $modversion['dirname'] . '/include/constants.php';
+//require XOOPS_ROOT_PATH . '/modules/' . $modversion['dirname'] . '/include/constants.php';
 
 // ------------------- Help files ------------------- //
 $modversion['helpsection'] = [
@@ -143,4 +144,28 @@ $modversion['config'][] = [
     'formtype'    => 'text',
     'valuetype'   => 'text',
     'default'     => 'xoops_menu_',
+];
+
+/**
+ * Make Sample button visible?
+ */
+$modversion['config'][] = [
+    'name'        => 'displaySampleButton',
+    'title'       => 'CO_' . $moduleDirNameUpper . '_' . 'SHOW_SAMPLE_BUTTON',
+    'description' => 'CO_' . $moduleDirNameUpper . '_' . 'SHOW_SAMPLE_BUTTON_DESC',
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+    'default'     => 0,
+];
+
+/**
+ * Show Developer Tools?
+ */
+$modversion['config'][] = [
+    'name' => 'displayDeveloperTools',
+    'title' => 'CO_' . $moduleDirNameUpper . '_' . 'SHOW_DEV_TOOLS',
+    'description' => 'CO_' . $moduleDirNameUpper . '_' . 'SHOW_DEV_TOOLS_DESC',
+    'formtype' => 'yesno',
+    'valuetype' => 'int',
+    'default' => 0,
 ];

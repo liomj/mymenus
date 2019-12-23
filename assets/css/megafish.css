@@ -33,6 +33,7 @@
   width: 100%;
 }
 .sf-mega .sf-mega {
+  -webkit-box-shadow: 2px 3px 6px rgba(0, 0, 0, .2);
   box-shadow: 2px 3px 6px rgba(0,0,0,.2);
   width: 100%; /* allow long menu items to determine submenu width */
 }
@@ -62,6 +63,7 @@
 .sf-mega {
   background-color: #CFDEFF;
   padding: 1em;
+  -webkit-box-sizing: border-box;
   box-sizing: border-box;
   width: 100%;
 }

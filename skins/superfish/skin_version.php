@@ -28,11 +28,11 @@ $skinVersion['js'] = [
 ];
 
 
-$header = "\n" . '<script type="text/javascript">
-    $(document).ready(function() {
+$header = "\n" . '<script type="module">
+    jQuery(document).ready(function () {
         jQuery("ul.sf-menu").superfish();
         delay: 1000;
-        animation: {opacity:"show";height: "show" };
+        animation: opacity:"show";height: "show" ;
         speed: "fast"
         })
 </script>';

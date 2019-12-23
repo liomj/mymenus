@@ -1,3 +1,15 @@
+<h5>1.54 Beta 4  [NOT RELEASED]</h5>  Dev: Xoops 2.5.11, PHP 7.4.1
+<hr>
+- added Feedback (mamba)
+- renamed builder.php to Builder.php (zyspec/mamba)
+- added Migrate (mamba)
+- added Stats (mamba)
+- renamed 'PHP_SELF' to 'SCRIPT_NAME' (mamba)
+- moved include/config.php to /config/config.ph (mamba)
+- deleted /include/constants.php (mamba)
+- cosmetics (mamba)
+
+
 <h5>1.54 Beta 3  [NOT RELEASED]</h5>  Dev: Xoops 2.5.10, PHP 7.3.7
 <hr>
 - made  menu.css visible in each link (mamba)

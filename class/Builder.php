@@ -138,8 +138,8 @@ class Builder
         $sel = [];
         //        $queryString = $_SERVER['QUERY_STRING'] ? '?' . $_SERVER['QUERY_STRING'] : '';
         $queryString = Request::getString('QUERY_STRING', '', 'SERVER') ? '?' . Request::getString('QUERY_STRING', '', 'SERVER') : '';
-        //        $self         = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'] . $queryString;
-        $self = 'http://' . Request::getString('HTTP_HOST', '', 'SERVER') . Request::getString('PHP_SELF', '', 'SERVER') . $queryString;
+        //        $self         = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['SCRIPT_NAME'] . $queryString;
+        $self = 'http://' . Request::getString('HTTP_HOST', '', 'SERVER') . Request::getString('SCRIPT_NAME', '', 'SERVER') . $queryString;
 
         //set a default page in case we don't get matches
         $default = XOOPS_URL . '/index.php';

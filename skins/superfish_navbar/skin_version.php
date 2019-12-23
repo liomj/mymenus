@@ -31,7 +31,7 @@ $skinVersion['js'] = [
     '../../assets/js/superfish.js',
 ];
 
-$header = "\n" . '<script type="text/javascript">';
+$header = "\n" . '<script type="module">';
 $header .= "\n" . '  var $sfnav = jQuery.noConflict()';
 $header .= "\n" . '  $sfnav(function(){';
 $header .= "\n" . '    $sfnav(\'ul.sf-menu\').superfish({';

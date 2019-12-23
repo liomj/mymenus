@@ -1,0 +1,65 @@
+mymenus_links:
+    options: 'ENGINE=MyISAM DEFAULT CHARSET=utf8'
+    columns:
+        -
+            name: id
+            attributes: ' int(5) unsigned  NOT NULL auto_increment'
+        -
+            name: pid
+            attributes: ' int(5) unsigned  NOT NULL  DEFAULT ''0'' '
+        -
+            name: mid
+            attributes: ' int(5) unsigned  NOT NULL  DEFAULT ''0'' '
+        -
+            name: title
+            attributes: ' varchar(255)  NOT NULL  DEFAULT '''' '
+        -
+            name: alt_title
+            attributes: ' varchar(255)  NOT NULL  DEFAULT '''' '
+        -
+            name: visible
+            attributes: ' tinyint(1) unsigned  NOT NULL  DEFAULT ''1'' '
+        -
+            name: link
+            attributes: ' varchar(255) '
+        -
+            name: weight
+            attributes: ' tinyint(4) unsigned  NOT NULL  DEFAULT ''0'' '
+        -
+            name: target
+            attributes: ' varchar(10) '
+        -
+            name: groups
+            attributes: ' text '
+        -
+            name: hooks
+            attributes: ' text '
+        -
+            name: image
+            attributes: ' varchar(255) '
+        -
+            name: css
+            attributes: ' varchar(255) '
+    keys:
+        mid:
+            columns: mid
+            unique: false
+        PRIMARY:
+            columns: id
+            unique: true
+mymenus_menus:
+    options: 'ENGINE=MyISAM DEFAULT CHARSET=utf8'
+    columns:
+        -
+            name: id
+            attributes: ' int(5) unsigned  NOT NULL auto_increment'
+        -
+            name: title
+            attributes: ' varchar(255)  NOT NULL  DEFAULT '''' '
+        -
+            name: css
+            attributes: ' varchar(255)  NOT NULL  DEFAULT '''' '
+    keys:
+        PRIMARY:
+            columns: id
+            unique: true

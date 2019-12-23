@@ -16,7 +16,7 @@
  * @author      Bleekk
  */
 
-$(document).ready(function () {
+jQuery(document).ready(function () {
     $('ol.sortable').nestedSortable({
         handle: 'div',
         items: 'li',
