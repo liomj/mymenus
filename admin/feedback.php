@@ -13,7 +13,7 @@
  * Feedback plugin for xoops modules
  *
  * @copyright      XOOPS Project  (https://xoops.org)
- * @license        GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
+ * @license        GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author         Michael Beck <mambax7@gmailc.com>
  * @author         Wedega - Email:<webmaster@wedega.com>
  * @author         Fernando Santos (topet05) <fernando@mastop.com.br>
@@ -40,11 +40,12 @@ switch ($op) {
     case 'list':
     default:
         $GLOBALS['xoopsTpl']->assign('navigation', $adminObject->displayNavigation('feedback.php'));
-        $feedback->name  = $GLOBALS['xoopsUser']->getVar('name');
+        $feedback->name = $GLOBALS['xoopsUser']->getVar('name');
         $feedback->email = $GLOBALS['xoopsUser']->getVar('email');
-        $feedback->site  = XOOPS_URL;
-        $form            = $feedback->getFormFeedback();
-        echo $form->display();
+        $feedback->site = XOOPS_URL;
+        /** @var \XoopsThemeForm $form */
+        $form = $feedback->getFormFeedback();
+        $form->display();
         break;
 
     case 'send':
@@ -91,8 +92,9 @@ switch ($op) {
         echo '<div align="center" style="width: 80%; padding: 10px; border: 2px solid #ff0000; color: #ff0000; margin-right:auto;margin-left:auto;">
             <h3>' . constant('CO_' . $moduleDirNameUpper . '_' . 'FB_SEND_ERROR') . '</h3>
             </div>';
+        /** @var \XoopsThemeForm $form */
         $form = $feedback->getFormFeedback();
-        echo $form->display();
+        $form->display();
 
         break;
 }

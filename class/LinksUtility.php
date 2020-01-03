@@ -14,7 +14,7 @@ namespace XoopsModules\Mymenus;
 
 /**
  * @copyright       XOOPS Project (https://xoops.org)
- * @license         http://www.gnu.org/licenses/gpl-2.0.html GNU Public License
+ * @license         https://www.gnu.org/licenses/gpl-2.0.html GNU Public License
  * @package         Mymenus
  * @since           1.0
  * @author          trabis <lusopoemas@gmail.com>, bleekk <bleekk@outlook.com>
@@ -50,7 +50,7 @@ class LinksUtility
         $linksCriteria->setSort('weight');
         $linksCriteria->setOrder('ASC');
         //
-        //        $menusArray = array();
+        //        $menusArray = [];
         if (($linksCount > 0) && ($linksCount >= (int)$start)) {
             $linksCriteria->setStart((int)$start);
             $linksArrays = $helper->getHandler('Links')->getObjects($linksCriteria, false, false); // as array
@@ -92,7 +92,7 @@ class LinksUtility
 
         $newLinksObj = $helper->getHandler('Links')->create();
         //    if (!isset($_POST['hooks'])) {
-        //        $_POST['hooks'] = array();
+        //        $_POST['hooks'] = [];
         //    }
         if (!Request::getArray('hooks', null, 'POST')) {
             $_POST['hooks'] = [];

@@ -196,4 +196,4 @@
 
 <h5>1.0 [2010-08-11]</h5>
 <hr>
-- First public release of the module.
+- First public release of the module. (Trabis)
