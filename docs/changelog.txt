@@ -8,6 +8,7 @@
 - moved include/config.php to /config/config.ph (mamba)
 - deleted /include/constants.php (mamba)
 - cosmetics (mamba)
+- added Testdata (mamba)
 
 
 <h5>1.54 Beta 3  [NOT RELEASED]</h5>  Dev: Xoops 2.5.10, PHP 7.3.7
