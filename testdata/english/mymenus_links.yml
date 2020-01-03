@@ -1,0 +1,70 @@
+-
+    id: '1'
+    pid: '0'
+    mid: '1'
+    title: Home
+    alt_title: home
+    visible: '1'
+    link: /
+    weight: '1'
+    target: _self
+    groups: 'a:3:{i:0;s:1:"1";i:1;s:1:"2";i:2;s:1:"3";}'
+    hooks: 'a:0:{}'
+    image: ''
+    css: ''
+-
+    id: '2'
+    pid: '0'
+    mid: '1'
+    title: PM-test
+    alt_title: 'private messages'
+    visible: '1'
+    link: /modules/pm/
+    weight: '2'
+    target: _self
+    groups: 'a:3:{i:0;s:1:"1";i:1;s:1:"2";i:2;s:1:"3";}'
+    hooks: 'a:0:{}'
+    image: ''
+    css: ''
+-
+    id: '3'
+    pid: '0'
+    mid: '1'
+    title: 'View Account'
+    alt_title: /user.php
+    visible: '1'
+    link: /user.php
+    weight: '3'
+    target: _self
+    groups: 'a:3:{i:0;s:1:"1";i:1;s:1:"2";i:2;s:1:"3";}'
+    hooks: 'a:0:{}'
+    image: ''
+    css: ''
+-
+    id: '4'
+    pid: '0'
+    mid: '1'
+    title: XOOPS
+    alt_title: 'XOOPS Website'
+    visible: '1'
+    link: 'http://xoops.org'
+    weight: '4'
+    target: _blank
+    groups: 'a:3:{i:0;s:1:"1";i:1;s:1:"2";i:2;s:1:"3";}'
+    hooks: 'a:0:{}'
+    image: ''
+    css: ''
+-
+    id: '5'
+    pid: '4'
+    mid: '1'
+    title: Forums
+    alt_title: 'XOOPS Forums'
+    visible: '1'
+    link: 'http://xoops.org/modules/newbb/'
+    weight: '5'
+    target: _blank
+    groups: 'a:3:{i:0;s:1:"1";i:1;s:1:"2";i:2;s:1:"3";}'
+    hooks: 'a:0:{}'
+    image: ''
+    css: ''
