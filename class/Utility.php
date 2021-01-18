@@ -2,19 +2,19 @@
 
 namespace XoopsModules\Mymenus;
 
+use XoopsModules\Mymenus;
+use XoopsModules\Mymenus\Common;
+use XoopsModules\Mymenus\Constants;
+
+
+
+
 /**
  * Class Utility
  */
-class Utility
+class Utility extends Common\SysUtility
 {
-    use Common\VersionChecks; //checkVerXoops, checkVerPhp Traits
-
-    use Common\ServerStats; // getServerStats Trait
-
-    use Common\FilesManagement; // Files Management Trait
-
     //--------------- Custom module methods -----------------------------
-
     /**
      * @param string $moduleSkin
      * @param bool   $useThemeSkin
@@ -44,7 +44,7 @@ class Utility
         $file = $GLOBALS['xoops']->path("{$path}/skin_version.php");
         $info = [];
 
-        if (file_exists($file)) {
+        if (is_file($file)) {
             require $file;
             $info = $skinVersion;
         }
