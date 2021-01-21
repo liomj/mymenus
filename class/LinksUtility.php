@@ -20,6 +20,7 @@ namespace XoopsModules\Mymenus;
  * @author          trabis <lusopoemas@gmail.com>, bleekk <bleekk@outlook.com>
  */
 
+use Xmf\Module\Admin;
 use Xmf\Request;
 use XoopsModules\Mymenus;
 
@@ -173,10 +174,10 @@ class LinksUtility
     }
 
     /**
-     * @param null|int  $id
-     * @param null|int  $pid
+     * @param null|int $id
+     * @param null|int $pid
      *
-     * @param  null|int $mid
+     * @param null|int $mid
      * @return string
      */
     public static function editLink($id = null, $pid = null, $mid = null)
@@ -190,7 +191,7 @@ class LinksUtility
         $xoopsLogger->activated = false;
         error_reporting(0);
 
-        $pathIcon16 = \Xmf\Module\Admin::iconUrl('', 16);
+        $pathIcon16 = Admin::iconUrl('', 16);
 
         //        $registry = MymenusRegistry::getInstance();
         //        $plugin   = MymenusPlugin::getInstance();
@@ -320,7 +321,7 @@ class LinksUtility
 
     /**
      * @param int $id
-     * @param $visible
+     * @param     $visible
      */
     public static function toggleLinkVisibility($id, $visible)
     {
@@ -361,7 +362,6 @@ class LinksUtility
             // Return the new id
             $new_id = $GLOBALS['xoopsDB']->getInsertId();
             $msg    = _AM_MYMENUS_MSG_SUCCESS;
-
         } else {
             $msg = _AM_MYMENUS_MSG_ERROR;
         }

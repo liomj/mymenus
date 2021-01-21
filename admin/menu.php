@@ -16,18 +16,21 @@
  * @since           1.0
  * @author          trabis <lusopoemas@gmail.com>
  */
-defined('XOOPS_ROOT_PATH') || die('Restricted access');
+defined('XOOPS_ROOT_PATH') || exit('Restricted access');
 
+use Xmf\Module\Admin;
 use XoopsModules\Mymenus;
+use XoopsModules\Mymenus\Helper;
 
 $moduleDirName      = basename(dirname(__DIR__));
 $moduleDirNameUpper = mb_strtoupper($moduleDirName);
 
 /** @var \XoopsModules\Mymenus\Helper $helper */
-$helper = \XoopsModules\Mymenus\Helper::getInstance();
+$helper = Helper::getInstance();
 $helper->loadLanguage('common');
+$helper->loadLanguage('feedback');
 
-$pathIcon32 = \Xmf\Module\Admin::menuIconPath('');
+$pathIcon32 = Admin::menuIconPath('');
 if (is_object($helper->getModule())) {
     $pathModIcon32 = $helper->getModule()->getInfo('modicons32');
 }
@@ -71,11 +74,11 @@ $adminmenu[] = [
     'icon'  => $pathIcon32 . '/mail_foward.png',
 ];
 
-if ($helper->getConfig('displayDeveloperTools')) {
+if (is_object($helper->getModule()) && $helper->getConfig('displayDeveloperTools')) {
     $adminmenu[] = [
         'title' => constant('CO_' . $moduleDirNameUpper . '_' . 'ADMENU_MIGRATE'),
-        'link' => 'admin/migrate.php',
-        'icon' => $pathIcon32 . '/database_go.png',
+        'link'  => 'admin/migrate.php',
+        'icon'  => $pathIcon32 . '/database_go.png',
     ];
 }
 

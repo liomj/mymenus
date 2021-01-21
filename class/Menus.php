@@ -23,8 +23,6 @@ namespace XoopsModules\Mymenus;
 use Xmf\Request;
 use XoopsModules\Mymenus;
 
-defined('XOOPS_ROOT_PATH') || die('Restricted access');
-
 //require  dirname(__DIR__) . '/include/common.php';
 
 /**
@@ -47,22 +45,23 @@ class Menus extends \XoopsObject
         /** @var \XoopsModules\Mymenus\Helper $this ->helper */
         $this->helper = \XoopsModules\Mymenus\Helper::getInstance();
         $this->db     = \XoopsDatabaseFactory::getDatabaseConnection();
-        $this->initVar('id', XOBJ_DTYPE_INT);
-        $this->initVar('title', XOBJ_DTYPE_TXTBOX);
-        $this->initVar('css', XOBJ_DTYPE_TXTBOX);
+        $this->initVar('id', \XOBJ_DTYPE_INT);
+        $this->initVar('title', \XOBJ_DTYPE_TXTBOX);
+        $this->initVar('css', \XOBJ_DTYPE_TXTBOX);
     }
 
     /**
      * Get {@link XoopsThemeForm} for adding/editing items
      *
-     * @param  bool|string $action
+     * @param bool|string $action
      * @return \XoopsThemeForm <a href='psi_element://XoopsThemeForm'>XoopsThemeForm</a>
      */
     public function getForm($action = false)
     {
-        //        $grouppermHandler = xoops_getHandler('groupperm');
+        /** @var \XoopsGroupPermHandler $grouppermHandler */
+        $grouppermHandler = xoops_getHandler('groupperm');
         //
-        xoops_load('XoopsFormLoader');
+        \xoops_load('XoopsFormLoader');
 
         if (false === $action) {
             //            $action = $_SERVER['REQUEST_URI'];
@@ -72,17 +71,17 @@ class Menus extends \XoopsObject
         //        $isAdmin = mymenusUserIsAdmin();
         //        $groups  = is_object($GLOBALS['xoopsUser']) ? $GLOBALS['xoopsUser']->getGroups() : array(0 => XOOPS_GROUP_ANONYMOUS);
         //
-        $title = $this->isNew() ? _AM_MYMENUS_MENUS_ADD : _AM_MYMENUS_MENUS_EDIT;
+        $title = $this->isNew() ? \_AM_MYMENUS_MENUS_ADD : \_AM_MYMENUS_MENUS_EDIT;
 
         $form = new \XoopsThemeForm($title, 'moneusform', $action, 'post', true);
         $form->setExtra('enctype="multipart/form-data"');
         // menus: title
-        $menusTitleText = new \XoopsFormText(_AM_MYMENUS_MENU_TITLE, 'title', 50, 255, $this->getVar('title', 'e'));
-        $menusTitleText->setDescription(_AM_MYMENUS_MENU_TITLE_DESC);
+        $menusTitleText = new \XoopsFormText(\_AM_MYMENUS_MENU_TITLE, 'title', 50, 255, $this->getVar('title', 'e'));
+        $menusTitleText->setDescription(\_AM_MYMENUS_MENU_TITLE_DESC);
         $form->addElement($menusTitleText, true);
         // menus: css
-        $menusCssText = new \XoopsFormText(_AM_MYMENUS_MENU_CSS, 'css', 50, 255, $this->getVar('css', 'e'));
-        $menusCssText->setDescription(_AM_MYMENUS_MENU_CSS_DESC);
+        $menusCssText = new \XoopsFormText(\_AM_MYMENUS_MENU_CSS, 'css', 50, 255, $this->getVar('css', 'e'));
+        $menusCssText->setDescription(\_AM_MYMENUS_MENU_CSS_DESC);
         $form->addElement($menusCssText, false);
         // form: button tray
         $buttonTray = new \XoopsFormElementTray('', '');

@@ -22,8 +22,6 @@ namespace XoopsModules\Mymenus\Plugins\Constant;
 
 use XoopsModules\Mymenus;
 
-defined('XOOPS_ROOT_PATH') || die('Restricted access');
-
 /**
  * Class PluginItem
  */
@@ -71,16 +69,16 @@ class PluginItem extends Mymenus\PluginItem
         $registry = Mymenus\Registry::getInstance();
         //        $string = '';
 
-        if (!preg_match('/{(.*\|.*)}/i', $string, $reg)) {
+        if (!\preg_match('/{(.*\|.*)}/i', $string, $reg)) {
             return $string;
         }
 
         $expression = $reg[0];
-        list($validator, $value) = array_map('strtoupper', explode('|', $reg[1]));
+        [$validator, $value] = \array_map('\strtoupper', \explode('|', $reg[1]));
 
         if ('CONSTANT' === $validator) {
-            if (defined($value)) {
-                $string = str_replace($expression, constant($value), $string);
+            if (\defined($value)) {
+                $string = \str_replace($expression, \constant($value), $string);
             }
         }
 

@@ -22,10 +22,8 @@ namespace XoopsModules\Mymenus;
 
 use XoopsModules\Mymenus;
 
-defined('XOOPS_ROOT_PATH') || die('Restricted access');
-
 //require  dirname(__DIR__) . '/include/common.php';
-xoops_load('XoopsLists');
+\xoops_load('XoopsLists');
 
 /**
  * Class PluginItem
@@ -49,7 +47,7 @@ class PluginItem
         //        return $ret;
 
         $path2 = "{$helper->getDirname()}/plugins/{$name}/{$language}/";
-        xoops_loadLanguage($name, $path2);
+        \xoops_loadLanguage($name, $path2);
 
         return true;
     }

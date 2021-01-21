@@ -22,8 +22,6 @@ namespace XoopsModules\Mymenus\Plugins\Smarty;
 
 use XoopsModules\Mymenus;
 
-defined('XOOPS_ROOT_PATH') || die('Restricted access');
-
 /**
  * Class PluginItem
  */
@@ -69,16 +67,16 @@ class PluginItem extends Mymenus\PluginItem
     protected static function doDecoration($string)
     {
         $registry = Mymenus\Registry::getInstance();
-        if (!preg_match('/{(.*\|.*)}/i', $string, $reg)) {
+        if (!\preg_match('/{(.*\|.*)}/i', $string, $reg)) {
             return $string;
         }
 
         $expression = $reg[0];
-        list($validator, $value) = array_map('mb_strtolower', explode('|', $reg[1]));
+        [$validator, $value] = \array_map('\mb_strtolower', \explode('|', $reg[1]));
 
         if ('smarty' === $validator) {
             if (isset($GLOBALS['xoopsTpl']->_tpl_vars[$value])) {
-                $string = str_replace($expression, $GLOBALS['xoopsTpl']->_tpl_vars[$value], $string);
+                $string = \str_replace($expression, $GLOBALS['xoopsTpl']->_tpl_vars[$value], $string);
             }
         }
 

@@ -29,15 +29,14 @@ trait FilesManagement
     public static function createFolder($folder)
     {
         try {
-            if (!file_exists($folder)) {
+            if (!is_dir($folder)) {
                 if (!is_dir($folder) && !mkdir($folder) && !is_dir($folder)) {
                     throw new \RuntimeException(sprintf('Unable to create the %s directory', $folder));
                 }
 
                 file_put_contents($folder . '/index.html', '<script>history.go(-1);</script>');
             }
-        }
-        catch (\Exception $e) {
+        } catch (\Exception $e) {
             echo 'Caught exception: ', $e->getMessage(), "\n", '<br>';
         }
     }
@@ -105,11 +104,8 @@ trait FilesManagement
                     if (!$success = self::deleteDirectory($fileInfo->getRealPath())) {
                         break;
                     }
-                } else {
-                    // delete the file
-                    if (!($success = unlink($fileInfo->getRealPath()))) {
-                        break;
-                    }
+                } elseif (!($success = unlink($fileInfo->getRealPath()))) {
+                    break;
                 }
             }
             // now delete this (sub)directory if all the files are gone

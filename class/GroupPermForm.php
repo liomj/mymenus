@@ -20,7 +20,6 @@ namespace XoopsModules\Mymenus;
  * @author       XOOPS Development Team,
  * @author       GIJ=CHECKMATE (PEAK Corp. http://www.peak.ne.jp/)
  */
-defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 require_once XOOPS_ROOT_PATH . '/class/xoopsform/formelement.php';
 require_once XOOPS_ROOT_PATH . '/class/xoopsform/formhidden.php';
@@ -34,8 +33,6 @@ require_once XOOPS_ROOT_PATH . '/class/xoopsform/form.php';
  * @author      Kazumi Ono  <onokazu@myweb.ne.jp>
  * @copyright   copyright (c) 2000-2003 XOOPS.org
  *
- * @package     kernel
- * @subpackage  form
  */
 class GroupPermForm extends \XoopsForm
 {

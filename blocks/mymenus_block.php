@@ -19,9 +19,10 @@
 
 use Xmf\Request;
 use XoopsModules\Mymenus;
+use XoopsModules\Mymenus\Helper;
 use XoopsModules\Mymenus\Utility;
 
-defined('XOOPS_ROOT_PATH') || die('Restricted access');
+defined('XOOPS_ROOT_PATH') || exit('Restricted access');
 
 require dirname(__DIR__) . '/include/common.php';
 
@@ -34,7 +35,7 @@ function mymenus_block_show($options)
 {
     global $xoopsTpl, $xoopsLogger;
     /** @var \XoopsModules\Mymenus\Helper $helper */
-    $helper = \XoopsModules\Mymenus\Helper::getInstance();
+    $helper = Helper::getInstance();
 
     $block = [];
     $xoopsLogger->startTime('My Menus Block');
@@ -122,13 +123,15 @@ function mymenus_block_show($options)
     }
 
     $blockTpl = new \XoopsTpl();
-    $blockTpl->assign([
-                          'block'     => $block,
-                          'config'    => $skinInfo['config'],
-                          'skinurl'   => $skinInfo['url'],
-                          'skinpath'  => $skinInfo['path'],
-                          'xlanguage' => xoops_isActiveModule('xlanguage') ? true : false, // xLanguage check
-                      ]);
+    $blockTpl->assign(
+        [
+            'block'     => $block,
+            'config'    => $skinInfo['config'],
+            'skinurl'   => $skinInfo['url'],
+            'skinpath'  => $skinInfo['path'],
+            'xlanguage' => xoops_isActiveModule('xlanguage') ? true : false, // xLanguage check
+        ]
+    );
     // Assign ul class
     $menusObj = $helper->getHandler('Menus')->get($mid);
     $blockTpl->assign('menucss', $menusObj->getVar('css'));
@@ -173,7 +176,7 @@ function mymenus_block_show($options)
 function mymenus_block_edit($options)
 {
     /** @var \XoopsModules\Mymenus\Helper $helper */
-    $helper = \XoopsModules\Mymenus\Helper::getInstance();
+    $helper = Helper::getInstance();
 
     xoops_loadLanguage('admin', 'mymenus');
     xoops_load('XoopsFormLoader');

@@ -22,8 +22,6 @@ namespace XoopsModules\Mymenus;
 
 use XoopsModules\Mymenus;
 
-defined('XOOPS_ROOT_PATH') || die('Restricted access');
-
 //require  dirname(__DIR__) . '/include/common.php';
 
 /**
@@ -46,19 +44,19 @@ class Links extends \XoopsObject
         /** @var \XoopsModules\Mymenus\Helper $this ->helper */
         $this->helper = \XoopsModules\Mymenus\Helper::getInstance();
         $this->db     = \XoopsDatabaseFactory::getDatabaseConnection();
-        $this->initVar('id', XOBJ_DTYPE_INT);
-        $this->initVar('pid', XOBJ_DTYPE_INT);
-        $this->initVar('mid', XOBJ_DTYPE_INT);
-        $this->initVar('title', XOBJ_DTYPE_TXTBOX);
-        $this->initVar('alt_title', XOBJ_DTYPE_TXTBOX);
-        $this->initVar('visible', XOBJ_DTYPE_INT, true);
-        $this->initVar('link', XOBJ_DTYPE_TXTBOX);
-        $this->initVar('weight', XOBJ_DTYPE_INT, 255);
-        $this->initVar('target', XOBJ_DTYPE_TXTBOX);
-        $this->initVar('groups', XOBJ_DTYPE_ARRAY, serialize([XOOPS_GROUP_ANONYMOUS, XOOPS_GROUP_USERS]));
-        $this->initVar('hooks', XOBJ_DTYPE_ARRAY, serialize([]));
-        $this->initVar('image', XOBJ_DTYPE_TXTBOX);
-        $this->initVar('css', XOBJ_DTYPE_TXTBOX);
+        $this->initVar('id', \XOBJ_DTYPE_INT);
+        $this->initVar('pid', \XOBJ_DTYPE_INT);
+        $this->initVar('mid', \XOBJ_DTYPE_INT);
+        $this->initVar('title', \XOBJ_DTYPE_TXTBOX);
+        $this->initVar('alt_title', \XOBJ_DTYPE_TXTBOX);
+        $this->initVar('visible', \XOBJ_DTYPE_INT, true);
+        $this->initVar('link', \XOBJ_DTYPE_TXTBOX);
+        $this->initVar('weight', \XOBJ_DTYPE_INT, 255);
+        $this->initVar('target', \XOBJ_DTYPE_TXTBOX);
+        $this->initVar('groups', \XOBJ_DTYPE_ARRAY, \serialize([XOOPS_GROUP_ANONYMOUS, XOOPS_GROUP_USERS]));
+        $this->initVar('hooks', \XOBJ_DTYPE_ARRAY, \serialize([]));
+        $this->initVar('image', \XOBJ_DTYPE_TXTBOX);
+        $this->initVar('css', \XOBJ_DTYPE_TXTBOX);
     }
 
     /**
@@ -87,12 +85,12 @@ class Links extends \XoopsObject
         if (!$data) {
             return $ret;
         }
-        $lines = explode("\n", $data);
+        $lines = \explode("\n", $data);
         foreach ($lines as $line) {
-            $line   = trim($line);
-            $line   = explode('|', $line);
-            $hook   = trim($line[0]);
-            $method = isset($line[1]) ? trim($line[1]) : '';
+            $line   = \trim($line);
+            $line   = \explode('|', $line);
+            $hook   = \trim($line[0]);
+            $method = isset($line[1]) ? \trim($line[1]) : '';
             //$info = explode(',', trim($line[0]));
             $ret[$hook][] = $method;
         }

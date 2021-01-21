@@ -17,6 +17,7 @@
  * @author          trabis <lusopoemas@gmail.com>, bleekk <bleekk@outlook.com>
  */
 
+use Xmf\Module\Admin;
 use Xmf\Request;
 use XoopsModules\Mymenus;
 
@@ -72,8 +73,8 @@ switch ($op) {
         echo Mymenus\LinksUtility::editLink($id, null, $mid);
         break;
     case 'add':
-    Mymenus\LinksUtility::addLink($mid);
-    break;
+        Mymenus\LinksUtility::addLink($mid);
+        break;
     case 'clone':
         Mymenus\LinksUtility::cloneLink($id);
         break;
@@ -105,14 +106,17 @@ switch ($op) {
             redirect_header($currentFile, 3, _AM_MYMENUS_MSG_DELETE_LINK_SUCCESS);
         } else {
             xoops_cp_header();
-            xoops_confirm(['ok' => true, 'id' => $id, 'op' => 'delete'], //                $_SERVER['REQUEST_URI'],
-                          Request::getString('REQUEST_URI', '', 'SERVER'), sprintf(_AM_MYMENUS_LINKS_SUREDEL, $linksObj->getVar('title')));
+            xoops_confirm(
+                ['ok' => true, 'id' => $id, 'op' => 'delete'], //                $_SERVER['REQUEST_URI'],
+                Request::getString('REQUEST_URI', '', 'SERVER'),
+                sprintf(_AM_MYMENUS_LINKS_SUREDEL, $linksObj->getVar('title'))
+            );
             require __DIR__ . '/admin_footer.php';
         }
         break;
     case 'move':
         xoops_cp_header();
-        $adminObject = \Xmf\Module\Admin::getInstance();
+        $adminObject = Admin::getInstance();
         $adminObject->displayNavigation($currentFile);
 
         Mymenus\LinksUtility::moveLink($id, $weight);
@@ -144,7 +148,7 @@ switch ($op) {
     case 'list':
     default:
         xoops_cp_header();
-        $adminObject = \Xmf\Module\Admin::getInstance();
+        $adminObject = Admin::getInstance();
         $adminObject->displayNavigation($currentFile);
         // Add module stylesheet
         $GLOBALS['xoTheme']->addStylesheet(XOOPS_URL . '/modules/system/css/ui/' . xoops_getModuleOption('jquery_theme', 'system') . '/ui.all.css');

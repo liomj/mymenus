@@ -25,7 +25,7 @@
         <table class="outer">
             <tr>
                 <td align='left' colspan='3'>
-                    <{if ($apply_filter == false)}>
+                    <{if ($apply_filter === false)}>
                         <{$smarty.const._AM_MYMENUS_MENUS_COUNT|replace:'%menusCount':$menusCount}>
                     <{else}>
                         <{$smarty.const._AM_MYMENUS_MENUS_COUNT_OF|replace:'%menusCount':$menusCount|replace:'%menusFilterCount':$menusFilterCount}>

@@ -9,7 +9,7 @@
  * @category        Module
  * @author          XOOPS Development Team
  * @copyright       XOOPS Project
- * @link            https://www.xoops.org
+ * @link            https://xoops.org
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  */
 
@@ -75,6 +75,7 @@ if ($GLOBALS['xoopsUser']->isAdmin($xoopsModule->mid())) {
         ksort($module_list);
         echo "
         <h4 style='text-align:left;'>" . constant('CO_' . $moduleDirNameUpper . '_' . 'BADMIN') . '</h4>';
+        /** @var \XoopsModuleHandler $moduleHandler */
         $moduleHandler = xoops_getHandler('module');
         echo "<form action='" . $_SERVER['SCRIPT_NAME'] . "' name='blockadmin' method='post'>";
         echo $GLOBALS['xoopsSecurity']->getTokenHTML();
@@ -90,10 +91,9 @@ if ($GLOBALS['xoopsUser']->isAdmin($xoopsModule->mid())) {
              . '-'
              . _RIGHT
              . "</th><th align='center'>"
-             . constant('CO_'
-                        . $moduleDirNameUpper
-                        . '_'
-                        . 'WEIGHT')
+             . constant(
+                 'CO_' . $moduleDirNameUpper . '_' . 'WEIGHT'
+             )
              . "</th><th align='center'>"
              . constant('CO_' . $moduleDirNameUpper . '_' . 'VISIBLE')
              . "</th><th align='center'>"
@@ -169,71 +169,23 @@ if ($GLOBALS['xoopsUser']->isAdmin($xoopsModule->mid())) {
                 $title = $i->getVar('title');
             }
             $name = $i->getVar('name');
-            echo "<tr valign='top'><td class='$class' align='center'><input type='text' name='title["
-                 . $i->getVar('bid')
-                 . "]' value='"
-                 . $title
-                 . "'></td><td class='$class' align='center' nowrap='nowrap'>
+            echo "<tr valign='top'><td class='$class' align='center'><input type='text' name='title[" . $i->getVar('bid') . "]' value='" . $title . "'></td><td class='$class' align='center' nowrap='nowrap'>
                     <div align='center' >
-                    <input type='radio' name='side["
-                 . $i->getVar('bid')
-                 . "]' value='"
-                 . XOOPS_CENTERBLOCK_LEFT
-                 . "'$ssel2>
-                        <input type='radio' name='side["
-                 . $i->getVar('bid')
-                 . "]' value='"
-                 . XOOPS_CENTERBLOCK_CENTER
-                 . "'$ssel3>
-                    <input type='radio' name='side["
-                 . $i->getVar('bid')
-                 . "]' value='"
-                 . XOOPS_CENTERBLOCK_RIGHT
-                 . "'$ssel4>
+                    <input type='radio' name='side[" . $i->getVar('bid') . "]' value='" . XOOPS_CENTERBLOCK_LEFT . "'$ssel2>
+                        <input type='radio' name='side[" . $i->getVar('bid') . "]' value='" . XOOPS_CENTERBLOCK_CENTER . "'$ssel3>
+                    <input type='radio' name='side[" . $i->getVar('bid') . "]' value='" . XOOPS_CENTERBLOCK_RIGHT . "'$ssel4>
                     </div>
                     <div>
-                        <span style='float:right;'><input type='radio' name='side["
-                 . $i->getVar('bid')
-                 . "]' value='"
-                 . XOOPS_SIDEBLOCK_RIGHT
-                 . "'$ssel1></span>
-                    <div align='left'><input type='radio' name='side["
-                 . $i->getVar('bid')
-                 . "]' value='"
-                 . XOOPS_SIDEBLOCK_LEFT
-                 . "'$ssel0></div>
+                        <span style='float:right;'><input type='radio' name='side[" . $i->getVar('bid') . "]' value='" . XOOPS_SIDEBLOCK_RIGHT . "'$ssel1></span>
+                    <div align='left'><input type='radio' name='side[" . $i->getVar('bid') . "]' value='" . XOOPS_SIDEBLOCK_LEFT . "'$ssel0></div>
                     </div>
                     <div align='center'>
-                    <input type='radio' name='side["
-                 . $i->getVar('bid')
-                 . "]' value='"
-                 . XOOPS_CENTERBLOCK_BOTTOMLEFT
-                 . "'$ssel5>
-                        <input type='radio' name='side["
-                 . $i->getVar('bid')
-                 . "]' value='"
-                 . XOOPS_CENTERBLOCK_BOTTOM
-                 . "'$ssel7>
-                    <input type='radio' name='side["
-                 . $i->getVar('bid')
-                 . "]' value='"
-                 . XOOPS_CENTERBLOCK_BOTTOMRIGHT
-                 . "'$ssel6>
+                    <input type='radio' name='side[" . $i->getVar('bid') . "]' value='" . XOOPS_CENTERBLOCK_BOTTOMLEFT . "'$ssel5>
+                        <input type='radio' name='side[" . $i->getVar('bid') . "]' value='" . XOOPS_CENTERBLOCK_BOTTOM . "'$ssel7>
+                    <input type='radio' name='side[" . $i->getVar('bid') . "]' value='" . XOOPS_CENTERBLOCK_BOTTOMRIGHT . "'$ssel6>
                     </div>
-                </td><td class='$class' align='center'><input type='text' name='weight["
-                 . $i->getVar('bid')
-                 . "]' value='"
-                 . $i->getVar('weight')
-                 . "' size='5' maxlength='5'></td>
-                <td class='$class' align='center' nowrap><input type='radio' name='visible["
-                 . $i->getVar('bid')
-                 . "]' value='1'$sel1>"
-                 . _YES
-                 . "&nbsp;<input type='radio' name='visible["
-                 . $i->getVar('bid')
-                 . "]' value='0'$sel0>"
-                 . _NO
-                 . '</td>';
+                </td><td class='$class' align='center'><input type='text' name='weight[" . $i->getVar('bid') . "]' value='" . $i->getVar('weight') . "' size='5' maxlength='5'></td>
+                <td class='$class' align='center' nowrap><input type='radio' name='visible[" . $i->getVar('bid') . "]' value='1'$sel1>" . _YES . "&nbsp;<input type='radio' name='visible[" . $i->getVar('bid') . "]' value='0'$sel0>" . _NO . '</td>';
 
             echo "<td class='$class' align='center'><select size='5' name='bmodule[" . $i->getVar('bid') . "][]' id='bmodule[" . $i->getVar('bid') . "][]' multiple='multiple'>";
             foreach ($module_list as $k => $v) {
@@ -253,7 +205,25 @@ if ($GLOBALS['xoopsUser']->isAdmin($xoopsModule->mid())) {
 
             // Actions
 
-            echo "<td class='$class' align='center'><a href='blocksadmin.php?op=edit&amp;bid=" . $i->getVar('bid') . "'><img src=" . $pathIcon16 . '/edit.png' . " alt='" . _EDIT . "' title='" . _EDIT . "'></a> <a href='blocksadmin.php?op=clone&amp;bid=" . $i->getVar('bid') . "'><img src=" . $pathIcon16 . '/editcopy.png' . " alt='" . _CLONE . "' title='" . _CLONE . "'></a>";
+            echo "<td class='$class' align='center'><a href='blocksadmin.php?op=edit&amp;bid="
+                 . $i->getVar('bid')
+                 . "'><img src="
+                 . $pathIcon16
+                 . '/edit.png'
+                 . " alt='"
+                 . _EDIT
+                 . "' title='"
+                 . _EDIT
+                 . "'></a> <a href='blocksadmin.php?op=clone&amp;bid="
+                 . $i->getVar('bid')
+                 . "'><img src="
+                 . $pathIcon16
+                 . '/editcopy.png'
+                 . " alt='"
+                 . _CLONE
+                 . "' title='"
+                 . _CLONE
+                 . "'></a>";
             if ('S' !== $i->getVar('block_type') && 'M' !== $i->getVar('block_type')) {
                 echo "&nbsp;<a href='" . XOOPS_URL . '/modules/system/admin.php?fct=blocksadmin&amp;op=delete&amp;bid=' . $i->getVar('bid') . "'><img src=" . $pathIcon16 . '/delete.png' . " alt='" . _DELETE . "' title='" . _DELETE . "'>
                      </a>";
@@ -280,7 +250,7 @@ if ($GLOBALS['xoopsUser']->isAdmin($xoopsModule->mid())) {
     }
 
     /**
-          * @param int               $bid
+     * @param int $bid
      */
     function cloneBlock($bid)
     {
@@ -329,13 +299,13 @@ if ($GLOBALS['xoopsUser']->isAdmin($xoopsModule->mid())) {
     }
 
     /**
-          * @param int               $bid
-     * @param $bside
-     * @param $bweight
-     * @param $bvisible
-     * @param $bcachetime
-     * @param $bmodule
-     * @param $options
+     * @param int $bid
+     * @param     $bside
+     * @param     $bweight
+     * @param     $bvisible
+     * @param     $bcachetime
+     * @param     $bmodule
+     * @param     $options
      */
     function isBlockCloned($bid, $bside, $bweight, $bvisible, $bcachetime, $bmodule, $options)
     {
@@ -401,12 +371,12 @@ if ($GLOBALS['xoopsUser']->isAdmin($xoopsModule->mid())) {
     }
 
     /**
-     * @param int               $bid
-     * @param string            $title
-     * @param int               $weight
-     * @param bool              $visible
-     * @param string            $side
-     * @param int               $bcachetime
+     * @param int    $bid
+     * @param string $title
+     * @param int    $weight
+     * @param bool   $visible
+     * @param string $side
+     * @param int    $bcachetime
      */
     function xtubeSetOrder($bid, $title, $weight, $visible, $side, $bcachetime)
     {
@@ -420,7 +390,7 @@ if ($GLOBALS['xoopsUser']->isAdmin($xoopsModule->mid())) {
     }
 
     /**
-          * @param int               $bid
+     * @param int $bid
      */
     function xtubeEditBlock($bid)
     {

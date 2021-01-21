@@ -16,11 +16,11 @@
  * @since           1.0
  * @author          trabis <lusopoemas@gmail.com>, bleekk <bleekk@outlook.com>
  */
-defined('XOOPS_ROOT_PATH') || die('Restricted access');
+defined('XOOPS_ROOT_PATH') || exit('Restricted access');
 
 require __DIR__ . '/preloads/autoloader.php';
 
-$moduleDirName = basename(__DIR__);
+$moduleDirName      = basename(__DIR__);
 $moduleDirNameUpper = mb_strtoupper($moduleDirName);
 
 // ------------------- Informations ------------------- //
@@ -43,7 +43,7 @@ $modversion = [
     'release_file'        => XOOPS_URL . "/modules/{$moduleDirName}/docs/release_info file",
     'manual'              => 'link to manual file',
     'manual_file'         => XOOPS_URL . "/modules/{$moduleDirName}/docs/install.txt",
-    'min_php'             => '5.6',
+    'min_php'             => '7.2',
     'min_xoops'           => '2.5.10',
     'min_admin'           => '1.2',
     'min_db'              => ['mysql' => '5.5'],
@@ -162,10 +162,10 @@ $modversion['config'][] = [
  * Show Developer Tools?
  */
 $modversion['config'][] = [
-    'name' => 'displayDeveloperTools',
-    'title' => 'CO_' . $moduleDirNameUpper . '_' . 'SHOW_DEV_TOOLS',
+    'name'        => 'displayDeveloperTools',
+    'title'       => 'CO_' . $moduleDirNameUpper . '_' . 'SHOW_DEV_TOOLS',
     'description' => 'CO_' . $moduleDirNameUpper . '_' . 'SHOW_DEV_TOOLS_DESC',
-    'formtype' => 'yesno',
-    'valuetype' => 'int',
-    'default' => 0,
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+    'default'     => 0,
 ];

@@ -12,11 +12,13 @@
 /**
  * @copyright       XOOPS Project (https://xoops.org)
  * @license         https://www.gnu.org/licenses/gpl-2.0.html GNU Public License
- * @package         Mytabs
  * @since           1.0
  * @author          trabis <lusopoemas@gmail.com>
  */
-$pathIcon32 = \Xmf\Module\Admin::iconUrl('', 32);
+
+use Xmf\Module\Admin;
+
+$pathIcon32 = Admin::iconUrl('', 32);
 
 echo "<div class='adminfooter'>\n" . "  <div style='text-align: center;'>\n" . "    <a href='https://xoops.org' rel='external'><img src='{$pathIcon32}/xoopsmicrobutton.gif' alt='XOOPS' title='XOOPS'></a>\n" . "  </div>\n" . '  ' . _AM_MODULEADMIN_ADMIN_FOOTER . "\n" . '</div>';
 

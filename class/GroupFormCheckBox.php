@@ -20,7 +20,6 @@ namespace XoopsModules\Mymenus;
  * @author       XOOPS Development Team,
  * @author       GIJ=CHECKMATE (PEAK Corp. http://www.peak.ne.jp/)
  */
-defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 require_once XOOPS_ROOT_PATH . '/class/xoopsform/formelement.php';
 require_once XOOPS_ROOT_PATH . '/class/xoopsform/formhidden.php';
@@ -34,8 +33,6 @@ require_once XOOPS_ROOT_PATH . '/class/xoopsform/form.php';
  * @author      Kazumi Ono  <onokazu@myweb.ne.jp>
  * @copyright   copyright (c) 2000-2003 XOOPS.org
  *
- * @package     kernel
- * @subpackage  form
  */
 class GroupFormCheckBox extends \XoopsFormElement
 {
@@ -195,22 +192,10 @@ class GroupFormCheckBox extends \XoopsFormElement
         if (isset($this->_value) && in_array($option['id'], $this->_value)) {
             $tree .= ' checked';
         }
-        $tree .= '>'
-                 . $option['name']
-                 . '<input type="hidden" name="'
-                 . $this->getName()
-                 . '[parents]['
-                 . $option['id']
-                 . ']" value="'
-                 . implode(':', $parentIds)
-                 . '"><input type="hidden" name="'
-                 . $this->getName()
-                 . '[itemname]['
-                 . $option['id']
-                 . ']" value="'
-                 . htmlspecialchars($option['name'], ENT_QUOTES
-                                                     | ENT_HTML5)
-                 . "\"><br>\n";
+        $tree .= '>' . $option['name'] . '<input type="hidden" name="' . $this->getName() . '[parents][' . $option['id'] . ']" value="' . implode(':', $parentIds) . '"><input type="hidden" name="' . $this->getName() . '[itemname][' . $option['id'] . ']" value="' . htmlspecialchars(
+                $option['name'],
+                ENT_QUOTES | ENT_HTML5
+            ) . "\"><br>\n";
         if (isset($option['children'])) {
             foreach ($option['children'] as $child) {
                 array_push($parentIds, $option['id']);

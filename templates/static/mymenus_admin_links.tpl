@@ -40,11 +40,11 @@
                             <{if $mid == $id}> selected<{/if}>><{$title}></option>
                 <{/foreach}>
             </select>
-            <!--
-               <button role="button" class="ui-xbutton">
-                <{$smarty.const._AM_MYMENUS_ACTION_GOTO_MENU}>
-            </button>
- -->
+
+            <{*               <button role="button" class="ui-xbutton">*}>
+            <{*                <{$smarty.const._AM_MYMENUS_ACTION_GOTO_MENU}>*}>
+            <{*            </button>*}>
+
         </form>
     </div>
     <div class="clear"></div>

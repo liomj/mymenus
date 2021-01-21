@@ -19,7 +19,6 @@ namespace XoopsModules\Mymenus;
  * @since           1.0
  * @author          trabis <lusopoemas@gmail.com>
  */
-defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 /**
  * Class Registry
@@ -58,7 +57,7 @@ class Registry
     {
         $ret = true;
         if (true === $this->isLocked($key)) {
-            trigger_error(_AM_MYMENUS_ENTRY_UNABLE . " `{$key}`." . _AM_MYMENUS_ENTRY_LOCKED, E_USER_WARNING);
+            \trigger_error(\_AM_MYMENUS_ENTRY_UNABLE . " `{$key}`." . \_AM_MYMENUS_ENTRY_LOCKED, \E_USER_WARNING);
 
             $ret = false;
         }

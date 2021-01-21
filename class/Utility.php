@@ -6,9 +6,6 @@ use XoopsModules\Mymenus;
 use XoopsModules\Mymenus\Common;
 use XoopsModules\Mymenus\Constants;
 
-
-
-
 /**
  * Class Utility
  */

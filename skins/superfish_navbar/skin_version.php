@@ -24,7 +24,7 @@ $skinVersion['css'] = [
 ];
 
 $skinVersion['js'] = [
-//    '../../../../browse.php?Frameworks/jquery/jquery.js',
+    //    '../../../../browse.php?Frameworks/jquery/jquery.js',
     '../../assets/js/jquery.js',
     //                           '../../assets/js/jquery-1.11.2.min.js',
     '../../assets/js/hoverIntent.js',

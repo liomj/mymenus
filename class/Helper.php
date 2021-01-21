@@ -19,7 +19,6 @@ namespace XoopsModules\Mymenus;
  * @since
  * @author       XOOPS Development Team
  */
-//defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 /**
  * Class Helper
@@ -33,7 +32,7 @@ class Helper extends \Xmf\Module\Helper
      */
     public function __construct($debug = false)
     {
-        $this->debug = $debug;
+        $this->debug   = $debug;
         $moduleDirName = basename(dirname(__DIR__));
         parent::__construct($moduleDirName);
     }
@@ -70,7 +69,7 @@ class Helper extends \Xmf\Module\Helper
      */
     public function getHandler($name)
     {
-        $ret   = false;
+        $ret = false;
 
         $class = __NAMESPACE__ . '\\' . ucfirst($name) . 'Handler';
         if (!class_exists($class)) {

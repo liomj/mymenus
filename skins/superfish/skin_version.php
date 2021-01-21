@@ -20,13 +20,12 @@ $skinVersion['template'] = 'templates/template.tpl';
 $skinVersion['css']      = 'css/superfish.css';
 
 $skinVersion['js'] = [
-//    '../../../../browse.php?Frameworks/jquery/jquery.js',
+    //    '../../../../browse.php?Frameworks/jquery/jquery.js',
     '../../assets/js/jquery.js',
     //                           '../../assets/js/jquery-1.11.2.min.js',
     '../../assets/js/hoverIntent.js',
     '../../assets/js/superfish.js',
 ];
-
 
 $header = "\n" . '<script type="module">
     jQuery(document).ready(function () {
@@ -36,6 +35,5 @@ $header = "\n" . '<script type="module">
         speed: "fast"
         })
 </script>';
-
 
 $skinVersion['header'] = $header;

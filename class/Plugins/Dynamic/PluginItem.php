@@ -21,8 +21,7 @@ namespace XoopsModules\Mymenus\Plugins\Dynamic;
  */
 
 use XoopsModules\Mymenus;
-
-defined('XOOPS_ROOT_PATH') || die('Restricted access');
+use XoopsModules\Mymenus\Helper;
 
 /**
  * Class PluginItem
@@ -35,11 +34,11 @@ class PluginItem extends Mymenus\PluginItem
         $registry = Mymenus\Registry::getInstance();
         $menus    = $registry->getEntry('menus');
         foreach ($menus as $menu) {
-            if (!preg_match('/{(MODULE\|.*)}/i', $menu['title'], $reg)) {
+            if (!\preg_match('/{(MODULE\|.*)}/i', $menu['title'], $reg)) {
                 $newmenus[] = $menu;
                 continue;
             }
-            $result      = array_map('mb_strtolower', explode('|', $reg[1]));
+            $result      = \array_map('\mb_strtolower', \explode('|', $reg[1]));
             $moduleMenus = self::getModuleMenus($result[1], $menu['pid']);
             foreach ($moduleMenus as $mMenu) {
                 $newmenus[] = $mMenu;
@@ -59,18 +58,18 @@ class PluginItem extends Mymenus\PluginItem
         global $xoopsModule;
         static $id = -1;
         /** @var \XoopsModules\Mymenus\Helper $helper */
-        $helper = \XoopsModules\Mymenus\Helper::getInstance();
+        $helper = Helper::getInstance();
 
         $ret = [];
         //Sanitizing $module
-        if (preg_match('/[^a-z0-9\\/\\\\_.:-]/i', $module)) {
+        if (\preg_match('/[^a-z0-9\\/\\\\_.:-]/i', $module)) {
             return $ret;
         }
 
         $path = "modules/{$module}";
         $file = $GLOBALS['xoops']->path("{$path}/xoops_version.php");
 
-        if (!file_exists($file)) {
+        if (!\is_file($file)) {
             return $ret;
         }
         $helper->loadLanguage('modinfo');
@@ -80,14 +79,14 @@ class PluginItem extends Mymenus\PluginItem
             if (!($xoopsModule instanceof \XoopsModule) || ($xoopsModule->getVar('dirname') != $module)) {
                 // @TODO: check the following 2 statements, they're basically just assigns - is this intended?
                 $_xoopsModule       = ($xoopsModule instanceof \XoopsModule) ? $xoopsModule : $xoopsModule;
-                $_xoopsModuleConfig = is_object($xoopsModuleConfig) ? $xoopsModuleConfig : $xoopsModuleConfig;
+                $_xoopsModuleConfig = \is_object($xoopsModuleConfig) ? $xoopsModuleConfig : $xoopsModuleConfig;
                 /** @var \XoopsModuleHandler $moduleHandler */
-                $moduleHandler          = xoops_getHandler('module');
+                $moduleHandler          = \xoops_getHandler('module');
                 $xoopsModule            = $moduleHandler->getByDirname($module);
                 $GLOBALS['xoopsModule'] = $xoopsModule;
                 if ($xoopsModule instanceof \XoopsModule) {
                     /** @var \XoopsConfigHandler $configHandler */
-                    $configHandler                = xoops_getHandler('config');
+                    $configHandler                = \xoops_getHandler('config');
                     $xoopsModuleConfig            = $configHandler->getConfigsByCat(0, $xoopsModule->getVar('mid'));
                     $GLOBALS['xoopsModuleConfig'] = $xoopsModuleConfig;
                 }
@@ -101,13 +100,15 @@ class PluginItem extends Mymenus\PluginItem
         $linksHandler = $helper->getHandler('Links');
         foreach ($modversion['sub'] as $links) {
             $obj = $linksHandler->create();
-            $obj->setVars([
-                              'title'     => $links['name'],
-                              'alt_title' => $links['name'],
-                              'link'      => $GLOBALS['xoops']->url("{$path}/{$links['url']}"),
-                              'id'        => $id,
-                              'pid'       => (int)$pid,
-                          ]);
+            $obj->setVars(
+                [
+                    'title'     => $links['name'],
+                    'alt_title' => $links['name'],
+                    'link'      => $GLOBALS['xoops']->url("{$path}/{$links['url']}"),
+                    'id'        => $id,
+                    'pid'       => (int)$pid,
+                ]
+            );
             $ret[] = $obj->getValues();
             $id--;
         }

@@ -5,7 +5,9 @@
 //                          GIJOE <http://www.peak.ne.jp>                   //
 // ------------------------------------------------------------------------- //
 
-require_once dirname(dirname(dirname(__DIR__))) . '/include/cp_header.php';
+use Xmf\Module\Admin;
+use Xmf\Request;
+
 require_once __DIR__ . '/admin_header.php';
 //require_once XOOPS_ROOT_PATH."/modules/" . $xoopsModule->getVar("dirname") . "/class/admin.php";
 
@@ -54,7 +56,7 @@ if (!empty($target_module) && is_object($target_module)) {
     $target_mid     = $target_module->getVar('mid');
     $target_mname   = $target_module->getVar('name') . '&nbsp;' . sprintf('(%2.2f)', $target_module->getVar('version') / 100.0);
     $query4redirect = '?dirname=' . urlencode(strip_tags($_GET['dirname']));
-} elseif ((\Xmf\Request::hasVar('mid', 'GET') && 0 == $_GET['mid']) || 'blocksadmin' === $xoopsModule->getVar('dirname')) {
+} elseif ((Request::hasVar('mid', 'GET') && 0 == $_GET['mid']) || 'blocksadmin' === $xoopsModule->getVar('dirname')) {
     $target_mid     = 0;
     $target_mname   = '';
     $query4redirect = '?mid=0';
@@ -65,6 +67,7 @@ if (!empty($target_module) && is_object($target_module)) {
 }
 
 // check access right (needs system_admin of BLOCK)
+/** @var \XoopsGroupPermHandler $grouppermHandler */
 $grouppermHandler = xoops_getHandler('groupperm');
 if (!$grouppermHandler->checkRight('system_admin', XOOPS_SYSTEM_BLOCK, $xoopsUser->getGroups())) {
     redirect_header(XOOPS_URL . '/user.php', 1, _NOPERM);
@@ -113,7 +116,7 @@ if (!empty($_POST['submit'])) {
 }
 
 xoops_cp_header();
-$adminObject = \Xmf\Module\Admin::getInstance();
+$adminObject = Admin::getInstance();
 $adminObject->displayNavigation(basename(__FILE__));
 
 if (file_exists('./mymenu.php')) {
@@ -122,3 +125,5 @@ if (file_exists('./mymenu.php')) {
 
 list_groups();
 require_once __DIR__ . '/admin_footer.php';
+
+?>

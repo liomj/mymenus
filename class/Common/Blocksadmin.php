@@ -9,7 +9,7 @@
  * @category        Module
  * @author          XOOPS Development Team
  * @copyright       XOOPS Project
- * @link            https://www.xoops.org
+ * @link            https://xoops.org
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  */
 
@@ -81,6 +81,7 @@ if ($GLOBALS['xoopsUser']->isAdmin($xoopsModule->mid())) {
         ksort($module_list);
         echo "
         <h4 style='text-align:left;'>" . constant('CO_' . $moduleDirNameUpper . '_' . 'BADMIN') . '</h4>';
+        /** @var \XoopsModuleHandler $moduleHandler */
         $moduleHandler = xoops_getHandler('module');
         echo "<form action='" . $_SERVER['SCRIPT_NAME'] . "' name='blockadmin' method='post'>";
         echo $GLOBALS['xoopsSecurity']->getTokenHTML();
@@ -96,10 +97,9 @@ if ($GLOBALS['xoopsUser']->isAdmin($xoopsModule->mid())) {
              . '-'
              . _RIGHT
              . "</th><th align='center'>"
-             . constant('CO_'
-                        . $moduleDirNameUpper
-                        . '_'
-                        . 'WEIGHT')
+             . constant(
+                 'CO_' . $moduleDirNameUpper . '_' . 'WEIGHT'
+             )
              . "</th><th align='center'>"
              . constant('CO_' . $moduleDirNameUpper . '_' . 'VISIBLE')
              . "</th><th align='center'>"
@@ -287,7 +287,7 @@ if ($GLOBALS['xoopsUser']->isAdmin($xoopsModule->mid())) {
     }
 
     /**
-          * @param int               $bid
+     * @param int $bid
      */
     function cloneBlock($bid)
     {
@@ -336,13 +336,13 @@ if ($GLOBALS['xoopsUser']->isAdmin($xoopsModule->mid())) {
     }
 
     /**
-          * @param int               $bid
-     * @param $bside
-     * @param $bweight
-     * @param $bvisible
-     * @param $bcachetime
-     * @param $bmodule
-     * @param $options
+     * @param int $bid
+     * @param     $bside
+     * @param     $bweight
+     * @param     $bvisible
+     * @param     $bcachetime
+     * @param     $bmodule
+     * @param     $options
      */
     function isBlockCloned($bid, $bside, $bweight, $bvisible, $bcachetime, $bmodule, $options)
     {
@@ -408,12 +408,12 @@ if ($GLOBALS['xoopsUser']->isAdmin($xoopsModule->mid())) {
     }
 
     /**
-     * @param int               $bid
-     * @param string            $title
-     * @param int               $weight
-     * @param bool              $visible
-     * @param string            $side
-     * @param int               $bcachetime
+     * @param int    $bid
+     * @param string $title
+     * @param int    $weight
+     * @param bool   $visible
+     * @param string $side
+     * @param int    $bcachetime
      */
     function setOrder($bid, $title, $weight, $visible, $side, $bcachetime)
     {
@@ -427,7 +427,7 @@ if ($GLOBALS['xoopsUser']->isAdmin($xoopsModule->mid())) {
     }
 
     /**
-          * @param int               $bid
+     * @param int $bid
      */
     function editBlock($bid)
     {
@@ -487,12 +487,26 @@ if ($GLOBALS['xoopsUser']->isAdmin($xoopsModule->mid())) {
      */
     function updateBlock($bid, $btitle, $bside, $bweight, $bvisible, $bcachetime, $bmodule, $options, $groups)
     {
-        $myblock = new \XoopsBlock($bid);
+        $myblock = new XoopsBlock($bid);
         $myblock->setVar('title', $btitle);
         $myblock->setVar('weight', $bweight);
         $myblock->setVar('visible', $bvisible);
         $myblock->setVar('side', $bside);
         $myblock->setVar('bcachetime', $bcachetime);
+        //update block options
+        if (isset($options)) {
+            $options_count = count($options);
+            if ($options_count > 0) {
+                //Convert array values to comma-separated
+                for ($i = 0; $i < $options_count; ++$i) {
+                    if (is_array($options[$i])) {
+                        $options[$i] = implode(',', $options[$i]);
+                    }
+                }
+                $options = implode('|', $options);
+                $myblock->setVar('options', $options);
+            }
+        }
         $myblock->store();
 
         if (!empty($bmodule) && count($bmodule) > 0) {

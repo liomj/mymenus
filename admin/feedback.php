@@ -19,18 +19,20 @@
  * @author         Fernando Santos (topet05) <fernando@mastop.com.br>
  */
 
+use Xmf\Module\Admin;
 use Xmf\Request;
 use XoopsModules\Mymenus\Common;
+use XoopsModules\Mymenus\Common\ModuleFeedback;
 
-include __DIR__ . '/admin_header.php';
+require __DIR__ . '/admin_header.php';
 
-$adminObject = \Xmf\Module\Admin::getInstance();
+$adminObject = Admin::getInstance();
 
-$feedback = new \XoopsModules\Mymenus\Common\ModuleFeedback();
+$feedback = new ModuleFeedback();
 
 // It recovered the value of argument op in URL$
-$op            = Request::getString('op', 'list');
-$moduleDirName = $GLOBALS['xoopsModule']->getVar('dirname');
+$op                 = Request::getString('op', 'list');
+$moduleDirName      = $GLOBALS['xoopsModule']->getVar('dirname');
 $moduleDirNameUpper = mb_strtoupper($moduleDirName);
 xoops_loadLanguage('feedback', $moduleDirName);
 
@@ -40,9 +42,9 @@ switch ($op) {
     case 'list':
     default:
         $GLOBALS['xoopsTpl']->assign('navigation', $adminObject->displayNavigation('feedback.php'));
-        $feedback->name = $GLOBALS['xoopsUser']->getVar('name');
+        $feedback->name  = $GLOBALS['xoopsUser']->getVar('name');
         $feedback->email = $GLOBALS['xoopsUser']->getVar('email');
-        $feedback->site = XOOPS_URL;
+        $feedback->site  = XOOPS_URL;
         /** @var \XoopsThemeForm $form */
         $form = $feedback->getFormFeedback();
         $form->display();

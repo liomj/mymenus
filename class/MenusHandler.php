@@ -22,8 +22,6 @@ namespace XoopsModules\Mymenus;
 
 use XoopsModules\Mymenus;
 
-defined('XOOPS_ROOT_PATH') || die('Restricted access');
-
 //require  dirname(__DIR__) . '/include/common.php';
 
 /**

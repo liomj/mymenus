@@ -18,6 +18,8 @@
  */
 
 use XoopsModules\Mymenus;
+use XoopsModules\Mymenus\Helper;
+use XoopsModules\Mymenus\Utility;
 
 //require __DIR__ . '/setup.php';
 
@@ -30,7 +32,7 @@ use XoopsModules\Mymenus;
 function xoops_module_pre_install_mymenus(\XoopsModule $module)
 {
     /** @var Mymenus\Utility $utility */
-    $utility = new \XoopsModules\Mymenus\Utility();
+    $utility = new Utility();
 
     //check for minimum XOOPS version
     if (!$utility::checkVerXoops($module)) {
@@ -59,11 +61,11 @@ function xoops_module_pre_install_mymenus(\XoopsModule $module)
 function xoops_module_install_mymenus(\XoopsModule $module)
 {
     require dirname(dirname(dirname(__DIR__))) . '/mainfile.php';
-    require dirname(__DIR__) . '/include/config.php';
+    require dirname(__DIR__) . '/config/config.php';
 
     $moduleDirName = basename(dirname(__DIR__));
     /** @var \XoopsModules\Mymenus\Helper $helper */
-    $helper = \XoopsModules\Mymenus\Helper::getInstance();
+    $helper = Helper::getInstance();
 
     // Load language files
     $helper->loadLanguage('admin');
@@ -71,11 +73,11 @@ function xoops_module_install_mymenus(\XoopsModule $module)
 
     $configurator = new Mymenus\Common\Configurator();
     /** @var Mymenus\Utility $utility */
-    $utility = new \XoopsModules\Mymenus\Utility();
+    $utility = new Utility();
 
     // default Permission Settings ----------------------
     global $xoopsModule;
-    $moduleId  = $xoopsModule->getVar('mid');
+    $moduleId = $xoopsModule->getVar('mid');
 
     /** @var \XoopsGroupPermHandler $grouppermHandler */
     $grouppermHandler = xoops_getHandler('groupperm');

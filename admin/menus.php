@@ -17,6 +17,7 @@
  * @author          trabis <lusopoemas@gmail.com>
  */
 
+use Xmf\Module\Admin;
 use Xmf\Request;
 
 $currentFile = basename(__FILE__);
@@ -29,7 +30,7 @@ switch ($op) {
         $apply_filter = Request::getBool('apply_filter', false);
         //  admin navigation
         xoops_cp_header();
-        $adminObject = \Xmf\Module\Admin::getInstance();
+        $adminObject = Admin::getInstance();
         $adminObject->displayNavigation($currentFile);
         // buttons
         if (true === $apply_filter) {
@@ -127,7 +128,7 @@ switch ($op) {
     case 'edit':
         //  admin navigation
         xoops_cp_header();
-        $adminObject = \Xmf\Module\Admin::getInstance();
+        $adminObject = Admin::getInstance();
         $adminObject->displayNavigation($currentFile);
         // buttons
         $adminObject->addItemButton(_LIST, $currentFile . '?op=list', 'list');
@@ -190,8 +191,11 @@ switch ($op) {
             redirect_header($currentFile, 3, _AM_MYMENUS_MSG_DELETE_MENU_SUCCESS);
         } else {
             xoops_cp_header();
-            xoops_confirm(['ok' => true, 'id' => $id, 'op' => 'delete'], //                $_SERVER['REQUEST_URI'],
-                          Request::getString('REQUEST_URI', '', 'SERVER'), sprintf(_AM_MYMENUS_MENUS_SUREDEL, $menusObj->getVar('title')));
+            xoops_confirm(
+                ['ok' => true, 'id' => $id, 'op' => 'delete'], //                $_SERVER['REQUEST_URI'],
+                Request::getString('REQUEST_URI', '', 'SERVER'),
+                sprintf(_AM_MYMENUS_MENUS_SUREDEL, $menusObj->getVar('title'))
+            );
             require __DIR__ . '/admin_footer.php';
         }
         break;

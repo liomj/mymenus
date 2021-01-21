@@ -17,13 +17,16 @@
  * @author          trabis <lusopoemas@gmail.com>
  */
 
+use Xmf\Module\Admin;
+use Xmf\Request;
+use Xmf\Yaml;
 use XoopsModules\Mymenus\Common;
 
 require __DIR__ . '/admin_header.php';
 
 // admin navigation
 xoops_cp_header();
-$adminObject = \Xmf\Module\Admin::getInstance();
+$adminObject = Admin::getInstance();
 
 //check or upload folders
 $configurator = new Common\Configurator();
@@ -31,19 +34,6 @@ foreach (array_keys($configurator->uploadFolders) as $i) {
     $utility::createFolder($configurator->uploadFolders[$i]);
     $adminObject->addConfigBoxLine($configurator->uploadFolders[$i], 'folder');
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 $adminObject->displayNavigation(basename(__FILE__));
 
@@ -62,7 +52,7 @@ if ($helper->getConfig('displaySampleButton')) {
 
     if (1 == $displaySampleButton) {
         xoops_loadLanguage('admin/modulesadmin', 'system');
-        require __DIR__ . '/../testdata/index.php';
+        require dirname(__DIR__) . '/testdata/index.php';
 
         $adminObject->addItemButton(constant('CO_' . $moduleDirNameUpper . '_' . 'ADD_SAMPLEDATA'), '__DIR__ . /../../testdata/index.php?op=load', 'add');
         $adminObject->addItemButton(constant('CO_' . $moduleDirNameUpper . '_' . 'SAVE_SAMPLEDATA'), '__DIR__ . /../../testdata/index.php?op=save', 'add');
@@ -85,7 +75,7 @@ $adminObject->displayIndex();
  */
 function loadAdminConfig($yamlFile)
 {
-    $config = \Xmf\Yaml::readWrapped($yamlFile); // work with phpmyadmin YAML dumps
+    $config = Yaml::readWrapped($yamlFile); // work with phpmyadmin YAML dumps
     return $config;
 }
 
@@ -95,7 +85,7 @@ function loadAdminConfig($yamlFile)
 function hideButtons($yamlFile)
 {
     $app['displaySampleButton'] = 0;
-    \Xmf\Yaml::save($app, $yamlFile);
+    Yaml::save($app, $yamlFile);
     redirect_header('index.php', 0, '');
 }
 
@@ -105,11 +95,11 @@ function hideButtons($yamlFile)
 function showButtons($yamlFile)
 {
     $app['displaySampleButton'] = 1;
-    \Xmf\Yaml::save($app, $yamlFile);
+    Yaml::save($app, $yamlFile);
     redirect_header('index.php', 0, '');
 }
 
-$op = \Xmf\Request::getString('op', 0, 'GET');
+$op = Request::getString('op', 0, 'GET');
 
 switch ($op) {
     case 'hide_buttons':

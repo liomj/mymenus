@@ -4,7 +4,6 @@ namespace XoopsModules\Mymenus;
 
 /**
  * Class Updater
- * @package XoopsModules\Mymenus
  */
 class Updater
 {
@@ -21,7 +20,7 @@ class Updater
     public static function checkInfoTemplates(\XoopsObject $module)
     {
         $err = true;
-        if (!file_exists(XOOPS_ROOT_PATH . '/modules/' . $module->getInfo('dirname') . '/templates/blocks/' . $module->getInfo('dirname') . '_block.tpl')) {
+        if (!\file_exists(XOOPS_ROOT_PATH . '/modules/' . $module->getInfo('dirname') . '/templates/blocks/' . $module->getInfo('dirname') . '_block.tpl')) {
             $module->setErrors('Template ' . $module->getInfo('dirname') . '_block.tpl not exists!');
             $err = false;
         }

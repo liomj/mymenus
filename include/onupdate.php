@@ -21,7 +21,7 @@
 
 use XoopsModules\Mymenus;
 
-defined('XOOPS_ROOT_PATH') || die('Restricted access');
+defined('XOOPS_ROOT_PATH') || exit('Restricted access');
 
 //$moduleDirname = basename(dirname(__DIR__));
 //require(XOOPS_ROOT_PATH . "/modules/$moduleDirname/include/common.php");
@@ -31,8 +31,8 @@ $helper = Mymenus\Helper::getInstance($debug);
 xoops_loadLanguage('admin', $helper->getDirname());
 
 /**
- * @param  object|\XoopsObject $xoopsModule
- * @param  int                 $previousVersion
+ * @param object|\XoopsObject $xoopsModule
+ * @param int                 $previousVersion
  * @return bool               FALSE if failed
  */
 function xoops_module_update_mymenus(\XoopsObject $xoopsModule, $previousVersion)

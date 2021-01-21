@@ -23,8 +23,6 @@ namespace XoopsModules\Mymenus\Plugins\MyMenus;
 use Xmf\Request;
 use XoopsModules\Mymenus;
 
-defined('XOOPS_ROOT_PATH') || die('Restricted access');
-
 /**
  * Class PluginItem
  */
@@ -34,7 +32,7 @@ class PluginItem extends Mymenus\PluginItem
     {
         $registry = Mymenus\Registry::getInstance();
         /** @var \XoopsMemberHandler $memberHandler */
-        $memberHandler = xoops_getHandler('member');
+        $memberHandler = \xoops_getHandler('member');
 
         $user = ($GLOBALS['xoopsUser'] instanceof \XoopsUser) ? $GLOBALS['xoopsUser'] : null;
         if (!$user) {
@@ -67,7 +65,7 @@ class PluginItem extends Mymenus\PluginItem
         $linkArray         = $registry->getEntry('link_array');
         $linkArray['link'] = self::doDecoration($linkArray['link']);
         //if (!eregi('mailto:', $linkArray['link']) && !eregi('://', $linkArray['link'])) {
-        if (!preg_match('/mailto:/i', $linkArray['link']) && !preg_match('#://#i', $linkArray['link'])) {
+        if (!\preg_match('/mailto:/i', $linkArray['link']) && !\preg_match('#://#i', $linkArray['link'])) {
             $linkArray['link'] = XOOPS_URL . '/' . $linkArray['link'];  //Do not do this in other decorators
         }
         $registry->setEntry('link_array', $linkArray);
@@ -77,7 +75,7 @@ class PluginItem extends Mymenus\PluginItem
     {
         $registry  = Mymenus\Registry::getInstance();
         $linkArray = $registry->getEntry('link_array');
-        if ($linkArray['image'] && !filter_var($linkArray['image'], FILTER_VALIDATE_URL)) {
+        if ($linkArray['image'] && !\filter_var($linkArray['image'], \FILTER_VALIDATE_URL)) {
             $linkArray['image'] = XOOPS_URL . '/' . $linkArray['image'];
             //Do not do this in other decorators
             $linkArray['image'] = self::doDecoration($linkArray['image']);
@@ -113,12 +111,12 @@ class PluginItem extends Mymenus\PluginItem
     {
         $registry = Mymenus\Registry::getInstance();
         //if (!eregi("{(.*\|.*)}", $string, $reg)) {
-        if (!preg_match('/{(.*\|.*)}/i', $string, $reg)) {
+        if (!\preg_match('/{(.*\|.*)}/i', $string, $reg)) {
             return $string;
         }
 
         $expression = $reg[0];
-        list($validator, $value) = array_map('strtolower', explode('|', $reg[1]));
+        [$validator, $value] = \array_map('\strtolower', \explode('|', $reg[1]));
 
         //just to prevent any bad admin to get easy passwords
         if ('pass' === $value) {
@@ -128,18 +126,18 @@ class PluginItem extends Mymenus\PluginItem
         if ('user' === $validator) {
             $user   = $registry->getEntry('user');
             $value  = isset($user[$value]) ? $user[$value] : static::getExtraValue('user', $value);
-            $string = str_replace($expression, $value, $string);
+            $string = \str_replace($expression, $value, $string);
         }
 
         if ('uri' === $validator) {
             $value  = Request::getString($value, 0, 'GET');
-            $string = str_replace($expression, $value, $string);
+            $string = \str_replace($expression, $value, $string);
         }
 
         if ('owner' === $validator) {
             $owner  = $registry->getEntry('owner');
             $value  = isset($owner[$value]) ? $owner[$value] : static::getExtraValue('owner', $value);
-            $string = str_replace($expression, $value, $string);
+            $string = \str_replace($expression, $value, $string);
         }
 
         return $string;
@@ -156,12 +154,12 @@ class PluginItem extends Mymenus\PluginItem
         $registry = Mymenus\Registry::getInstance();
         $menu     = $registry->getEntry('menu');
         $groups   = $registry->getEntry('user_groups');
-        if (0 == $menu['visible'] || !array_intersect($menu['groups'], $groups)) {
+        if (0 == $menu['visible'] || !\array_intersect($menu['groups'], $groups)) {
             $registry->setEntry('has_access', 'no');
 
             return;
         }
-        $hooks = array_intersect($menu['hooks'], get_class_methods(__CLASS__));
+        $hooks = \array_intersect($menu['hooks'], \get_class_methods(__CLASS__));
 
         foreach ($hooks as $method) {
             if (!self::$method()) {
@@ -177,9 +175,9 @@ class PluginItem extends Mymenus\PluginItem
         static::loadLanguage('mymenus');
         $registry                               = Mymenus\Registry::getInstance();
         $accessFilter                           = $registry->getEntry('accessFilter');
-        $accessFilter['is_owner']['name']       = _PL_MYMENUS_MYMENUS_ISOWNER;
+        $accessFilter['is_owner']['name']       = \_PL_MYMENUS_MYMENUS_ISOWNER;
         $accessFilter['is_owner']['method']     = 'isOwner';
-        $accessFilter['is_not_owner']['name']   = _PL_MYMENUS_MYMENUS_ISNOTOWNER;
+        $accessFilter['is_not_owner']['name']   = \_PL_MYMENUS_MYMENUS_ISNOTOWNER;
         $accessFilter['is_not_owner']['method'] = 'isNotOwner';
         $registry->setEntry('accessFilter', $accessFilter);
     }
@@ -214,7 +212,7 @@ class PluginItem extends Mymenus\PluginItem
         $registry = Mymenus\Registry::getInstance();
         $ret      = 0;
         $values   = ['pm_new', 'pm_readed', 'pm_total'];
-        if (!in_array($value, $values)) {
+        if (!\in_array($value, $values)) {
             return $ret;
         }
 
@@ -223,7 +221,7 @@ class PluginItem extends Mymenus\PluginItem
             return $ret;
         }
 
-        $pmHandler = xoops_getHandler('privmessage');
+        $pmHandler = \xoops_getHandler('privmessage');
 
         if ('pm_new' === $value) {
             $criteria = new \CriteriaCompo(new \Criteria('read_msg', 0));

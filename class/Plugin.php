@@ -22,10 +22,8 @@ namespace XoopsModules\Mymenus;
 
 use XoopsModules\Mymenus;
 
-defined('XOOPS_ROOT_PATH') || die('Restricted access');
-
 //require  dirname(__DIR__) . '/include/common.php';
-xoops_load('XoopsLists');
+\xoops_load('XoopsLists');
 
 /**
  * Class Plugin
@@ -63,13 +61,13 @@ class Plugin
 
     public function setPlugins()
     {
-        if (is_dir($dir = $GLOBALS['xoops']->path("modules/{$this->helper->getDirname()}/class/Plugins/"))) {
+        if (\is_dir($dir = $GLOBALS['xoops']->path("modules/{$this->helper->getDirname()}/class/Plugins/"))) {
             $pluginsList = \XoopsLists::getDirListAsArray($dir);
             foreach ($pluginsList as $plugin) {
                 //                if (file_exists($GLOBALS['xoops']->path("modules/{$this->helper->getDirname()}/plugins/{$plugin}/{$plugin}.php"))) {
                 $dirname   = $this->helper->getDirname();
                 $className = "\XoopsModules\{$dirname}\Plugins\{$plugin}\PluginItem";
-                if (class_exists($className)) {
+                if (\class_exists($className)) {
                     $this->plugins[] = $plugin;
                 }
             }
@@ -82,13 +80,13 @@ class Plugin
             //            require $GLOBALS['xoops']->path("modules/{$this->helper->getDirname()}/plugins/{$plugin}/{$plugin}.php");
             $dirname   = $this->helper->getDirname();
             $className = "\XoopsModules\{$dirname}\Plugins\{$plugin}\PluginItem";
-            if (!class_exists($className)) {
+            if (!\class_exists($className)) {
                 continue;
             }
-            $classMethods = get_class_methods($className);
+            $classMethods = \get_class_methods($className);
             foreach ($classMethods as $method) {
                 if (0 === mb_strpos($method, 'event')) {
-                    $eventName                  = mb_strtolower(str_replace('event', '', $method));
+                    $eventName                  = mb_strtolower(\str_replace('event', '', $method));
                     $event                      = ['className' => $className, 'method' => $method];
                     $this->events[$eventName][] = $event;
                 }
@@ -102,10 +100,10 @@ class Plugin
      */
     public function triggerEvent($eventName, $args = [])
     {
-        $eventName = mb_strtolower(str_replace('.', '', $eventName));
+        $eventName = mb_strtolower(\str_replace('.', '', $eventName));
         if (isset($this->events[(string)$eventName])) {
             foreach ($this->events[(string)$eventName] as $event) {
-                call_user_func([$event['className'], $event['method']], $args);
+                \call_user_func([$event['className'], $event['method']], $args);
             }
         }
     }

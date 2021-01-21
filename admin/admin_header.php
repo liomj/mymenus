@@ -17,9 +17,11 @@
  * @author          trabis <lusopoemas@gmail.com>
  */
 
+use Xmf\Module\Admin;
 use XoopsModules\Mymenus;
+use XoopsModules\Mymenus\Helper;
 
-include dirname(__DIR__) . '/preloads/autoloader.php';
+require dirname(__DIR__) . '/preloads/autoloader.php';
 
 require dirname(dirname(dirname(__DIR__))) . '/include/cp_header.php';
 xoops_load('XoopsFormLoader');
@@ -29,9 +31,9 @@ require dirname(__DIR__) . '/include/common.php';
 $moduleDirName = basename(dirname(__DIR__));
 
 /** @var \XoopsModules\Mymenus\Helper $helper */
-$helper = \XoopsModules\Mymenus\Helper::getInstance();
+$helper = Helper::getInstance();
 /** @var Xmf\Module\Admin $adminObject */
-$adminObject = \Xmf\Module\Admin::getInstance();
+$adminObject = Admin::getInstance();
 
 $myts = \MyTextSanitizer::getInstance();
 

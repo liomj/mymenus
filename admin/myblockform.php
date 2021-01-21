@@ -12,12 +12,9 @@
 /**
  * @copyright     {@link https://xoops.org/ XOOPS Project}
  * @license       {@link https://www.gnu.org/licenses/gpl-2.0.html GNU GPL 2 or later}
- * @package       mylinks
  * @since
  * @author        XOOPS Development Team
  */
-
-// defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 $usespaw = empty($_GET['usespaw']) ? false : true;
 
@@ -28,13 +25,15 @@ if (isset($block['name'])) {
     $form->addElement(new \XoopsFormLabel(_AM_NAME, $block['name']));
 }
 $side_select = new \XoopsFormSelect(_AM_BLKTYPE, 'bside', $block['side']);
-$side_select->addOptionArray([
-                                 0 => _AM_SBLEFT,
-                                 1 => _AM_SBRIGHT,
-                                 3 => _AM_CBLEFT,
-                                 4 => _AM_CBRIGHT,
-                                 5 => _AM_CBCENTER,
-                             ]);
+$side_select->addOptionArray(
+    [
+        0 => _AM_SBLEFT,
+        1 => _AM_SBRIGHT,
+        3 => _AM_CBLEFT,
+        4 => _AM_CBRIGHT,
+        5 => _AM_CBCENTER,
+    ]
+);
 $form->addElement($side_select);
 $form->addElement(new \XoopsFormText(_AM_MYLINKS_WEIGHT, 'bweight', 2, 5, $block['weight']));
 $form->addElement(new \XoopsFormRadioYN(_AM_VISIBLE, 'bvisible', $block['visible']));
@@ -60,7 +59,7 @@ if ($block['is_custom']) {
     //TODO:  change this to use XoopsEditor class
     // $can_use_spaw = check_browser_can_use_spaw();
     $myts     = \MyTextSanitizer::getInstance();
-    $textarea = new \XoopsFormDhtmlTextArea(_AM_CONTENT, 'bcontent', $myts->htmlSpecialChars($block['content']), 15, 70);
+    $textarea = new \XoopsFormDhtmlTextArea(_AM_CONTENT, 'bcontent', htmlspecialchars($block['content']), 15, 70);
     if ($can_use_spaw) {
         $textarea->setDescription($notice_for_tags . "<br><br><a href='$uri_to_myself&amp;usespaw=1'>SPAW</a>");
     } else {
@@ -73,6 +72,7 @@ if ($block['is_custom']) {
     $form->addElement($ctype_select);
 } else {
     if ('' != $block['template'] && !defined('XOOPS_ORETEKI')) {
+        /** @var \XoopsTplfileHandler $tplfileHandler */
         $tplfileHandler = xoops_getHandler('tplfile');
         $btemplate      = $tplfileHandler->find($GLOBALS['xoopsConfig']['template_set'], 'block', $block['bid']);
         if (count($btemplate) > 0) {
@@ -89,19 +89,21 @@ if ($block['is_custom']) {
     }
 }
 $cache_select = new \XoopsFormSelect(_AM_MYLINKS_BCACHETIME, 'bcachetime', $block['cachetime']);
-$cache_select->addOptionArray([
-                                  '0'       => _NOCACHE,
-                                  '30'      => sprintf(_SECONDS, 30),
-                                  '60'      => _MINUTE,
-                                  '300'     => sprintf(_MINUTES, 5),
-                                  '1800'    => sprintf(_MINUTES, 30),
-                                  '3600'    => _HOUR,
-                                  '18000'   => sprintf(_HOURS, 5),
-                                  '86400'   => _DAY,
-                                  '259200'  => sprintf(_DAYS, 3),
-                                  '604800'  => _WEEK,
-                                  '2592000' => _MONTH,
-                              ]);
+$cache_select->addOptionArray(
+    [
+        '0'       => _NOCACHE,
+        '30'      => sprintf(_SECONDS, 30),
+        '60'      => _MINUTE,
+        '300'     => sprintf(_MINUTES, 5),
+        '1800'    => sprintf(_MINUTES, 30),
+        '3600'    => _HOUR,
+        '18000'   => sprintf(_HOURS, 5),
+        '86400'   => _DAY,
+        '259200'  => sprintf(_DAYS, 3),
+        '604800'  => _WEEK,
+        '2592000' => _MONTH,
+    ]
+);
 $form->addElement($cache_select);
 if (isset($block['bid'])) {
     $form->addElement(new \XoopsFormHidden('bid', $block['bid']));

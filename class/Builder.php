@@ -83,7 +83,7 @@ class Builder
             }
 
             $this->output[$idx]['oli'] = true;
-            $this->output[$idx]        = array_merge($item, $this->output[$idx]);
+            $this->output[$idx]        = \array_merge($item, $this->output[$idx]);
 
             if (isset($this->parents[$item['id']])) {
                 $this->output[$idx]['hassub'] = true;
@@ -107,7 +107,7 @@ class Builder
         $up         = 0;
         $down       = 1;
         $counter    = 0;
-        $count      = count($this->parents[$pid]);
+        $count      = \count($this->parents[$pid]);
 
         foreach ($this->parents[$pid] as $item) {
             ++$idx;
