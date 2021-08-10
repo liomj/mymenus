@@ -24,7 +24,7 @@ use Xmf\Request;
 use XoopsModules\Mymenus\Common;
 use XoopsModules\Mymenus\Common\ModuleFeedback;
 
-require __DIR__ . '/admin_header.php';
+require_once __DIR__ . '/admin_header.php';
 
 $adminObject = Admin::getInstance();
 
@@ -100,4 +100,4 @@ switch ($op) {
 
         break;
 }
-require __DIR__ . '/admin_footer.php';
+require_once __DIR__ . '/admin_footer.php';

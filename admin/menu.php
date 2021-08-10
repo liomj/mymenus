@@ -21,18 +21,19 @@ defined('XOOPS_ROOT_PATH') || exit('Restricted access');
 use Xmf\Module\Admin;
 use XoopsModules\Mymenus;
 use XoopsModules\Mymenus\Helper;
+/** @var \XoopsModules\Mymenus\Helper $helper */
 
-$moduleDirName      = basename(dirname(__DIR__));
+$moduleDirName      = \basename(\dirname(__DIR__));
 $moduleDirNameUpper = mb_strtoupper($moduleDirName);
 
-/** @var \XoopsModules\Mymenus\Helper $helper */
 $helper = Helper::getInstance();
 $helper->loadLanguage('common');
 $helper->loadLanguage('feedback');
 
 $pathIcon32 = Admin::menuIconPath('');
-if (is_object($helper->getModule())) {
-    $pathModIcon32 = $helper->getModule()->getInfo('modicons32');
+$pathModIcon32 = XOOPS_URL .   '/modules/' . $moduleDirName . '/assets/images/icons/32/';
+if (is_object($helper->getModule()) && false !== $helper->getModule()->getInfo('modicons32')) {
+    $pathModIcon32 = $helper->url($helper->getModule()->getInfo('modicons32'));
 }
 
 $adminmenu[] = [

@@ -1,4 +1,16 @@
 -
     id: '1'
-    title: TestMenu1
+    title: 'Menu 1'
+    css: sf-menu
+-
+    id: '2'
+    title: Menu2
     css: ''
+-
+    id: '3'
+    title: 'Menu 3'
+    css: ''
+-
+    id: '4'
+    title: MEGA
+    css: sf-mega

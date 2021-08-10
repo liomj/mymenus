@@ -19,9 +19,11 @@
 
 use Xmf\Module\Admin;
 use Xmf\Request;
-use XoopsModules\Mymenus;
+use XoopsModules\Mymenus\{
+    LinksUtility
+};
 
-require __DIR__ . '/admin_header.php';
+require_once __DIR__ . '/admin_header.php';
 
 $currentFile = basename(__FILE__);
 
@@ -70,16 +72,16 @@ switch ($op) {
     */
 
     case 'edit':
-        echo Mymenus\LinksUtility::editLink($id, null, $mid);
+        echo LinksUtility::editLink($id, null, $mid);
         break;
     case 'add':
-        Mymenus\LinksUtility::addLink($mid);
+        LinksUtility::addLink($mid);
         break;
     case 'clone':
-        Mymenus\LinksUtility::cloneLink($id);
+        LinksUtility::cloneLink($id);
         break;
     case 'save':
-        Mymenus\LinksUtility::saveLink($id, $mid);
+        LinksUtility::saveLink($id, $mid);
         break;
     case 'delete':
         $id       = Request::getInt('id', null);
@@ -111,7 +113,7 @@ switch ($op) {
                 Request::getString('REQUEST_URI', '', 'SERVER'),
                 sprintf(_AM_MYMENUS_LINKS_SUREDEL, $linksObj->getVar('title'))
             );
-            require __DIR__ . '/admin_footer.php';
+            require_once __DIR__ . '/admin_footer.php';
         }
         break;
     case 'move':
@@ -119,13 +121,13 @@ switch ($op) {
         $adminObject = Admin::getInstance();
         $adminObject->displayNavigation($currentFile);
 
-        Mymenus\LinksUtility::moveLink($id, $weight);
-        echo Mymenus\LinksUtility::listLinks($start, $mid);
+        LinksUtility::moveLink($id, $weight);
+        echo LinksUtility::listLinks($start, $mid);
 
-        require __DIR__ . '/admin_footer.php';
+        require_once __DIR__ . '/admin_footer.php';
         break;
     case 'toggle':
-        Mymenus\LinksUtility::toggleLinkVisibility($id, $visible);
+        LinksUtility::toggleLinkVisibility($id, $visible);
         break;
     case 'order':
         $test  = [];
@@ -159,7 +161,7 @@ switch ($op) {
         $GLOBALS['xoTheme']->addScript(XOOPS_URL . "/modules/{$helper->getDirname()}/assets/js/nestedSortable.js");
         //$GLOBALS['xoTheme']->addScript(XOOPS_URL . '/modules/{$mymenus->dirname}/assets/js/switchButton.js');
         $GLOBALS['xoTheme']->addScript(XOOPS_URL . "/modules/{$helper->getDirname()}/assets/js/links.js");
-        echo Mymenus\LinksUtility::listLinks($start, $mid);
+        echo LinksUtility::listLinks($start, $mid);
         // Disable xoops debugger in dialog window
         //        require $GLOBALS['xoops']->path('/class/logger/xoopslogger.php');
         xoops_load('xoopslogger');
@@ -167,6 +169,6 @@ switch ($op) {
         $xoopsLogger->activated = true;
         error_reporting(-1);
 
-        require __DIR__ . '/admin_footer.php';
+        require_once __DIR__ . '/admin_footer.php';
         break;
 }

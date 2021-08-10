@@ -21,10 +21,11 @@ use Xmf\Request;
 use XoopsModules\Mymenus;
 use XoopsModules\Mymenus\Helper;
 use XoopsModules\Mymenus\Utility;
+/** @var Helper $helper */
 
 defined('XOOPS_ROOT_PATH') || exit('Restricted access');
 
-require dirname(__DIR__) . '/include/common.php';
+require \dirname(__DIR__) . '/include/common.php';
 
 /**
  * @param array $options array(0 => menu, 1 => moduleSkin, 2 => useThemeSkin, 3 => displayMethod, 4 => unique_id, 5 => themeSkin)
@@ -34,7 +35,11 @@ require dirname(__DIR__) . '/include/common.php';
 function mymenus_block_show($options)
 {
     global $xoopsTpl, $xoopsLogger;
-    /** @var \XoopsModules\Mymenus\Helper $helper */
+
+    if (!class_exists(Helper::class)) {
+        return false;
+    }
+
     $helper = Helper::getInstance();
 
     $block = [];

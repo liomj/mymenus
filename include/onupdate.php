@@ -23,7 +23,7 @@ use XoopsModules\Mymenus;
 
 defined('XOOPS_ROOT_PATH') || exit('Restricted access');
 
-//$moduleDirname = basename(dirname(__DIR__));
+//$moduleDirname = \basename(\dirname(__DIR__));
 //require(XOOPS_ROOT_PATH . "/modules/$moduleDirname/include/common.php");
 require __DIR__ . '/common.php';
 $helper = Mymenus\Helper::getInstance($debug);

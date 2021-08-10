@@ -22,7 +22,7 @@ namespace XoopsModules\Mymenus;
 
 use XoopsModules\Mymenus;
 
-//require  dirname(__DIR__) . '/include/common.php';
+//require  \dirname(__DIR__) . '/include/common.php';
 
 /**
  * Class LinksHandler
@@ -42,7 +42,7 @@ class LinksHandler extends \XoopsPersistableObjectHandler
     {
         parent::__construct($db, 'mymenus_links', Links::class, 'id', 'title');
         /** @var \XoopsModules\Mymenus\Helper $this ->helper */
-        $this->helper = \XoopsModules\Mymenus\Helper::getInstance();
+        $this->helper = Helper::getInstance();
     }
 
     /**

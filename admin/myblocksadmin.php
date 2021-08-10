@@ -11,8 +11,8 @@ use Xmf\Request;
 require_once __DIR__ . '/admin_header.php';
 //require_once XOOPS_ROOT_PATH."/modules/" . $xoopsModule->getVar("dirname") . "/class/admin.php";
 
-require_once XOOPS_ROOT_PATH . '/class/xoopsblock.php';
-//require_once  dirname(__DIR__) . '/include/gtickets.php';// GIJ
+require_once XOOPS_ROOT_PATH . '/kernel/block.php';
+//require_once  \dirname(__DIR__) . '/include/gtickets.php';// GIJ
 
 $xoops_system_path = XOOPS_ROOT_PATH . '/modules/system';
 
@@ -87,7 +87,7 @@ function list_groups()
 {
     global $target_mid, $target_mname, $block_arr;
 
-    $moduleDirName      = basename(dirname(__DIR__));
+    $moduleDirName      = \basename(\dirname(__DIR__));
     $moduleDirNameUpper = mb_strtoupper($moduleDirName);
 
     $item_list = [];

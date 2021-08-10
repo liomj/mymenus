@@ -13,11 +13,9 @@ namespace XoopsModules\Mymenus;
  */
 
 /**
- * @copyright    XOOPS Project https://xoops.org/
+ * @copyright    XOOPS Project (https://xoops.org)
  * @license      GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
- * @package
- * @since
- * @author       XOOPS Development Team
+ * @author      XOOPS Development Team
  */
 
 /**
@@ -33,7 +31,7 @@ class Helper extends \Xmf\Module\Helper
     public function __construct($debug = false)
     {
         $this->debug   = $debug;
-        $moduleDirName = basename(dirname(__DIR__));
+        $moduleDirName = \basename(\dirname(__DIR__));
         parent::__construct($moduleDirName);
     }
 
@@ -42,7 +40,7 @@ class Helper extends \Xmf\Module\Helper
      *
      * @return \XoopsModules\Mymenus\Helper
      */
-    public static function getInstance($debug = false)
+    public static function getInstance(bool $debug = false): Helper
     {
         static $instance;
         if (null === $instance) {
@@ -71,8 +69,8 @@ class Helper extends \Xmf\Module\Helper
     {
         $ret = false;
 
-        $class = __NAMESPACE__ . '\\' . ucfirst($name) . 'Handler';
-        if (!class_exists($class)) {
+        $class = __NAMESPACE__ . '\\' . \ucfirst($name) . 'Handler';
+        if (!\class_exists($class)) {
             throw new \RuntimeException("Class '$class' not found");
         }
         /** @var \XoopsMySQLDatabase $db */

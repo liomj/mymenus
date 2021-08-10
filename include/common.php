@@ -24,10 +24,10 @@ use XoopsModules\Mymenus;
 use XoopsModules\Mymenus\Helper;
 use XoopsModules\Mymenus\Utility;
 
-require dirname(__DIR__) . '/preloads/autoloader.php';
+require \dirname(__DIR__) . '/preloads/autoloader.php';
 
-$moduleDirName      = basename(dirname(__DIR__));
-$moduleDirNameUpper = mb_strtoupper($moduleDirName); //$capsDirName
+$moduleDirName      = \basename(\dirname(__DIR__));
+$moduleDirNameUpper = \mb_strtoupper($moduleDirName);
 
 /** @var \XoopsDatabase $db */
 /** @var \XoopsModules\Mymenus\Helper $helper */

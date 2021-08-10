@@ -21,7 +21,7 @@ use Xmf\Module\Admin;
 use Xmf\Request;
 
 $currentFile = basename(__FILE__);
-require __DIR__ . '/admin_header.php';
+require_once __DIR__ . '/admin_header.php';
 
 $op = Request::getString('op', 'list');
 switch ($op) {
@@ -122,7 +122,7 @@ switch ($op) {
         // NOP
 
         $GLOBALS['xoopsTpl']->display($GLOBALS['xoops']->path("modules/{$helper->getDirname()}/templates/static/mymenus_admin_menus.tpl"));
-        require __DIR__ . '/admin_footer.php';
+        require_once __DIR__ . '/admin_footer.php';
         break;
     case 'add':
     case 'edit':
@@ -142,7 +142,7 @@ switch ($op) {
         $form = $menusObj->getForm();
         $form->display();
 
-        require __DIR__ . '/admin_footer.php';
+        require_once __DIR__ . '/admin_footer.php';
         break;
     case 'save':
         if (!$GLOBALS['xoopsSecurity']->check()) {
@@ -196,7 +196,7 @@ switch ($op) {
                 Request::getString('REQUEST_URI', '', 'SERVER'),
                 sprintf(_AM_MYMENUS_MENUS_SUREDEL, $menusObj->getVar('title'))
             );
-            require __DIR__ . '/admin_footer.php';
+            require_once __DIR__ . '/admin_footer.php';
         }
         break;
 }

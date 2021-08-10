@@ -22,7 +22,7 @@ namespace XoopsModules\Mymenus;
 
 use XoopsModules\Mymenus;
 
-//require  dirname(__DIR__) . '/include/common.php';
+//require  \dirname(__DIR__) . '/include/common.php';
 \xoops_load('XoopsLists');
 
 /**
@@ -41,7 +41,7 @@ class Plugin
         $this->events   = [];
         $this->registry = Mymenus\Registry::getInstance();
         /** @var \XoopsModules\Mymenus\Helper $this ->helper */
-        $this->helper = \XoopsModules\Mymenus\Helper::getInstance();
+        $this->helper = Helper::getInstance();
         $this->setPlugins();
         $this->setEvents();
     }

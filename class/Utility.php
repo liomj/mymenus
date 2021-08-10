@@ -22,13 +22,13 @@ class Utility extends Common\SysUtility
     {
         //    require __DIR__ . '/common.php';
         /** @var \XoopsModules\Mymenus\Helper $helper */
-        $helper = \XoopsModules\Mymenus\Helper::getInstance();
+        $helper = Helper::getInstance();
         $error  = false;
         if ($useThemeSkin) {
             $path = 'themes/' . $GLOBALS['xoopsConfig']['theme_set'] . '/menu';
-            if (!file_exists($GLOBALS['xoops']->path("{$path}/skin_version.php"))) {
+            if (!\file_exists($GLOBALS['xoops']->path("{$path}/skin_version.php"))) {
                 $path = 'themes/' . $GLOBALS['xoopsConfig']['theme_set'] . "/modules/{$helper->getDirname()}/skins/{$themeSkin}";
-                if (!file_exists($GLOBALS['xoops']->path("{$path}/skin_version.php"))) {
+                if (!\file_exists($GLOBALS['xoops']->path("{$path}/skin_version.php"))) {
                     $error = true;
                 }
             }
@@ -41,7 +41,7 @@ class Utility extends Common\SysUtility
         $file = $GLOBALS['xoops']->path("{$path}/skin_version.php");
         $info = [];
 
-        if (is_file($file)) {
+        if (\is_file($file)) {
             require $file;
             $info = $skinVersion;
         }

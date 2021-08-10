@@ -38,7 +38,7 @@ define('_MI_MYMENUS_CONF_UNIQUE_ID_PREFIX', 'Common prefix when menu is assigned
 define('_MI_MYMENUS_CONF_UNIQUE_ID_PREFIX_DSC', "When 'Display method' is set to 'Assign to template'");
 
 //1.51
-define('_MI_MYMENUS_DIRNAME', basename(dirname(dirname(__DIR__))));
+define('_MI_MYMENUS_DIRNAME', basename(dirname(__DIR__, 2)));
 define('_MI_MYMENUS_HELP_HEADER', __DIR__ . '/help/helpheader.tpl');
 define('_MI_MYMENUS_BACK_2_ADMIN', 'Back to Administration of ');
 //1.53

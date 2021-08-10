@@ -21,14 +21,14 @@ use Xmf\Module\Admin;
 use XoopsModules\Mymenus;
 use XoopsModules\Mymenus\Helper;
 
-require dirname(__DIR__) . '/preloads/autoloader.php';
+require \dirname(__DIR__) . '/preloads/autoloader.php';
 
-require dirname(dirname(dirname(__DIR__))) . '/include/cp_header.php';
+require \dirname(__DIR__, 3) . '/include/cp_header.php';
 xoops_load('XoopsFormLoader');
 
-require dirname(__DIR__) . '/include/common.php';
+require \dirname(__DIR__) . '/include/common.php';
 
-$moduleDirName = basename(dirname(__DIR__));
+$moduleDirName = \basename(\dirname(__DIR__));
 
 /** @var \XoopsModules\Mymenus\Helper $helper */
 $helper = Helper::getInstance();

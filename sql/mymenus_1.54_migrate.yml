@@ -27,7 +27,7 @@ mymenus_links:
             attributes: ' tinyint(4) unsigned  NOT NULL  DEFAULT ''0'' '
         -
             name: target
-            attributes: ' varchar(10) '
+            attributes: ' varchar(10)  DEFAULT '''' '
         -
             name: groups
             attributes: ' text '

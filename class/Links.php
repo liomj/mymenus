@@ -22,7 +22,7 @@ namespace XoopsModules\Mymenus;
 
 use XoopsModules\Mymenus;
 
-//require  dirname(__DIR__) . '/include/common.php';
+//require  \dirname(__DIR__) . '/include/common.php';
 
 /**
  * Class Links
@@ -42,7 +42,7 @@ class Links extends \XoopsObject
     public function __construct()
     {
         /** @var \XoopsModules\Mymenus\Helper $this ->helper */
-        $this->helper = \XoopsModules\Mymenus\Helper::getInstance();
+        $this->helper = Helper::getInstance();
         $this->db     = \XoopsDatabaseFactory::getDatabaseConnection();
         $this->initVar('id', \XOBJ_DTYPE_INT);
         $this->initVar('pid', \XOBJ_DTYPE_INT);

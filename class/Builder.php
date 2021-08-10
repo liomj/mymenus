@@ -67,6 +67,7 @@ class Builder
         $first = true;
 
         foreach ($this->parents[$pid] as $item) {
+            if (1 === $item["visible"]) {
             ++$idx;
 
             $this->output[$idx]['oul']    = false;
@@ -83,18 +84,22 @@ class Builder
             }
 
             $this->output[$idx]['oli'] = true;
-            $this->output[$idx]        = \array_merge($item, $this->output[$idx]);
+
+            $this->output[$idx] = \array_merge($item, $this->output[$idx]);
 
             if (isset($this->parents[$item['id']])) {
                 $this->output[$idx]['hassub'] = true;
                 $this->buildMenus($item['id']);
             }
-            $this->output[$idx]['cli']   = true;
-            $this->output[$idx]['close'] .= "</li>\n";
+
+                $this->output[$idx]['cli']   = true;
+                $this->output[$idx]['close'] .= "</li>\n";
+
         }
         $this->output[$idx]['cul']   = true;
         $this->output[$idx]['close'] .= "</ul>\n";
         --$level;
+        }
     }
 
     /**
@@ -123,7 +128,7 @@ class Builder
                 $this->output[$idx]['down_weight'] = $this->output[$idx]['weight'] + 2;
             }
 
-            $prevWeight = $this->output[$idx]['weight'];
+            $prevWeight = $this->output[$idx]['weight']??0;
             $up         = 1; // turn on up link for all entries after first one
 
             if (isset($this->parents[$item['id']])) {
@@ -147,11 +152,11 @@ class Builder
         //get all matching links
         foreach ($this->output as $idx => $menu) {
             $selected = 0;
-            if ($menu['link']) {
+            if (isset($menu['link'])) {
                 $selected = (false !== mb_stripos($self, $menu['link'])) ? 1 : $selected;
             }
-            $selected = ($menu['link'] == $self) ? 1 : $selected;
-            $selected = ($menu['link'] == $default) ? 1 : $selected;
+            $selected = (isset($menu['link']) && $menu['link'] == $self) ? 1 : $selected;
+            $selected = (isset($menu['link']) && $menu['link'] == $default) ? 1 : $selected;
             if ($selected) {
                 $sel[$idx] = $menu;
             }
@@ -186,7 +191,7 @@ class Builder
     public function addSelectedParents($pid)
     {
         foreach ($this->output as $idx => $menu) {
-            if ($menu['id'] == $pid) {
+            if (isset($menu['id']) && $menu['id'] == $pid) {
                 $this->output[$idx]['selected'] = true;
                 $this->addSelectedParents($menu['pid']);
             }

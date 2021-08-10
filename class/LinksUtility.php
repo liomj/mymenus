@@ -22,7 +22,9 @@ namespace XoopsModules\Mymenus;
 
 use Xmf\Module\Admin;
 use Xmf\Request;
-use XoopsModules\Mymenus;
+
+/** @var Helper $helper */
+/** @var LinksHandler $linksHandler */
 
 /**
  * Class LinksUtility
@@ -39,8 +41,7 @@ class LinksUtility
      */
     public static function listLinks($start, $mid)
     {
-        /** @var \XoopsModules\Mymenus\Helper $helper */
-        $helper = \XoopsModules\Mymenus\Helper::getInstance();
+        $helper = Helper::getInstance();
 
         global $mymenusTpl;
 
@@ -56,7 +57,7 @@ class LinksUtility
             $linksCriteria->setStart((int)$start);
             $linksArrays = $helper->getHandler('Links')->getObjects($linksCriteria, false, false); // as array
             //
-            $menuBuilder = new Mymenus\Builder($linksArrays);
+            $menuBuilder = new Builder($linksArrays);
             $menusArray  = $menuBuilder->render();
             $mymenusTpl->assign('menus', $menusArray); // not 'menus', 'links' shoult be better
         }
@@ -71,14 +72,13 @@ class LinksUtility
      */
     public static function addLink($mid)
     {
-        /** @var \XoopsModules\Mymenus\Helper $helper */
-        $helper = \XoopsModules\Mymenus\Helper::getInstance();
+        $helper = Helper::getInstance();
 
         if (!$GLOBALS['xoopsSecurity']->check()) {
-            redirect_header($GLOBALS['mymenusAdminPage'], 3, implode('<br>', $GLOBALS['xoopsSecurity']->getErrors()));
+            \redirect_header($GLOBALS['mymenusAdminPage'], 3, \implode('<br>', $GLOBALS['xoopsSecurity']->getErrors()));
         }
         if (!$mid) {
-            redirect_header($GLOBALS['mymenusAdminPage'] . '?op=list', 2, _AM_MYMENUS_MSG_MENU_INVALID_ERROR);
+            \redirect_header($GLOBALS['mymenusAdminPage'] . '?op=list', 2, \_AM_MYMENUS_MSG_MENU_INVALID_ERROR);
         }
 
         $linksCiteria = new \CriteriaCompo(new \Criteria('mid', $mid));
@@ -114,16 +114,15 @@ class LinksUtility
         $newLinksObj->setVar('css', Request::getString('css', '', 'POST'));
 
         $newLinksObj->setVar('weight', $weight);
-        /** @var \XoopsModules\Mymenus\LinksHandler $linksHandler */
         $linksHandler = $helper->getHandler('Links');
         if (!$linksHandler->insert($newLinksObj)) {
-            $msg = _AM_MYMENUS_MSG_ERROR;
+            $msg = \_AM_MYMENUS_MSG_ERROR;
         } else {
             $linksHandler->updateWeights($newLinksObj);
-            $msg = _AM_MYMENUS_MSG_SUCCESS;
+            $msg = \_AM_MYMENUS_MSG_SUCCESS;
         }
 
-        redirect_header($GLOBALS['mymenusAdminPage'] . '?op=list&amp;mid=' . $newLinksObj->getVar('mid'), 2, $msg);
+        \redirect_header($GLOBALS['mymenusAdminPage'] . '?op=list&amp;mid=' . $newLinksObj->getVar('mid'), 2, $msg);
     }
 
     /**
@@ -132,16 +131,14 @@ class LinksUtility
      */
     public static function saveLink($id, $mid)
     {
-        /** @var \XoopsModules\Mymenus\Helper $helper */
-        $helper = \XoopsModules\Mymenus\Helper::getInstance();
-        /** @var \XoopsModules\Mymenus\LinksHandler $linksHandler */
+        $helper = Helper::getInstance();
         $linksHandler = $helper->getHandler('Links');
 
         if (!$GLOBALS['xoopsSecurity']->check()) {
-            redirect_header($GLOBALS['mymenusAdminPage'], 3, implode('<br>', $GLOBALS['xoopsSecurity']->getErrors()));
+            \redirect_header($GLOBALS['mymenusAdminPage'], 3, \implode('<br>', $GLOBALS['xoopsSecurity']->getErrors()));
         }
         if (!$mid) {
-            redirect_header($GLOBALS['mymenusAdminPage'] . '?op=list', 2, _AM_MYMENUS_MSG_MENU_INVALID_ERROR);
+            \redirect_header($GLOBALS['mymenusAdminPage'] . '?op=list', 2, \_AM_MYMENUS_MSG_MENU_INVALID_ERROR);
         }
 
         $mid      = (int)$mid;
@@ -156,21 +153,21 @@ class LinksUtility
             }
         }
         // Disable xoops debugger in dialog window
-        xoops_load('xoopslogger');
+        \xoops_load('xoopslogger');
         $xoopsLogger            = \XoopsLogger::getInstance();
         $xoopsLogger->activated = false;
-        error_reporting(0);
+        \error_reporting(0);
 
         // @TODO: clean incoming POST vars
         $linksObj->setVars($_POST);
 
         if (!$linksHandler->insert($linksObj)) {
-            $msg = _AM_MYMENUS_MSG_ERROR;
+            $msg = \_AM_MYMENUS_MSG_ERROR;
         } else {
-            $msg = _AM_MYMENUS_MSG_SUCCESS;
+            $msg = \_AM_MYMENUS_MSG_SUCCESS;
         }
 
-        redirect_header($GLOBALS['mymenusAdminPage'] . "?op=list&mid={$mid}", 2, $msg);
+        \redirect_header($GLOBALS['mymenusAdminPage'] . "?op=list&mid={$mid}", 2, $msg);
     }
 
     /**
@@ -182,14 +179,13 @@ class LinksUtility
      */
     public static function editLink($id = null, $pid = null, $mid = null)
     {
-        /** @var \XoopsModules\Mymenus\Helper $helper */
-        $helper = \XoopsModules\Mymenus\Helper::getInstance();
+        $helper = Helper::getInstance();
         //
         // Disable xoops debugger in dialog window
-        xoops_load('xoopslogger');
+        \xoops_load('xoopslogger');
         $xoopsLogger            = \XoopsLogger::getInstance();
         $xoopsLogger->activated = false;
-        error_reporting(0);
+        \error_reporting(0);
 
         $pathIcon16 = Admin::iconUrl('', 16);
 
@@ -211,56 +207,56 @@ class LinksUtility
         }
         $form = new \XoopsThemeForm($formTitle, 'admin_form', $GLOBALS['mymenusAdminPage'], 'post', true);
         // links: title
-        $formtitle = new \XoopsFormText(_AM_MYMENUS_MENU_TITLE, 'title', 50, 255, $linksObj->getVar('title'));
+        $formtitle = new \XoopsFormText(\_AM_MYMENUS_MENU_TITLE, 'title', 50, 255, $linksObj->getVar('title'));
         $form->addElement($formtitle, true);
         // links: alt_title
-        $formalttitle = new \XoopsFormText(_AM_MYMENUS_MENU_ALTTITLE, 'alt_title', 50, 255, $linksObj->getVar('alt_title'));
+        $formalttitle = new \XoopsFormText(\_AM_MYMENUS_MENU_ALTTITLE, 'alt_title', 50, 255, $linksObj->getVar('alt_title'));
         $form->addElement($formalttitle);
         // links: mid
         $menusCriteria = new \CriteriaCompo();
         $menusCriteria->setSort('title');
         $menusCriteria->setOrder('ASC');
         $menusList = $helper->getHandler('Menus')->getList($menusCriteria);
-        if (count($menusList) > 1) {
+        if (\count($menusList) > 1) {
             // display menu options (if more than 1 menu available
             if (!$linksObj->getVar('mid')) { // initial menu value not set
                 //                $menuValues = array_flip($menusList);
-                $formmid = new \XoopsFormSelect(_AM_MYMENUS_MENU_MENU, 'mid', $mid); //array_shift($menuValues));
+                $formmid = new \XoopsFormSelect(\_AM_MYMENUS_MENU_MENU, 'mid', $mid); //array_shift($menuValues));
             } else {
-                $formmid = new \XoopsFormSelect(_AM_MYMENUS_MENU_MENU, 'mid', $linksObj->getVar('mid'));
+                $formmid = new \XoopsFormSelect(\_AM_MYMENUS_MENU_MENU, 'mid', $linksObj->getVar('mid'));
             }
             $formmid->addOptionArray($menusList);
         } else {
-            $menuKeys  = array_keys($menusList);
-            $menuTitle = array_shift($menusList);
+            $menuKeys  = \array_keys($menusList);
+            $menuTitle = \array_shift($menusList);
             $formmid   = new \XoopsFormElementTray('Menu');
             $formmid->addElement(new \XoopsFormHidden('mid', $menuKeys[0]));
             $formmid->addElement(new \XoopsFormLabel('', $menuTitle, 'menuTitle'));
         }
         $form->addElement($formmid);
         // links: link
-        $formlink = new \XoopsFormText(_AM_MYMENUS_MENU_LINK, 'link', 50, 255, $linksObj->getVar('link'));
+        $formlink = new \XoopsFormText(\_AM_MYMENUS_MENU_LINK, 'link', 50, 255, $linksObj->getVar('link'));
         $form->addElement($formlink);
         // links: image
-        $formimage = new \XoopsFormText(_AM_MYMENUS_MENU_IMAGE, 'image', 50, 255, $linksObj->getVar('image'));
+        $formimage = new \XoopsFormText(\_AM_MYMENUS_MENU_IMAGE, 'image', 50, 255, $linksObj->getVar('image'));
         $form->addElement($formimage);
         //
         //$form->addElement($formparent);
         // links: visible
         $statontxt  = "&nbsp;<img src='{$pathIcon16}/1.png' alt='" . _YES . "'>&nbsp;" . _YES . '&nbsp;&nbsp;&nbsp;';
         $statofftxt = "&nbsp;<img src='{$pathIcon16}/0.png' alt='" . _NO . "'>&nbsp;" . _NO . '&nbsp;';
-        $formvis    = new \XoopsFormRadioYN(_AM_MYMENUS_MENU_VISIBLE, 'visible', $linksObj->getVar('visible'), $statontxt, $statofftxt);
+        $formvis    = new \XoopsFormRadioYN(\_AM_MYMENUS_MENU_VISIBLE, 'visible', $linksObj->getVar('visible'), $statontxt, $statofftxt);
         $form->addElement($formvis);
         // links: target
-        $formtarget = new \XoopsFormSelect(_AM_MYMENUS_MENU_TARGET, 'target', $linksObj->getVar('target'));
-        $formtarget->addOption('_self', _AM_MYMENUS_MENU_TARG_SELF);
-        $formtarget->addOption('_blank', _AM_MYMENUS_MENU_TARG_BLANK);
-        $formtarget->addOption('_parent', _AM_MYMENUS_MENU_TARG_PARENT);
-        $formtarget->addOption('_top', _AM_MYMENUS_MENU_TARG_TOP);
+        $formtarget = new \XoopsFormSelect(\_AM_MYMENUS_MENU_TARGET, 'target', $linksObj->getVar('target'));
+        $formtarget->addOption('_self', \_AM_MYMENUS_MENU_TARG_SELF);
+        $formtarget->addOption('_blank', \_AM_MYMENUS_MENU_TARG_BLANK);
+        $formtarget->addOption('_parent', \_AM_MYMENUS_MENU_TARG_PARENT);
+        $formtarget->addOption('_top', \_AM_MYMENUS_MENU_TARG_TOP);
         $form->addElement($formtarget);
         // links: groups
-        $formgroups = new \XoopsFormSelectGroup(_AM_MYMENUS_MENU_GROUPS, 'groups', true, $linksObj->getVar('groups'), 5, true);
-        $formgroups->setDescription(_AM_MYMENUS_MENU_GROUPS_HELP);
+        $formgroups = new \XoopsFormSelectGroup(\_AM_MYMENUS_MENU_GROUPS, 'groups', true, $linksObj->getVar('groups'), 5, true);
+        $formgroups->setDescription(\_AM_MYMENUS_MENU_GROUPS_HELP);
         $form->addElement($formgroups);
         // @TODO: reintroduce hooks
         /*
@@ -276,7 +272,7 @@ class LinksUtility
             $form->addElement($formhooks);
         */
         // links: css
-        $formcss = new \XoopsFormText(_AM_MYMENUS_MENU_CSS, 'css', 50, 255, $linksObj->getVar('css'));
+        $formcss = new \XoopsFormText(\_AM_MYMENUS_MENU_CSS, 'css', 50, 255, $linksObj->getVar('css'));
         $form->addElement($formcss);
 
         $buttonTray = new \XoopsFormElementTray('', '');
@@ -308,9 +304,7 @@ class LinksUtility
      */
     public static function moveLink($id, $weight)
     {
-        /** @var \XoopsModules\Mymenus\Helper $helper */
-        $helper = \XoopsModules\Mymenus\Helper::getInstance();
-        /** @var Mymenus\LinksHandler $linksHandler */
+        $helper = Helper::getInstance();
         $linksHandler = $helper->getHandler('Links');
 
         $linksObj = $linksHandler->get((int)$id);
@@ -325,15 +319,13 @@ class LinksUtility
      */
     public static function toggleLinkVisibility($id, $visible)
     {
-        /** @var \XoopsModules\Mymenus\Helper $helper */
-        $helper = \XoopsModules\Mymenus\Helper::getInstance();
-        /** @var \XoopsModules\Mymenus\LinksHandler $linksHandler */
+        $helper = Helper::getInstance();
         $linksHandler = $helper->getHandler('Links');
         // Disable xoops debugger in dialog window
-        xoops_load('xoopslogger');
+        \xoops_load('xoopslogger');
         $xoopsLogger            = \XoopsLogger::getInstance();
         $xoopsLogger->activated = false;
-        error_reporting(0);
+        \error_reporting(0);
 
         $linksObj = $linksHandler->get((int)$id);
         $visible  = (1 === $linksObj->getVar('visible')) ? 0 : 1;
@@ -344,28 +336,26 @@ class LinksUtility
 
     public static function cloneLink($id)
     {
-        /** @var \XoopsModules\Mymenus\Helper $helper */
-        $helper = \XoopsModules\Mymenus\Helper::getInstance();
-        /** @var Mymenus\LinksHandler $linksHandler */
+        $helper = Helper::getInstance();
         $linksHandler = $helper->getHandler('Links');
 
         $new_id = false;
         $table  = $GLOBALS['xoopsDB']->prefix('mymenus_links');
         // copy content of the record you wish to clone
-        $tempTable = $GLOBALS['xoopsDB']->fetchArray($GLOBALS['xoopsDB']->query("SELECT * FROM $table WHERE id='$id' "), MYSQLI_ASSOC) or exit('Could not select record');
+        $tempTable = $GLOBALS['xoopsDB']->fetchArray($GLOBALS['xoopsDB']->query("SELECT * FROM $table WHERE id='$id' "), \MYSQLI_ASSOC) or exit('Could not select record');
         // set the auto-incremented id's value to blank.
         unset($tempTable['id']);
         // insert cloned copy of the original  record
-        $result = $GLOBALS['xoopsDB']->queryF("INSERT INTO $table (" . implode(', ', array_keys($tempTable)) . ") VALUES ('" . implode("', '", array_values($tempTable)) . "')") or exit($GLOBALS['xoopsDB']->error());
+        $result = $GLOBALS['xoopsDB']->queryF("INSERT INTO $table (" . \implode(', ', \array_keys($tempTable)) . ") VALUES ('" . \implode("', '", \array_values($tempTable)) . "')") or exit($GLOBALS['xoopsDB']->error());
 
         if ($result) {
             // Return the new id
             $new_id = $GLOBALS['xoopsDB']->getInsertId();
-            $msg    = _AM_MYMENUS_MSG_SUCCESS;
+            $msg    = \_AM_MYMENUS_MSG_SUCCESS;
         } else {
-            $msg = _AM_MYMENUS_MSG_ERROR;
+            $msg = \_AM_MYMENUS_MSG_ERROR;
         }
 
-        redirect_header($GLOBALS['mymenusAdminPage'] . '?op=list&amp;mid=' . $new_id, 2, $msg);
+        \redirect_header($GLOBALS['mymenusAdminPage'] . '?op=list&amp;mid=' . $new_id, 2, $msg);
     }
 }

@@ -10,11 +10,9 @@
  */
 
 /**
- * @copyright    XOOPS Project https://xoops.org/
+ * @copyright    XOOPS Project (https://xoops.org)
  * @license      GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
- * @package
- * @since
- * @author       XOOPS Development Team
+ * @author      XOOPS Development Team
  */
 
 use XoopsModules\Mymenus;
@@ -60,10 +58,10 @@ function xoops_module_pre_install_mymenus(\XoopsModule $module)
  */
 function xoops_module_install_mymenus(\XoopsModule $module)
 {
-    require dirname(dirname(dirname(__DIR__))) . '/mainfile.php';
-    require dirname(__DIR__) . '/config/config.php';
+    require \dirname(__DIR__, 3) . '/mainfile.php';
+    require \dirname(__DIR__) . '/config/config.php';
 
-    $moduleDirName = basename(dirname(__DIR__));
+    $moduleDirName = \basename(\dirname(__DIR__));
     /** @var \XoopsModules\Mymenus\Helper $helper */
     $helper = Helper::getInstance();
 
@@ -98,7 +96,7 @@ function xoops_module_install_mymenus(\XoopsModule $module)
 
     //  ---  COPY blank.png FILES ---------------
     if (count($configurator->copyBlankFiles) > 0) {
-        $file = dirname(__DIR__) . '/assets/images/blank.png';
+        $file = \dirname(__DIR__) . '/assets/images/blank.png';
         foreach (array_keys($configurator->copyBlankFiles) as $i) {
             $dest = $configurator->copyBlankFiles[$i] . '/blank.png';
             $utility::copyFile($file, $dest);

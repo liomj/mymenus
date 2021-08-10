@@ -22,7 +22,7 @@ namespace XoopsModules\Mymenus;
 
 use XoopsModules\Mymenus;
 
-//require  dirname(__DIR__) . '/include/common.php';
+//require  \dirname(__DIR__) . '/include/common.php';
 \xoops_load('XoopsLists');
 
 /**
@@ -38,7 +38,7 @@ class PluginItem
     public static function loadLanguage($name)
     {
         /** @var \XoopsModules\Mymenus\Helper $helper */
-        $helper   = \XoopsModules\Mymenus\Helper::getInstance();
+        $helper   = Helper::getInstance();
         $language = $GLOBALS['xoopsConfig']['language'];
         //        $path     = $GLOBALS['xoops']->path("modules/{$mymenus->dirname}/plugins/{$name}/language");
         //        if (!($ret = @require "{$path}/{$language}/{$name}.php")) {

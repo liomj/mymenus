@@ -15,9 +15,7 @@ namespace XoopsModules\Mymenus;
 /**
  * @copyright    {@link https://xoops.org/ XOOPS Project}
  * @license      {@link http://www.fsf.org/copyleft/gpl.html GNU public license}
- * @package
- * @since
- * @author       XOOPS Development Team,
+ * @author      XOOPS Development Team,
  * @author       GIJ=CHECKMATE (PEAK Corp. http://www.peak.ne.jp/)
  */
 
@@ -125,10 +123,10 @@ class GroupPermForm extends \XoopsForm
         if (!empty($this->_itemTree[$itemId]['children'])) {
             $first_child = $this->_itemTree[$itemId]['children'];
             foreach ($first_child as $fcid) {
-                array_push($childIds, $fcid);
+                \array_push($childIds, $fcid);
                 if (!empty($this->_itemTree[$fcid]['children'])) {
                     foreach ($this->_itemTree[$fcid]['children'] as $_fcid) {
-                        array_push($childIds, $_fcid);
+                        \array_push($childIds, $_fcid);
                         $this->_loadAllChildItemIds($_fcid, $childIds);
                     }
                 }
@@ -145,14 +143,14 @@ class GroupPermForm extends \XoopsForm
     public function render()
     {
         // load all child ids for javascript codes
-        foreach (array_keys($this->_itemTree) as $item_id) {
+        foreach (\array_keys($this->_itemTree) as $item_id) {
             $this->_itemTree[$item_id]['allchild'] = [];
             $this->_loadAllChildItemIds($item_id, $this->_itemTree[$item_id]['allchild']);
         }
-        $grouppermHandler = xoops_getHandler('groupperm');
-        $memberHandler    = xoops_getHandler('member');
+        $grouppermHandler = \xoops_getHandler('groupperm');
+        $memberHandler    = \xoops_getHandler('member');
         $glist            = $memberHandler->getGroupList();
-        foreach (array_keys($glist) as $i) {
+        foreach (\array_keys($glist) as $i) {
             // get selected item id(s) for each group
             $selected = $grouppermHandler->getItemIds($this->_permName, $i, $this->_modid);
             $ele      = new GroupFormCheckBox($glist[$i], 'perms[' . $this->_permName . ']', $i, $selected);
@@ -185,8 +183,8 @@ class GroupPermForm extends \XoopsForm
         $ret      = '<h4>' . $this->getTitle() . '</h4>' . $this->_permDesc . '<br>';
         $ret      .= "<form name='" . $this->getName() . "' id='" . $this->getName() . "' action='" . $this->getAction() . "' method='" . $this->getMethod() . "'" . $this->getExtra() . ">\n<table width='100%' class='outer' cellspacing='1'>\n";
         $elements = $this->getElements();
-        foreach (array_keys($elements) as $i) {
-            if (!is_object($elements[$i])) {
+        foreach (\array_keys($elements) as $i) {
+            if (!\is_object($elements[$i])) {
                 $ret .= $elements[$i];
             } elseif (!$elements[$i]->isHidden()) {
                 $ret .= "<tr valign='top' align='left'><td class='head'>" . $elements[$i]->getCaption();

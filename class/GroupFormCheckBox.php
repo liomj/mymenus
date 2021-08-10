@@ -15,9 +15,7 @@ namespace XoopsModules\Mymenus;
 /**
  * @copyright    {@link https://xoops.org/ XOOPS Project}
  * @license      {@link http://www.fsf.org/copyleft/gpl.html GNU public license}
- * @package
- * @since
- * @author       XOOPS Development Team,
+ * @author      XOOPS Development Team,
  * @author       GIJ=CHECKMATE (PEAK Corp. http://www.peak.ne.jp/)
  */
 
@@ -82,7 +80,7 @@ class GroupFormCheckBox extends \XoopsFormElement
      */
     public function setValue($value)
     {
-        if (is_array($value)) {
+        if (\is_array($value)) {
             foreach ($value as $v) {
                 $this->setValue($v);
             }
@@ -123,7 +121,7 @@ class GroupFormCheckBox extends \XoopsFormElement
     {
         $ret = '';
 
-        if (count($this->_appendix) > 0) {
+        if (\count($this->_appendix) > 0) {
             $ret  .= '<table class="outer"><tr>';
             $cols = 1;
             foreach ($this->_appendix as $append) {
@@ -189,16 +187,16 @@ class GroupFormCheckBox extends \XoopsFormElement
             $tree      .= "var ele = xoopsGetElementById('" . $child_ele . "'); if (this.checked !== true) {ele.checked = false;}";
         }
         $tree .= '" value="1"';
-        if (isset($this->_value) && in_array($option['id'], $this->_value)) {
+        if (isset($this->_value) && \in_array($option['id'], $this->_value)) {
             $tree .= ' checked';
         }
-        $tree .= '>' . $option['name'] . '<input type="hidden" name="' . $this->getName() . '[parents][' . $option['id'] . ']" value="' . implode(':', $parentIds) . '"><input type="hidden" name="' . $this->getName() . '[itemname][' . $option['id'] . ']" value="' . htmlspecialchars(
+        $tree .= '>' . $option['name'] . '<input type="hidden" name="' . $this->getName() . '[parents][' . $option['id'] . ']" value="' . \implode(':', $parentIds) . '"><input type="hidden" name="' . $this->getName() . '[itemname][' . $option['id'] . ']" value="' . \htmlspecialchars(
                 $option['name'],
-                ENT_QUOTES | ENT_HTML5
+                \ENT_QUOTES | \ENT_HTML5
             ) . "\"><br>\n";
         if (isset($option['children'])) {
             foreach ($option['children'] as $child) {
-                array_push($parentIds, $option['id']);
+                \array_push($parentIds, $option['id']);
                 $this->_renderOptionTree($tree, $this->_optionTree[$child], $prefix . '&nbsp;-', $parentIds);
             }
         }

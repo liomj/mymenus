@@ -2,7 +2,7 @@
 
 use XoopsModules\Mymenus\Helper;
 
-$moduleDirName      = basename(dirname(__DIR__));
+$moduleDirName      = \basename(\dirname(__DIR__));
 $moduleDirNameUpper = mb_strtoupper($moduleDirName);
 
 /** @var \XoopsModules\Mymenus\Helper $helper */
