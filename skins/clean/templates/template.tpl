@@ -1,6 +1,6 @@
 <{foreach item=menu from=$block}>
 <{if $menu.oul && $menu.level == 0}>
-<ul<{if $menucss != ''}> class="<{$menucss}>"<{/if}>>
+<ul<{if $menucss|default:'' != ''}> class="<{$menucss}>"<{/if}>>
     <{/if}>
 
     <{assign var=myStr value="["|cat:$xoops_langcode|cat:"]"}>

@@ -11,7 +11,7 @@ use Xmf\Request;
 require_once __DIR__ . '/admin_header.php';
 //require_once XOOPS_ROOT_PATH."/modules/" . $xoopsModule->getVar("dirname") . "/class/admin.php";
 
-require_once XOOPS_ROOT_PATH . '/kernel/block.php';
+require_once XOOPS_ROOT_PATH . '/class/xoopsblock.php';
 //require_once  \dirname(__DIR__) . '/include/gtickets.php';// GIJ
 
 $xoops_system_path = XOOPS_ROOT_PATH . '/modules/system';

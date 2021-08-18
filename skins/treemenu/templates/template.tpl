@@ -37,7 +37,7 @@ echo "
                 <{else}>
                 <li><a href="<{$menu.link}>" target="<{$menu.target}>" title="<{$menu.alt_title}>"><{$menu.title}></a>
                     <{/if}>
-                    <{if $menu.close != ''}><{$menu.close}><{/if}>
+                    <{if $menu.close|default:'' != ''}><{$menu.close}><{/if}>
                     <{/foreach}>
             </ul>
             <script type="text/javascript">

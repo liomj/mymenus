@@ -19,7 +19,7 @@
                         <img src="<{$menu.image}>" alt="<{$menu.alt_title}>">
                     <{/if}><{$menu.title}>
                 </a>
-                <{if $menu.close != ''}><{$menu.close}><{/if}>
+                <{if $menu.close|default:'' != ''}><{$menu.close}><{/if}>
             <{/if}>
             <{/foreach}>
             <div style="clear: both;"></div>

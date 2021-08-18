@@ -39,5 +39,5 @@
                 <{/if}>
                 <{/if}>
                 <{/if}>
-                <{if $menu.close != ''}><{$menu.close}><{/if}>
+                <{if $menu.close|default:'' != ''}><{$menu.close}><{/if}>
                 <{/foreach}>
