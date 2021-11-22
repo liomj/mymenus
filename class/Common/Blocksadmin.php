@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace XoopsModules\Mymenus\Common;
 
 /**
@@ -19,19 +21,48 @@ use Xmf\Request;
 
 //require __DIR__ . '/admin_header.php';
 
+/**
+ * class Blocksadmin
+ */
 class Blocksadmin
 {
-    public static function listBlocks()
+    /**
+     * @var \XoopsMySQLDatabase|null
+     */
+    public $db;
+    public $modHelper;
+    public $moduleDirName;
+    public $moduleDirNameUpper;
+
+    /**
+     * @param $db
+     * @param $modHelper
+     */
+    public function __construct($db, $modHelper)
     {
-        global $xoopsModule, $pathIcon16;
-        require_once XOOPS_ROOT_PATH . '/class/xoopslists.php';
-        $moduleDirName      = \basename(\dirname(__DIR__, 2));
-        $moduleDirNameUpper = \mb_strtoupper($moduleDirName);
-        $db                 = \XoopsDatabaseFactory::getDatabaseConnection();
+        if (null === $db){
+            $db = \XoopsDatabaseFactory::getDatabaseConnection();
+        }
+        $this->db                 = $db;
+        $this->modHelper          = $modHelper;
+        $this->moduleDirName      = \basename(\dirname(__DIR__, 2));
+        $this->moduleDirNameUpper = \mb_strtoupper($this->moduleDirName);
         \xoops_loadLanguage('admin', 'system');
         \xoops_loadLanguage('admin/blocksadmin', 'system');
         \xoops_loadLanguage('admin/groups', 'system');
-        \xoops_loadLanguage('common', $moduleDirName);
+        \xoops_loadLanguage('common', $this->moduleDirName);
+        \xoops_loadLanguage('blocksadmin', $this->moduleDirName);
+    }
+
+    public function listBlocks(): void
+    {
+        global $xoopsModule, $pathIcon16;
+        require_once XOOPS_ROOT_PATH . '/class/xoopslists.php';
+        //        xoops_loadLanguage('admin', 'system');
+        //        xoops_loadLanguage('admin/blocksadmin', 'system');
+        //        xoops_loadLanguage('admin/groups', 'system');
+        //        xoops_loadLanguage('common', $moduleDirName);
+        //        xoops_loadLanguage('blocks', $moduleDirName);
 
         /** @var \XoopsModuleHandler $moduleHandler */
         $moduleHandler = \xoops_getHandler('module');
@@ -42,12 +73,12 @@ class Blocksadmin
         $groups           = $memberHandler->getGroups();
         $criteria         = new \CriteriaCompo(new \Criteria('hasmain', 1));
         $criteria->add(new \Criteria('isactive', 1));
-        $module_list     = $moduleHandler->getList($criteria);
-        $module_list[-1] = \_AM_SYSTEM_BLOCKS_TOPPAGE;
-        $module_list[0]  = \_AM_SYSTEM_BLOCKS_ALLPAGES;
-        \ksort($module_list);
+        $moduleList     = $moduleHandler->getList($criteria);
+        $moduleList[-1] = \_AM_SYSTEM_BLOCKS_TOPPAGE;
+        $moduleList[0]  = \_AM_SYSTEM_BLOCKS_ALLPAGES;
+        \ksort($moduleList);
         echo "
-        <h4 style='text-align:left;'>" . \constant('CO_' . $moduleDirNameUpper . '_' . 'BADMIN') . '</h4>';
+        <h4 style='text-align:left;'>" . \constant('CO_' . $this->moduleDirNameUpper . '_' . 'BADMIN') . '</h4>';
         /** @var \XoopsModuleHandler $moduleHandler */
         $moduleHandler = \xoops_getHandler('module');
         echo "<form action='" . $_SERVER['SCRIPT_NAME'] . "' name='blockadmin' method='post'>";
@@ -56,7 +87,7 @@ class Blocksadmin
         <tr valign='middle'><th align='center'>"
              . \_AM_SYSTEM_BLOCKS_TITLE
              . "</th><th align='center' nowrap='nowrap'>"
-             . \constant('CO_' . $moduleDirNameUpper . '_' . 'SIDE')
+             . \constant('CO_' . $this->moduleDirNameUpper . '_' . 'SIDE')
              . '<br>'
              . _LEFT
              . '-'
@@ -65,10 +96,10 @@ class Blocksadmin
              . _RIGHT
              . "</th><th align='center'>"
              . \constant(
-                 'CO_' . $moduleDirNameUpper . '_' . 'WEIGHT'
+                 'CO_' . $this->moduleDirNameUpper . '_' . 'WEIGHT'
              )
              . "</th><th align='center'>"
-             . \constant('CO_' . $moduleDirNameUpper . '_' . 'VISIBLE')
+             . \constant('CO_' . $this->moduleDirNameUpper . '_' . 'VISIBLE')
              . "</th><th align='center'>"
              . \_AM_SYSTEM_BLOCKS_VISIBLEIN
              . "</th><th align='center'>"
@@ -76,40 +107,40 @@ class Blocksadmin
              . "</th><th align='center'>"
              . \_AM_SYSTEM_BLOCKS_BCACHETIME
              . "</th><th align='center'>"
-             . \constant('CO_' . $moduleDirNameUpper . '_' . 'ACTION')
+             . \constant('CO_' . $this->moduleDirNameUpper . '_' . 'ACTION')
              . '</th></tr>
         ';
-        $block_arr   = \XoopsBlock::getByModule($xoopsModule->mid());
-        $block_count = \count($block_arr);
-        $class       = 'even';
-        $cachetimes  = [
-            '0'       => _NOCACHE,
-            '30'      => \sprintf(_SECONDS, 30),
-            '60'      => _MINUTE,
-            '300'     => \sprintf(_MINUTES, 5),
-            '1800'    => \sprintf(_MINUTES, 30),
-            '3600'    => _HOUR,
-            '18000'   => \sprintf(_HOURS, 5),
-            '86400'   => _DAY,
-            '259200'  => \sprintf(_DAYS, 3),
-            '604800'  => _WEEK,
-            '2592000' => _MONTH,
+        $blockArray = \XoopsBlock::getByModule($xoopsModule->mid());
+        $blockCount = \count($blockArray);
+        $class      = 'even';
+        $cachetimes = [
+            0       => _NOCACHE,
+            30      => \sprintf(_SECONDS, 30),
+            60      => _MINUTE,
+            300     => \sprintf(_MINUTES, 5),
+            1800    => \sprintf(_MINUTES, 30),
+            3600    => _HOUR,
+            18000   => \sprintf(_HOURS, 5),
+            86400   => _DAY,
+            259200  => \sprintf(_DAYS, 3),
+            604800  => _WEEK,
+            2592000 => _MONTH,
         ];
-        foreach ($block_arr as $i) {
-            $groups_perms = $grouppermHandler->getGroupIds('block_read', $i->getVar('bid'));
-            $sql          = 'SELECT module_id FROM ' . $db->prefix('block_module_link') . ' WHERE block_id=' . $i->getVar('bid');
-            $result       = $db->query($sql);
-            $modules      = [];
-            while (false !== ($row = $db->fetchArray($result))) {
+        foreach ($blockArray as $i) {
+            $groupsPermissions = $grouppermHandler->getGroupIds('block_read', $i->getVar('bid'));
+            $sql               = 'SELECT module_id FROM ' . $this->db->prefix('block_module_link') . ' WHERE block_id=' . $i->getVar('bid');
+            $result            = $this->db->query($sql);
+            $modules           = [];
+            while (false !== ($row = $this->db->fetchArray($result))) {
                 $modules[] = (int)$row['module_id'];
             }
 
-            $cachetime_options = '';
-            foreach ($cachetimes as $cachetime => $cachetime_name) {
+            $cachetimeOptions = '';
+            foreach ($cachetimes as $cachetime => $cachetimeName) {
                 if ($i->getVar('bcachetime') == $cachetime) {
-                    $cachetime_options .= "<option value='$cachetime' selected='selected'>$cachetime_name</option>\n";
+                    $cachetimeOptions .= "<option value='$cachetime' selected='selected'>$cachetimeName</option>\n";
                 } else {
-                    $cachetime_options .= "<option value='$cachetime'>$cachetime_name</option>\n";
+                    $cachetimeOptions .= "<option value='$cachetime'>$cachetimeName</option>\n";
                 }
             }
 
@@ -208,28 +239,35 @@ class Blocksadmin
                  . '</td>';
 
             echo "<td class='$class' align='center'><select size='5' name='bmodule[" . $i->getVar('bid') . "][]' id='bmodule[" . $i->getVar('bid') . "][]' multiple='multiple'>";
-            foreach ($module_list as $k => $v) {
+            foreach ($moduleList as $k => $v) {
                 echo "<option value='$k'" . (\in_array($k, $modules) ? " selected='selected'" : '') . ">$v</option>";
             }
             echo '</select></td>';
 
             echo "<td class='$class' align='center'><select size='5' name='groups[" . $i->getVar('bid') . "][]' id='groups[" . $i->getVar('bid') . "][]' multiple='multiple'>";
             foreach ($groups as $grp) {
-                echo "<option value='" . $grp->getVar('groupid') . "' " . (\in_array($grp->getVar('groupid'), $groups_perms) ? " selected='selected'" : '') . '>' . $grp->getVar('name') . '</option>';
+                echo "<option value='" . $grp->getVar('groupid') . "' " . (\in_array($grp->getVar('groupid'), $groupsPermissions) ? " selected='selected'" : '') . '>' . $grp->getVar('name') . '</option>';
             }
             echo '</select></td>';
 
             // Cache lifetime
-            echo '<td class="' . $class . '" align="center"> <select name="bcachetime[' . $i->getVar('bid') . ']" size="1">' . $cachetime_options . '</select>
+            echo '<td class="' . $class . '" align="center"> <select name="bcachetime[' . $i->getVar('bid') . ']" size="1">' . $cachetimeOptions . '</select>
                                     </td>';
 
             // Actions
 
-            echo "<td class='$class' align='center'><a href='blocksadmin2.php?op=edit&amp;bid=" . $i->getVar('bid') . "'><img src=" . $pathIcon16 . '/edit.png' . " alt='" . _EDIT . "' title='" . _EDIT . "'>
-                 </a> <a href='blocksadmin2.php?op=clone&amp;bid=" . $i->getVar('bid') . "'><img src=" . $pathIcon16 . '/editcopy.png' . " alt='" . _CLONE . "' title='" . _CLONE . "'>
+            echo "<td class='$class' align='center'><a href='blocksadmin.php?op=edit&amp;bid=" . $i->getVar('bid') . "'><img src=" . $pathIcon16 . '/edit.png' . " alt='" . _EDIT . "' title='" . _EDIT . "'>
+                 </a> <a href='blocksadmin.php?op=clone&amp;bid=" . $i->getVar('bid') . "'><img src=" . $pathIcon16 . '/editcopy.png' . " alt='" . _CLONE . "' title='" . _CLONE . "'>
                  </a>";
-            if ('S' !== $i->getVar('block_type') && 'M' !== $i->getVar('block_type')) {
-                echo "&nbsp;<a href='" . XOOPS_URL . '/modules/system/admin.php?fct=blocksadmin&amp;op=delete&amp;bid=' . $i->getVar('bid') . "'><img src=" . $pathIcon16 . '/delete.png' . " alt='" . _DELETE . "' title='" . _DELETE . "'>
+            //            if ('S' !== $i->getVar('block_type') && 'M' !== $i->getVar('block_type')) {
+            //                echo "&nbsp;<a href='" . XOOPS_URL . '/modules/system/admin.php?fct=blocksadmin&amp;op=delete&amp;bid=' . $i->getVar('bid') . "'><img src=" . $pathIcon16 . '/delete.png' . " alt='" . _DELETE . "' title='" . _DELETE . "'>
+            //                     </a>";
+            //            }
+
+            //            if ('S' !== $i->getVar('block_type') && 'M' !== $i->getVar('block_type')) {
+            if (!\in_array($i->getVar('block_type'), ['M', 'S'])) {
+                echo "&nbsp;
+                <a href='blocksadmin.php?op=delete&amp;bid=" . $i->getVar('bid') . "'><img src=" . $pathIcon16 . '/delete.png' . " alt='" . _DELETE . "' title='" . _DELETE . "'>
                      </a>";
             }
             echo "
@@ -256,39 +294,58 @@ class Blocksadmin
     /**
      * @param int $bid
      */
-    public static function cloneBlock($bid)
+    public function deleteBlock($bid)
     {
-        require __DIR__ . '/admin_header.php';
-        //require __DIR__ . '/admin_header.php';
-        \xoops_cp_header();
-
-        $moduleDirName      = \basename(\dirname(__DIR__));
-        $moduleDirNameUpper = \mb_strtoupper($moduleDirName);
+        //        \xoops_cp_header();
 
         \xoops_loadLanguage('admin', 'system');
         \xoops_loadLanguage('admin/blocksadmin', 'system');
         \xoops_loadLanguage('admin/groups', 'system');
 
-        //        mpu_adm_menu();
         $myblock = new \XoopsBlock($bid);
-        $db      = \XoopsDatabaseFactory::getDatabaseConnection();
-        $sql     = 'SELECT module_id FROM ' . $db->prefix('block_module_link') . ' WHERE block_id=' . (int)$bid;
-        $result  = $db->query($sql);
-        $modules = [];
-        while (false !== ($row = $db->fetchArray($result))) {
-            $modules[] = (int)$row['module_id'];
+
+        $sql = \sprintf('DELETE FROM %s WHERE bid = %u', $this->db->prefix('newblocks'), $bid);
+        if (!$result = $this->db->queryF($sql)) {
+            return false;
         }
-        $is_custom = ('C' === $myblock->getVar('block_type') || 'E' === $myblock->getVar('block_type'));
-        $block     = [
+        $sql = \sprintf('DELETE FROM %s WHERE block_id = %u', $this->db->prefix('block_module_link'), $bid);
+        $this->db->queryF($sql);
+
+        $this->modHelper->redirect('admin/blocksadmin.php?op=list', 1, _AM_DBUPDATED);
+    }
+
+    /**
+     * @param int $bid
+     */
+    public function cloneBlock($bid): void
+    {
+        //require __DIR__ . '/admin_header.php';
+        //        \xoops_cp_header();
+
+        \xoops_loadLanguage('admin', 'system');
+        \xoops_loadLanguage('admin/blocksadmin', 'system');
+        \xoops_loadLanguage('admin/groups', 'system');
+
+        $myblock = new \XoopsBlock($bid);
+        $sql     = 'SELECT module_id FROM ' . $this->db->prefix('block_module_link') . ' WHERE block_id=' . (int)$bid;
+        $result  = $this->db->query($sql);
+        $modules = [];
+        if ($result instanceof \mysqli_result) {
+            while (false !== ($row = $this->db->fetchArray($result))) {
+                $modules[] = (int)$row['module_id'];
+            }
+        }
+        $isCustom = \in_array($myblock->getVar('block_type'), ['C', 'E']);
+        $block    = [
             'title'      => $myblock->getVar('title') . ' Clone',
-            'form_title' => \constant('CO_' . $moduleDirNameUpper . '_' . 'BLOCKS_CLONEBLOCK'),
+            'form_title' => \constant('CO_' . $this->moduleDirNameUpper . '_' . 'BLOCKS_CLONEBLOCK'),
             'name'       => $myblock->getVar('name'),
             'side'       => $myblock->getVar('side'),
             'weight'     => $myblock->getVar('weight'),
             'visible'    => $myblock->getVar('visible'),
             'content'    => $myblock->getVar('content', 'N'),
             'modules'    => $modules,
-            'is_custom'  => $is_custom,
+            'is_custom'  => $isCustom,
             'ctype'      => $myblock->getVar('c_type'),
             'bcachetime' => $myblock->getVar('bcachetime'),
             'op'         => 'clone_ok',
@@ -297,34 +354,35 @@ class Blocksadmin
             'template'   => $myblock->getVar('template'),
             'options'    => $myblock->getVar('options'),
         ];
-        echo '<a href="blocksadmin2.php">' . constant('CO_' . $moduleDirNameUpper . '_' . 'BADMIN') . '</a>&nbsp;<span style="font-weight:bold;">&raquo;&raquo;</span>&nbsp;' . \_AM_SYSTEM_BLOCKS_CLONEBLOCK . '<br><br>';
-        require_once __DIR__ . '/blockform.php';
-        $form->display();
+        echo '<a href="blocksadmin.php">' . \constant('CO_' . $this->moduleDirNameUpper . '_' . 'BADMIN') . '</a>&nbsp;<span style="font-weight:bold;">&raquo;&raquo;</span>&nbsp;' . \_AM_SYSTEM_BLOCKS_CLONEBLOCK . '<br><br>';
+        //        $form = new Blockform();
+        //        $form->render();
+
+        echo $this->render($block);
         //        xoops_cp_footer();
-        require_once __DIR__ . '/admin_footer.php';
-        exit();
+        //        require_once __DIR__ . '/admin_footer.php';
+        //        exit();
     }
 
     /**
-     * @param int $bid
-     * @param     $bside
-     * @param     $bweight
-     * @param     $bvisible
-     * @param     $bcachetime
-     * @param     $bmodule
-     * @param     $options
+     * @param int               $bid
+     * @param string            $bside
+     * @param string            $bweight
+     * @param string            $bvisible
+     * @param string            $bcachetime
+     * @param array             $bmodule
+     * @param null|array|string $options
      */
-    public static function isBlockCloned($bid, $bside, $bweight, $bvisible, $bcachetime, $bmodule, $options)
+    public function isBlockCloned($bid, $bside, $bweight, $bvisible, $bcachetime, $bmodule, $options, $groups): void
     {
         \xoops_loadLanguage('admin', 'system');
         \xoops_loadLanguage('admin/blocksadmin', 'system');
         \xoops_loadLanguage('admin/groups', 'system');
 
-        /** @var \XoopsBlock $block */
         $block = new \XoopsBlock($bid);
         $clone = $block->xoopsClone();
         if (empty($bmodule)) {
-            \xoops_cp_header();
+            //            \xoops_cp_header();
             \xoops_error(\sprintf(_AM_NOTSELNG, _AM_VISIBLEIN));
             \xoops_cp_footer();
             exit();
@@ -340,14 +398,14 @@ class Blocksadmin
             $clone->setVar('options', $options);
         }
         $clone->setVar('bid', 0);
-        if ('C' === $block->getVar('block_type') || 'E' === $block->getVar('block_type')) {
+        if (\in_array($block->getVar('block_type'), ['C', 'E'])) {
             $clone->setVar('block_type', 'E');
         } else {
             $clone->setVar('block_type', 'D');
         }
         $newid = $clone->store();
         if (!$newid) {
-            \xoops_cp_header();
+            //            \xoops_cp_header();
             $clone->getHtmlErrors();
             \xoops_cp_footer();
             exit();
@@ -363,18 +421,17 @@ class Blocksadmin
                 $tplfileHandler->insert($tplclone);
             }
         }
-        $db = \XoopsDatabaseFactory::getDatabaseConnection();
+
         foreach ($bmodule as $bmid) {
-            $sql = 'INSERT INTO ' . $db->prefix('block_module_link') . ' (block_id, module_id) VALUES (' . $newid . ', ' . $bmid . ')';
-            $db->query($sql);
+            $sql = 'INSERT INTO ' . $this->db->prefix('block_module_link') . ' (block_id, module_id) VALUES (' . $newid . ', ' . $bmid . ')';
+            $this->db->query($sql);
         }
-        $groups = &$GLOBALS['xoopsUser']->getGroups();
-        $count  = \count($groups);
-        for ($i = 0; $i < $count; ++$i) {
-            $sql = 'INSERT INTO ' . $db->prefix('group_permission') . ' (gperm_groupid, gperm_itemid, gperm_modid, gperm_name) VALUES (' . $groups[$i] . ', ' . $newid . ", 1, 'block_read')";
-            $db->query($sql);
+        //$groups = &$GLOBALS['xoopsUser']->getGroups();
+        foreach ($groups as $iValue) {
+            $sql = 'INSERT INTO ' . $this->db->prefix('group_permission') . ' (gperm_groupid, gperm_itemid, gperm_modid, gperm_name) VALUES (' . $iValue . ', ' . $newid . ", 1, 'block_read')";
+            $this->db->query($sql);
         }
-        \redirect_header('blocksadmin.php?op=list', 1, _AM_DBUPDATED);
+        $this->modHelper->redirect('admin/blocksadmin.php?op=list', 1, _AM_DBUPDATED);
     }
 
     /**
@@ -385,7 +442,7 @@ class Blocksadmin
      * @param string $side
      * @param int    $bcachetime
      */
-    public static function setOrder($bid, $title, $weight, $visible, $side, $bcachetime)
+    public function setOrder($bid, $title, $weight, $visible, $side, $bcachetime, $bmodule): void
     {
         $myblock = new \XoopsBlock($bid);
         $myblock->setVar('title', $title);
@@ -393,35 +450,34 @@ class Blocksadmin
         $myblock->setVar('visible', $visible);
         $myblock->setVar('side', $side);
         $myblock->setVar('bcachetime', $bcachetime);
-        //        $myblock->store();
-        /** @var \XoopsBlockHandler $blockHandler */
-        $blockHandler = xoops_getHandler('block');
-        return $blockHandler->insert($myblock);
+        $myblock->store();
+        //        /** @var \XoopsBlockHandler $blockHandler */
+        //        $blockHandler = \xoops_getHandler('block');
+        //        return $blockHandler->insert($myblock);
     }
 
     /**
      * @param int $bid
      */
-    public static function editBlock($bid)
+    public function editBlock($bid): void
     {
-        require_once \dirname(__DIR__,2) . '/admin/admin_header.php';
-        \xoops_cp_header();
-        $moduleDirName      = \basename(\dirname(__DIR__));
-        $moduleDirNameUpper = \mb_strtoupper($moduleDirName);
+        //        require_once \dirname(__DIR__,2) . '/admin/admin_header.php';
+        //        \xoops_cp_header();
         \xoops_loadLanguage('admin', 'system');
         \xoops_loadLanguage('admin/blocksadmin', 'system');
         \xoops_loadLanguage('admin/groups', 'system');
         //        mpu_adm_menu();
         $myblock = new \XoopsBlock($bid);
-        $db      = \XoopsDatabaseFactory::getDatabaseConnection();
-        $sql     = 'SELECT module_id FROM ' . $db->prefix('block_module_link') . ' WHERE block_id=' . (int)$bid;
-        $result  = $db->query($sql);
+        $sql     = 'SELECT module_id FROM ' . $this->db->prefix('block_module_link') . ' WHERE block_id=' . (int)$bid;
+        $result  = $this->db->query($sql);
         $modules = [];
-        while (false !== ($row = $db->fetchArray($result))) {
-            $modules[] = (int)$row['module_id'];
+        if ($result instanceof \mysqli_result) {
+            while (false !== ($row = $this->db->fetchArray($result))) {
+                $modules[] = (int)$row['module_id'];
+            }
         }
-        $is_custom = ('C' === $myblock->getVar('block_type') || 'E' === $myblock->getVar('block_type'));
-        $block     = [
+        $isCustom = \in_array($myblock->getVar('block_type'), ['C', 'E']);
+        $block    = [
             'title'      => $myblock->getVar('title'),
             'form_title' => \_AM_SYSTEM_BLOCKS_EDITBLOCK,
             //        'name'       => $myblock->getVar('name'),
@@ -430,7 +486,7 @@ class Blocksadmin
             'visible'    => $myblock->getVar('visible'),
             'content'    => $myblock->getVar('content', 'N'),
             'modules'    => $modules,
-            'is_custom'  => $is_custom,
+            'is_custom'  => $isCustom,
             'ctype'      => $myblock->getVar('c_type'),
             'bcachetime' => $myblock->getVar('bcachetime'),
             'op'         => 'edit_ok',
@@ -439,47 +495,42 @@ class Blocksadmin
             'template'   => $myblock->getVar('template'),
             'options'    => $myblock->getVar('options'),
         ];
-        echo '<a href="blocksadmin2.php">' . constant('CO_' . $moduleDirNameUpper . '_' . 'BADMIN') . '</a>&nbsp;<span style="font-weight:bold;">&raquo;&raquo;</span>&nbsp;' . \_AM_SYSTEM_BLOCKS_EDITBLOCK . '<br><br>';
+        echo '<a href="blocksadmin.php">' . \constant('CO_' . $this->moduleDirNameUpper . '_' . 'BADMIN') . '</a>&nbsp;<span style="font-weight:bold;">&raquo;&raquo;</span>&nbsp;' . \_AM_SYSTEM_BLOCKS_EDITBLOCK . '<br><br>';
 
-        /** @var \XoopsThemeForm $form */
-//                $form = new Blockform();
-//        $form->render($block);
-//        $form = new \XoopsThemeForm();
+        /** @var \XoopsThemeForm $form */ //                $form = new Blockform();
+        //        $form->render($block);
+        //        $form = new \XoopsThemeForm();
 
-        $form->display();
-
-        //        xoops_cp_footer();
-        require_once \dirname(__DIR__,2) . '/admin/admin_footer.php';
-        exit();
+        echo $this->render($block);
     }
 
     /**
      * @param int               $bid
      * @param string            $btitle
      * @param string            $bside
-     * @param int               $bweight
-     * @param bool              $bvisible
-     * @param int               $bcachetime
+     * @param string            $bweight
+     * @param string            $bvisible
+     * @param string            $bcachetime
      * @param array             $bmodule
      * @param null|array|string $options
      * @param null|array        $groups
      */
-    public static function updateBlock($bid, $btitle, $bside, $bweight, $bvisible, $bcachetime, $bmodule, $options, $groups)
+    public function updateBlock($bid, $btitle, $bside, $bweight, $bvisible, $bcachetime, $bmodule, $options, $groups): void
     {
-        $myblock = new XoopsBlock($bid);
+        $myblock = new \XoopsBlock($bid);
         $myblock->setVar('title', $btitle);
         $myblock->setVar('weight', $bweight);
         $myblock->setVar('visible', $bvisible);
         $myblock->setVar('side', $bside);
         $myblock->setVar('bcachetime', $bcachetime);
         //update block options
-        if (isset($options)) {
-            $options_count = \count($options);
-            if ($options_count > 0) {
+        if (isset($options) && \is_array($options)) {
+            $optionsCount = \count($options);
+            if ($optionsCount > 0) {
                 //Convert array values to comma-separated
-                for ($i = 0; $i < $options_count; ++$i) {
-                    if (\is_array($options[$i])) {
-                        $options[$i] = \implode(',', $options[$i]);
+                foreach ($options as $i => $iValue) {
+                    if (\is_array($iValue)) {
+                        $options[$i] = \implode(',', $iValue);
                     }
                 }
                 $options = \implode('|', $options);
@@ -487,29 +538,199 @@ class Blocksadmin
             }
         }
         $myblock->store();
+        //        /** @var \XoopsBlockHandler $blockHandler */
+        //        $blockHandler = \xoops_getHandler('block');
+        //        $blockHandler->insert($myblock);
 
         if (!empty($bmodule) && \count($bmodule) > 0) {
-            $sql = \sprintf('DELETE FROM `%s` WHERE block_id = %u', $GLOBALS['xoopsDB']->prefix('block_module_link'), $bid);
-            $GLOBALS['xoopsDB']->query($sql);
+            $sql = \sprintf('DELETE FROM `%s` WHERE block_id = %u', $this->db->prefix('block_module_link'), $bid);
+            $this->db->query($sql);
             if (\in_array(0, $bmodule)) {
-                $sql = \sprintf('INSERT INTO `%s` (block_id, module_id) VALUES (%u, %d)', $GLOBALS['xoopsDB']->prefix('block_module_link'), $bid, 0);
-                $GLOBALS['xoopsDB']->query($sql);
+                $sql = \sprintf('INSERT INTO `%s` (block_id, module_id) VALUES (%u, %d)', $this->db->prefix('block_module_link'), $bid, 0);
+                $this->db->query($sql);
             } else {
                 foreach ($bmodule as $bmid) {
-                    $sql = \sprintf('INSERT INTO `%s` (block_id, module_id) VALUES (%u, %d)', $GLOBALS['xoopsDB']->prefix('block_module_link'), $bid, (int)$bmid);
-                    $GLOBALS['xoopsDB']->query($sql);
+                    $sql = \sprintf('INSERT INTO `%s` (block_id, module_id) VALUES (%u, %d)', $this->db->prefix('block_module_link'), $bid, (int)$bmid);
+                    $this->db->query($sql);
                 }
             }
         }
-        $sql = \sprintf('DELETE FROM `%s` WHERE gperm_itemid = %u', $GLOBALS['xoopsDB']->prefix('group_permission'), $bid);
-        $GLOBALS['xoopsDB']->query($sql);
+        $sql = \sprintf('DELETE FROM `%s` WHERE gperm_itemid = %u', $this->db->prefix('group_permission'), $bid);
+        $this->db->query($sql);
         if (!empty($groups)) {
             foreach ($groups as $grp) {
-                $sql = \sprintf("INSERT INTO `%s` (gperm_groupid, gperm_itemid, gperm_modid, gperm_name) VALUES (%u, %u, 1, 'block_read')", $GLOBALS['xoopsDB']->prefix('group_permission'), $grp, $bid);
-                $GLOBALS['xoopsDB']->query($sql);
+                $sql = \sprintf("INSERT INTO `%s` (gperm_groupid, gperm_itemid, gperm_modid, gperm_name) VALUES (%u, %u, 1, 'block_read')", $this->db->prefix('group_permission'), $grp, $bid);
+                $this->db->query($sql);
             }
         }
-        \redirect_header($_SERVER['SCRIPT_NAME'], 1, \constant('CO_' . $moduleDirNameUpper . '_' . 'UPDATE_SUCCESS'));
+        $this->modHelper->redirect('admin/blocksadmin.php', 1, \constant('CO_' . $this->moduleDirNameUpper . '_' . 'UPDATE_SUCCESS'));
+    }
+
+    /**
+     * @param array $bid
+     */
+    public function orderBlock(
+        $bid,
+        $oldtitle,
+        $oldside,
+        $oldweight,
+        $oldvisible,
+        $oldgroups,
+        $oldbcachetime,
+        $title,
+        $weight,
+        $visible,
+        $side,
+        $bcachetime,
+        $groups,
+        $bmodule = null
+    ): void {
+        if (!$GLOBALS['xoopsSecurity']->check()) {
+            \redirect_header($_SERVER['SCRIPT_NAME'], 3, \implode('<br>', $GLOBALS['xoopsSecurity']->getErrors()));
+        }
+        foreach (\array_keys($bid) as $i) {
+            if ($oldtitle[$i] !== $title[$i] || $oldweight[$i] !== $weight[$i] || $oldvisible[$i] !== $visible[$i]
+                || $oldside[$i] !== $side[$i]
+                || $oldbcachetime[$i] !== $bcachetime[$i]) {
+                $this->setOrder($bid[$i], $title[$i], $weight[$i], $visible[$i], $side[$i], $bcachetime[$i], $bmodule[$i]);
+            }
+            if (!empty($bmodule[$i]) && \count($bmodule[$i]) > 0) {
+                $sql = \sprintf('DELETE FROM `%s` WHERE block_id = %u', $this->db->prefix('block_module_link'), $bid[$i]);
+                $this->db->query($sql);
+                if (\in_array(0, $bmodule[$i], true)) {
+                    $sql = \sprintf('INSERT INTO `%s` (block_id, module_id) VALUES (%u, %d)', $this->db->prefix('block_module_link'), $bid[$i], 0);
+                    $this->db->query($sql);
+                } else {
+                    foreach ($bmodule[$i] as $bmid) {
+                        $sql = \sprintf('INSERT INTO `%s` (block_id, module_id) VALUES (%u, %d)', $this->db->prefix('block_module_link'), $bid[$i], (int)$bmid);
+                        $this->db->query($sql);
+                    }
+                }
+            }
+            $sql = \sprintf('DELETE FROM `%s` WHERE gperm_itemid = %u', $this->db->prefix('group_permission'), $bid[$i]);
+            $this->db->query($sql);
+            if (!empty($groups[$i])) {
+                foreach ($groups[$i] as $grp) {
+                    $sql = \sprintf("INSERT INTO `%s` (gperm_groupid, gperm_itemid, gperm_modid, gperm_name) VALUES (%u, %u, 1, 'block_read')", $this->db->prefix('group_permission'), $grp, $bid[$i]);
+                    $this->db->query($sql);
+                }
+            }
+        }
+
+        $this->modHelper->redirect('admin/blocksadmin.php', 1, \constant('CO_' . $this->moduleDirNameUpper . '_' . 'UPDATE_SUCCESS'));
+    }
+
+    /**
+     * @param null|\array $block
+     */
+    public function render($block = null)
+    {
+        \xoops_load('XoopsFormLoader');
+        \xoops_loadLanguage('common', $this->moduleDirNameUpper);
+
+        $form = new \XoopsThemeForm($block['form_title'], 'blockform', 'blocksadmin.php', 'post', true);
+        if (isset($block['name'])) {
+            $form->addElement(new \XoopsFormLabel(\_AM_SYSTEM_BLOCKS_NAME, $block['name']));
+        }
+        $sideSelect = new \XoopsFormSelect(\_AM_SYSTEM_BLOCKS_TYPE, 'bside', $block['side']);
+        $sideSelect->addOptionArray([
+                                        0 => \_AM_SYSTEM_BLOCKS_SBLEFT,
+                                        1 => \_AM_SYSTEM_BLOCKS_SBRIGHT,
+                                        3 => \_AM_SYSTEM_BLOCKS_CBLEFT,
+                                        4 => \_AM_SYSTEM_BLOCKS_CBRIGHT,
+                                        5 => \_AM_SYSTEM_BLOCKS_CBCENTER,
+                                        7 => \_AM_SYSTEM_BLOCKS_CBBOTTOMLEFT,
+                                        8 => \_AM_SYSTEM_BLOCKS_CBBOTTOMRIGHT,
+                                        9 => \_AM_SYSTEM_BLOCKS_CBBOTTOM,
+                                    ]);
+        $form->addElement($sideSelect);
+        $form->addElement(new \XoopsFormText(\constant('CO_' . $this->moduleDirNameUpper . '_' . 'WEIGHT'), 'bweight', 2, 5, $block['weight']));
+        $form->addElement(new \XoopsFormRadioYN(\constant('CO_' . $this->moduleDirNameUpper . '_' . 'VISIBLE'), 'bvisible', $block['visible']));
+        $modSelect = new \XoopsFormSelect(\constant('CO_' . $this->moduleDirNameUpper . '_' . 'VISIBLEIN'), 'bmodule', $block['modules'], 5, true);
+        /** @var \XoopsModuleHandler $moduleHandler */
+        $moduleHandler = \xoops_getHandler('module');
+        $criteria      = new \CriteriaCompo(new \Criteria('hasmain', 1));
+        $criteria->add(new \Criteria('isactive', 1));
+        $moduleList     = $moduleHandler->getList($criteria);
+        $moduleList[-1] = \_AM_SYSTEM_BLOCKS_TOPPAGE;
+        $moduleList[0]  = \_AM_SYSTEM_BLOCKS_ALLPAGES;
+        \ksort($moduleList);
+        $modSelect->addOptionArray($moduleList);
+        $form->addElement($modSelect);
+        $form->addElement(new \XoopsFormText(_AM_SYSTEM_BLOCKS_TITLE, 'btitle', 50, 255, $block['title']), false);
+        if ($block['is_custom']) {
+            $textarea = new \XoopsFormDhtmlTextArea(\_AM_SYSTEM_BLOCKS_CONTENT, 'bcontent', $block['content'], 15, 70);
+            $textarea->setDescription('<span style="font-size:x-small;font-weight:bold;">' . \_AM_SYSTEM_BLOCKS_USEFULTAGS . '</span><br><span style="font-size:x-small;font-weight:normal;">' . \sprintf(_AM_BLOCKTAG1, '{X_SITEURL}', XOOPS_URL . '/') . '</span>');
+            $form->addElement($textarea, true);
+            $ctypeSelect = new \XoopsFormSelect(\_AM_SYSTEM_BLOCKS_CTYPE, 'bctype', $block['ctype']);
+            $ctypeSelect->addOptionArray([
+                                             'H' => \_AM_SYSTEM_BLOCKS_HTML,
+                                             'P' => \_AM_SYSTEM_BLOCKS_PHP,
+                                             'S' => \_AM_SYSTEM_BLOCKS_AFWSMILE,
+                                             'T' => \_AM_SYSTEM_BLOCKS_AFNOSMILE,
+                                         ]);
+            $form->addElement($ctypeSelect);
+        } else {
+            if ('' !== $block['template']) {
+                /** @var \XoopsTplfileHandler $tplfileHandler */
+                $tplfileHandler = \xoops_getHandler('tplfile');
+                $btemplate      = $tplfileHandler->find($GLOBALS['xoopsConfig']['template_set'], 'block', $block['bid']);
+                if (\count($btemplate) > 0) {
+                    $form->addElement(new \XoopsFormLabel(\_AM_SYSTEM_BLOCKS_CONTENT, '<a href="' . XOOPS_URL . '/modules/system/admin.php?fct=tplsets&amp;op=edittpl&amp;id=' . $btemplate[0]->getVar('tpl_id') . '">' . \_AM_SYSTEM_BLOCKS_EDITTPL . '</a>'));
+                } else {
+                    $btemplate2 = $tplfileHandler->find('default', 'block', $block['bid']);
+                    if (\count($btemplate2) > 0) {
+                        $form->addElement(new \XoopsFormLabel(\_AM_SYSTEM_BLOCKS_CONTENT, '<a href="' . XOOPS_URL . '/modules/system/admin.php?fct=tplsets&amp;op=edittpl&amp;id=' . $btemplate2[0]->getVar('tpl_id') . '" target="_blank">' . \_AM_SYSTEM_BLOCKS_EDITTPL . '</a>'));
+                    }
+                }
+            }
+            if (false !== $block['edit_form']) {
+                $form->addElement(new \XoopsFormLabel(\_AM_SYSTEM_BLOCKS_OPTIONS, $block['edit_form']));
+            }
+        }
+        $cache_select = new \XoopsFormSelect(\_AM_SYSTEM_BLOCKS_BCACHETIME, 'bcachetime', $block['bcachetime']);
+        $cache_select->addOptionArray([
+                                          0       => _NOCACHE,
+                                          30      => \sprintf(_SECONDS, 30),
+                                          60      => _MINUTE,
+                                          300     => \sprintf(_MINUTES, 5),
+                                          1800    => \sprintf(_MINUTES, 30),
+                                          3600    => _HOUR,
+                                          18000   => \sprintf(_HOURS, 5),
+                                          86400   => _DAY,
+                                          259200  => \sprintf(_DAYS, 3),
+                                          604800  => _WEEK,
+                                          2592000 => _MONTH,
+                                      ]);
+        $form->addElement($cache_select);
+
+        /** @var \XoopsGroupPermHandler $grouppermHandler */
+        $grouppermHandler = \xoops_getHandler('groupperm');
+        $groups           = $grouppermHandler->getGroupIds('block_read', $block['bid']);
+
+        $form->addElement(new \XoopsFormSelectGroup(\_AM_SYSTEM_BLOCKS_GROUP, 'groups', true, $groups, 5, true));
+
+        if (isset($block['bid'])) {
+            $form->addElement(new \XoopsFormHidden('bid', $block['bid']));
+        }
+        $form->addElement(new \XoopsFormHidden('op', $block['op']));
+        $form->addElement(new \XoopsFormHidden('fct', 'blocksadmin'));
+        $buttonTray = new \XoopsFormElementTray('', '&nbsp;');
+        if ($block['is_custom']) {
+            $buttonTray->addElement(new \XoopsFormButton('', 'previewblock', _PREVIEW, 'submit'));
+        }
+
+        //Submit buttons
+        $buttonTray   = new \XoopsFormElementTray('', '');
+        $submitButton = new \XoopsFormButton('', 'submitblock', _SUBMIT, 'submit');
+        $buttonTray->addElement($submitButton);
+
+        $cancelButton = new \XoopsFormButton('', '', _CANCEL, 'button');
+        $cancelButton->setExtra('onclick="history.go(-1)"');
+        $buttonTray->addElement($cancelButton);
+
+        $form->addElement($buttonTray);
+        $form->display();
     }
 }
 

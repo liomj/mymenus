@@ -127,7 +127,7 @@ switch ($op) {
         require_once __DIR__ . '/admin_footer.php';
         break;
     case 'toggle':
-        LinksUtility::toggleLinkVisibility($id, $visible);
+        LinksUtility::toggleLinkVisibility($id);
         break;
     case 'order':
         $test  = [];

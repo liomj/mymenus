@@ -204,12 +204,12 @@ class SysUtility
 
     /**
      * @param array|string $tableName
-     * @param int          $id_field
+     * @param int          $idField
      * @param int          $id
      *
      * @return mixed
      */
-    public static function cloneRecord($tableName, $id_field, $id)
+    public static function cloneRecord($tableName, $idField, $id)
     {
         $new_id = false;
         $table  = $GLOBALS['xoopsDB']->prefix($tableName);

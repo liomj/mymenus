@@ -12,6 +12,8 @@
 - fixed bug in Admin for deactivated menus (mamba)
 - removed deactivated menus from showing in Front End (mamba)
 - semantic versioning (mamba)
+- refactored Blocksadmin to a class (mamba)
+
 
 
 <h5>1.54 Beta 3  [NOT RELEASED]</h5>  Dev: Xoops 2.5.10, PHP 7.3.7

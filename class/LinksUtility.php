@@ -317,7 +317,7 @@ class LinksUtility
      * @param int $id
      * @param     $visible
      */
-    public static function toggleLinkVisibility($id, $visible)
+    public static function toggleLinkVisibility($id)
     {
         $helper = Helper::getInstance();
         $linksHandler = $helper->getHandler('Links');

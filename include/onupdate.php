@@ -22,7 +22,8 @@
 use XoopsModules\Mymenus\{
     Common\Configurator,
     Helper,
-    Utility
+    Utility,
+    Updater
 };
 /** @var Helper $helper */
 /** @var Utility $utility */
@@ -46,14 +47,13 @@ function xoops_module_update_mymenus(\XoopsObject $xoopsModule, $previousVersion
 {
     if ($previousVersion < 151) {
         //if (!checkInfoTemplates($xoopsModule)) return false;
-        if (!Mymenus\Updater::checkInfoTable($xoopsModule)) {
+        if (!Updater::checkInfoTable($xoopsModule)) {
             return false;
         }
         //update_tables_to_150($xoopsModule);
     }
 
     $moduleDirName      = \basename(\dirname(__DIR__));
-    $moduleDirNameUpper = mb_strtoupper($moduleDirName);
 
     $helper       = Helper::getInstance();
     $utility      = new Utility();
@@ -131,9 +131,6 @@ function xoops_module_update_mymenus(\XoopsObject $xoopsModule, $previousVersion
         //delete .tpl entries from the tpl_source table
 //        $sql = 'DELETE FROM ' . $GLOBALS['xoopsDB']->prefix('tplsource') . " WHERE `tpl_source` LIKE '%'" . $xoopsModule->getVar('dirname', 'n') . "'%'";
 //        $GLOBALS['xoopsDB']->queryF($sql);
-
-        /** @var XoopsGroupPermHandler $gpermHandler */
-        $gpermHandler = xoops_getHandler('groupperm');
 
 //        return $gpermHandler->deleteByModule($xoopsModule->getVar('mid'), 'item_read');
 
