@@ -63,7 +63,7 @@ function mymenus_block_show($options)
         $registry->setEntry('menu', $links);
         $registry->setEntry('has_access', 'yes');
         $plugin->triggerEvent('HasAccess');
-        if ('no' === $registry->getEntry('has_access')) {
+        if ('no' === $registry->getEntry('has_access') || 0 === $links['visible']) {
             unset($linksArray[$key]);
         }
     }

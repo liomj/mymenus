@@ -86,7 +86,7 @@ class Plugin
             $classMethods = \get_class_methods($className);
             foreach ($classMethods as $method) {
                 if (0 === mb_strpos($method, 'event')) {
-                    $eventName                  = mb_strtolower(\str_replace('event', '', $method));
+                    $eventName                  = \mb_strtolower(\str_replace('event', '', $method));
                     $event                      = ['className' => $className, 'method' => $method];
                     $this->events[$eventName][] = $event;
                 }
@@ -100,7 +100,7 @@ class Plugin
      */
     public function triggerEvent($eventName, $args = [])
     {
-        $eventName = mb_strtolower(\str_replace('.', '', $eventName));
+        $eventName = \mb_strtolower(\str_replace('.', '', $eventName));
         if (isset($this->events[(string)$eventName])) {
             foreach ($this->events[(string)$eventName] as $event) {
                 \call_user_func([$event['className'], $event['method']], $args);

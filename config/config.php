@@ -18,7 +18,7 @@
 use Xmf\Module\Admin;
 
 $moduleDirName      = \basename(\dirname(__DIR__));
-$moduleDirNameUpper = mb_strtoupper($moduleDirName);
+$moduleDirNameUpper = \mb_strtoupper($moduleDirName);
 
 return (object)[
     'name'           => $moduleDirNameUpper . ' Module Configurator',
@@ -62,7 +62,7 @@ return (object)[
     ],
     'oldFiles'        => [
         '/class/request.php',
-        '/class/registry.php',
+//        '/class/registry.php',
         '/class/utilities.php',
         '/class/util.php',
         //            '/include/constants.php',

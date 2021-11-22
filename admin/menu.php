@@ -24,7 +24,7 @@ use XoopsModules\Mymenus\Helper;
 /** @var \XoopsModules\Mymenus\Helper $helper */
 
 $moduleDirName      = \basename(\dirname(__DIR__));
-$moduleDirNameUpper = mb_strtoupper($moduleDirName);
+$moduleDirNameUpper = \mb_strtoupper($moduleDirName);
 
 $helper = Helper::getInstance();
 $helper->loadLanguage('common');

@@ -21,13 +21,13 @@ defined('XOOPS_ROOT_PATH') || exit('Restricted access');
 require __DIR__ . '/preloads/autoloader.php';
 
 $moduleDirName      = basename(__DIR__);
-$moduleDirNameUpper = mb_strtoupper($moduleDirName);
+$moduleDirNameUpper = \mb_strtoupper($moduleDirName);
 
-// ------------------- Informations ------------------- //
+// ------------------- Information ------------------- /
 $modversion = [
-    'version'             => 1.54,
+    'version'             => '1.54.0',
     'module_status'       => 'Beta 4',
-    'release_date'        => '2019/12/22', // YYYY/mm/dd
+    'release_date'        => '2021/11/22', // YYYY/mm/dd
     'name'                => _MI_MYMENUS_MD_NAME,
     'description'         => _MI_MYMENUS_MD_DESC,
     'author'              => 'Trabis (www.xuups.com), contributors: Mamba, Bleek, Zyspec, Luciorota',

@@ -88,7 +88,7 @@ function list_groups()
     global $target_mid, $target_mname, $block_arr;
 
     $moduleDirName      = \basename(\dirname(__DIR__));
-    $moduleDirNameUpper = mb_strtoupper($moduleDirName);
+    $moduleDirNameUpper = \mb_strtoupper($moduleDirName);
 
     $item_list = [];
     foreach (array_keys($block_arr) as $i) {

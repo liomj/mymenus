@@ -19,14 +19,21 @@
  * @author          Xoops Development Team
  */
 
-use XoopsModules\Mymenus;
+use XoopsModules\Mymenus\{
+    Common\Configurator,
+    Helper,
+    Utility
+};
+/** @var Helper $helper */
+/** @var Utility $utility */
+/** @var Configurator $configurator */
 
 defined('XOOPS_ROOT_PATH') || exit('Restricted access');
 
 //$moduleDirname = \basename(\dirname(__DIR__));
 //require(XOOPS_ROOT_PATH . "/modules/$moduleDirname/include/common.php");
 require __DIR__ . '/common.php';
-$helper = Mymenus\Helper::getInstance($debug);
+$helper = Helper::getInstance($debug);
 
 xoops_loadLanguage('admin', $helper->getDirname());
 
@@ -43,6 +50,94 @@ function xoops_module_update_mymenus(\XoopsObject $xoopsModule, $previousVersion
             return false;
         }
         //update_tables_to_150($xoopsModule);
+    }
+
+    $moduleDirName      = \basename(\dirname(__DIR__));
+    $moduleDirNameUpper = mb_strtoupper($moduleDirName);
+
+    $helper       = Helper::getInstance();
+    $utility      = new Utility();
+    $configurator = new Configurator();
+
+    $helper->loadLanguage('common');
+
+    if ($previousVersion < 155) {
+        //delete old HTML templates
+        if (count($configurator->templateFolders) > 0) {
+            foreach ($configurator->templateFolders as $folder) {
+                $templateFolder = $GLOBALS['xoops']->path('modules/' . $moduleDirName . $folder);
+                if (is_dir($templateFolder)) {
+                    $templateList = array_diff(scandir($templateFolder, SCANDIR_SORT_NONE), ['..', '.']);
+                    foreach ($templateList as $k => $v) {
+                        $fileInfo = new SplFileInfo($templateFolder . $v);
+                        if ('html' === $fileInfo->getExtension() && 'index.html' !== $fileInfo->getFilename()) {
+                            if (file_exists($templateFolder . $v)) {
+                                unlink($templateFolder . $v);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        //  ---  DELETE OLD FILES ---------------
+        if (count($configurator->oldFiles) > 0) {
+            //    foreach (array_keys($GLOBALS['uploadFolders']) as $i) {
+            foreach (array_keys($configurator->oldFiles) as $i) {
+                $tempFile = $GLOBALS['xoops']->path('modules/' . $moduleDirName . $configurator->oldFiles[$i]);
+                if (is_file($tempFile)) {
+                    unlink($tempFile);
+                }
+            }
+        }
+
+        //  ---  DELETE OLD FOLDERS ---------------
+        xoops_load('XoopsFile');
+        if (count($configurator->oldFolders) > 0) {
+            //    foreach (array_keys($GLOBALS['uploadFolders']) as $i) {
+            foreach (array_keys($configurator->oldFolders) as $i) {
+                $tempFolder = $GLOBALS['xoops']->path('modules/' . $moduleDirName . $configurator->oldFolders[$i]);
+                /** @var XoopsObjectHandler $folderHandler */
+                $folderHandler = \XoopsFile::getHandler('folder', $tempFolder);
+                $folderHandler->delete($tempFolder);
+            }
+        }
+
+        //  ---  CREATE UPLOAD FOLDERS ---------------
+        if (count($configurator->uploadFolders) > 0) {
+            //    foreach (array_keys($GLOBALS['uploadFolders']) as $i) {
+            foreach (array_keys($configurator->uploadFolders) as $i) {
+                $utility::createFolder($configurator->uploadFolders[$i]);
+            }
+        }
+
+        //  ---  COPY blank.png FILES ---------------
+        if (count($configurator->copyBlankFiles) > 0) {
+            $file = dirname(__DIR__) . '/assets/images/blank.png';
+            foreach (array_keys($configurator->copyBlankFiles) as $i) {
+                $dest = $configurator->copyBlankFiles[$i] . '/blank.png';
+                $utility::copyFile($file, $dest);
+            }
+        }
+
+        //delete .html entries from the tpl table
+        $sql = 'DELETE FROM ' . $GLOBALS['xoopsDB']->prefix('tplfile') . " WHERE `tpl_module` = '" . $xoopsModule->getVar('dirname', 'n') . "' AND `tpl_file` LIKE '%.html%'";
+        $GLOBALS['xoopsDB']->queryF($sql);
+
+        //delete .tpl entries from the tpl table
+        $sql = 'DELETE FROM ' . $GLOBALS['xoopsDB']->prefix('tplfile') . " WHERE `tpl_module` = '" . $xoopsModule->getVar('dirname', 'n') . "' AND `tpl_file` LIKE '%.tpl%'";
+        $GLOBALS['xoopsDB']->queryF($sql);
+
+        //delete .tpl entries from the tpl_source table
+//        $sql = 'DELETE FROM ' . $GLOBALS['xoopsDB']->prefix('tplsource') . " WHERE `tpl_source` LIKE '%'" . $xoopsModule->getVar('dirname', 'n') . "'%'";
+//        $GLOBALS['xoopsDB']->queryF($sql);
+
+        /** @var XoopsGroupPermHandler $gpermHandler */
+        $gpermHandler = xoops_getHandler('groupperm');
+
+//        return $gpermHandler->deleteByModule($xoopsModule->getVar('mid'), 'item_read');
+
+        //TODO replace mymenus_block.html in newblocks table with mymenus_block.tpl
     }
 
     return true;

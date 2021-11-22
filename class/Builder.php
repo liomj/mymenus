@@ -68,38 +68,38 @@ class Builder
 
         foreach ($this->parents[$pid] as $item) {
             if (1 === $item["visible"]) {
-            ++$idx;
+                ++$idx;
 
-            $this->output[$idx]['oul']    = false;
-            $this->output[$idx]['oli']    = false;
-            $this->output[$idx]['close']  = '';
-            $this->output[$idx]['cul']    = false;
-            $this->output[$idx]['cli']    = false;
-            $this->output[$idx]['hassub'] = false;
-            $this->output[$idx]['level']  = $level;
+                $this->output[$idx]['oul']    = false;
+                $this->output[$idx]['oli']    = false;
+                $this->output[$idx]['close']  = '';
+                $this->output[$idx]['cul']    = false;
+                $this->output[$idx]['cli']    = false;
+                $this->output[$idx]['hassub'] = false;
+                $this->output[$idx]['level']  = $level;
 
-            if ($first) {
-                $this->output[$idx]['oul'] = true;
-                $first                     = false;
-            }
+                if ($first) {
+                    $this->output[$idx]['oul'] = true;
+                    $first                     = false;
+                }
 
-            $this->output[$idx]['oli'] = true;
+                $this->output[$idx]['oli'] = true;
 
-            $this->output[$idx] = \array_merge($item, $this->output[$idx]);
+                $this->output[$idx] = \array_merge($item, $this->output[$idx]);
 
-            if (isset($this->parents[$item['id']])) {
-                $this->output[$idx]['hassub'] = true;
-                $this->buildMenus($item['id']);
-            }
+                if (isset($this->parents[$item['id']])) {
+                    $this->output[$idx]['hassub'] = true;
+                    $this->buildMenus($item['id']);
+                }
 
                 $this->output[$idx]['cli']   = true;
                 $this->output[$idx]['close'] .= "</li>\n";
-
+            }
         }
-        $this->output[$idx]['cul']   = true;
-        $this->output[$idx]['close'] .= "</ul>\n";
-        --$level;
-        }
+            $this->output[$idx]['cul']   = true;
+            $this->output[$idx]['close'] .= "</ul>\n";
+            --$level;
+//        }
     }
 
     /**
@@ -125,10 +125,10 @@ class Builder
                 $this->output[$idx]['up_weight'] = $prevWeight;
             }
             if ($down) {
-                $this->output[$idx]['down_weight'] = $this->output[$idx]['weight'] + 2;
+                $this->output[$idx]['down_weight'] = ($this->output[$idx]['weight']??0) + 2;
             }
 
-            $prevWeight = $this->output[$idx]['weight']??0;
+            $prevWeight = $this->output[$idx]['weight'] ?? 0;
             $up         = 1; // turn on up link for all entries after first one
 
             if (isset($this->parents[$item['id']])) {
@@ -152,8 +152,8 @@ class Builder
         //get all matching links
         foreach ($this->output as $idx => $menu) {
             $selected = 0;
-            if (isset($menu['link'])) {
-                $selected = (false !== mb_stripos($self, $menu['link'])) ? 1 : $selected;
+            if (!empty($menu['link'])) {
+                $selected = (false !== stristr($self, $menu['link'])) ? 1 : $selected;
             }
             $selected = (isset($menu['link']) && $menu['link'] == $self) ? 1 : $selected;
             $selected = (isset($menu['link']) && $menu['link'] == $default) ? 1 : $selected;
@@ -207,6 +207,6 @@ class Builder
         $this->buildUpDown();
         $this->buildSelected();
 
-        return $this->output;
+        return $this->parents[0];
     }
 }

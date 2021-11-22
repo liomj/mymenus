@@ -187,7 +187,7 @@ class LinksUtility
         $xoopsLogger->activated = false;
         \error_reporting(0);
 
-        $pathIcon16 = Admin::iconUrl('', 16);
+        $pathIcon16 = Admin::iconUrl('', '16');
 
         //        $registry = MymenusRegistry::getInstance();
         //        $plugin   = MymenusPlugin::getInstance();
@@ -346,7 +346,7 @@ class LinksUtility
         // set the auto-incremented id's value to blank.
         unset($tempTable['id']);
         // insert cloned copy of the original  record
-        $result = $GLOBALS['xoopsDB']->queryF("INSERT INTO $table (" . \implode(', ', \array_keys($tempTable)) . ") VALUES ('" . \implode("', '", \array_values($tempTable)) . "')") or exit($GLOBALS['xoopsDB']->error());
+        $result = $GLOBALS['xoopsDB']->queryF("INSERT INTO $table (" . \implode(', ', \array_keys($tempTable)) . ") VALUES ('" . \implode("', '", \array_values($tempTable)) . "')") or \trigger_error($GLOBALS['xoopsDB']->error());
 
         if ($result) {
             // Return the new id

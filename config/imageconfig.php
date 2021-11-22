@@ -3,7 +3,7 @@
 use XoopsModules\Mymenus\Helper;
 
 $moduleDirName      = \basename(\dirname(__DIR__));
-$moduleDirNameUpper = mb_strtoupper($moduleDirName);
+$moduleDirNameUpper = \mb_strtoupper($moduleDirName);
 
 /** @var \XoopsModules\Mymenus\Helper $helper */
 $helper = Helper::getInstance();

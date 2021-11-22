@@ -394,9 +394,9 @@ class Blocksadmin
         $myblock->setVar('side', $side);
         $myblock->setVar('bcachetime', $bcachetime);
         //        $myblock->store();
-        /** @var \XoopsBlockHandler $blkhandler */
-        $blkhandler = \xoops_getHandler('block');
-        return $blkhandler->insert($myblock);
+        /** @var \XoopsBlockHandler $blockHandler */
+        $blockHandler = xoops_getHandler('block');
+        return $blockHandler->insert($myblock);
     }
 
     /**
@@ -486,10 +486,7 @@ class Blocksadmin
                 $myblock->setVar('options', $options);
             }
         }
-        //        $myblock->store();
-        /** @var \XoopsBlockHandler $blkhandler */
-        $blkhandler = \xoops_getHandler('block');
-        return $blkhandler->insert($myblock);
+        $myblock->store();
 
         if (!empty($bmodule) && \count($bmodule) > 0) {
             $sql = \sprintf('DELETE FROM `%s` WHERE block_id = %u', $GLOBALS['xoopsDB']->prefix('block_module_link'), $bid);
