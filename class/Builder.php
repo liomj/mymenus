@@ -67,7 +67,6 @@ class Builder
         $first = true;
 
         foreach ($this->parents[$pid] as $item) {
-            if (1 === $item["visible"]) {
                 ++$idx;
 
                 $this->output[$idx]['oul']    = false;
@@ -94,12 +93,10 @@ class Builder
 
                 $this->output[$idx]['cli']   = true;
                 $this->output[$idx]['close'] .= "</li>\n";
-            }
         }
             $this->output[$idx]['cul']   = true;
             $this->output[$idx]['close'] .= "</ul>\n";
             --$level;
-//        }
     }
 
     /**
@@ -207,6 +204,6 @@ class Builder
         $this->buildUpDown();
         $this->buildSelected();
 
-        return $this->parents[0];
+        return $this->output;
     }
 }
