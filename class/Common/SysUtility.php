@@ -223,7 +223,7 @@ class SysUtility
             \trigger_error($GLOBALS['xoopsDB']->error());
         }
         // set the auto-incremented id's value to blank.
-        unset($tempTable[$id_field]);
+        unset($tempTable[$idField]);
         // insert cloned copy of the original  record 
         $sql    = "INSERT INTO $table (" . \implode(', ', \array_keys($tempTable)) . ") VALUES ('" . \implode("', '", \array_values($tempTable)) . "')";
         $result = $GLOBALS['xoopsDB']->queryF($sql);
