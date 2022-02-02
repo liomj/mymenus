@@ -16,7 +16,7 @@ namespace XoopsModules\Mymenus\Common;
  */
 
 use Xmf\Request;
-use XoopsModules\Tag\{
+use XoopsModules\Mymenus\{
     Helper
 };
 

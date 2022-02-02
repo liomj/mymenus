@@ -58,7 +58,7 @@ if ($block['is_custom']) {
     //TODO:  change this to use XoopsEditor class
     // $can_use_spaw = check_browser_can_use_spaw();
     $myts     = \MyTextSanitizer::getInstance();
-    $textarea = new \XoopsFormDhtmlTextArea(_AM_CONTENT, 'bcontent', htmlspecialchars($block['content']), 15, 70);
+    $textarea = new \XoopsFormDhtmlTextArea(_AM_CONTENT, 'bcontent', htmlspecialchars($block['content'], ENT_QUOTES | ENT_HTML5), 15, 70);
     if ($can_use_spaw) {
         $textarea->setDescription($notice_for_tags . "<br><br><a href='$uri_to_myself&amp;usespaw=1'>SPAW</a>");
     } else {
