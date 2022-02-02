@@ -66,7 +66,7 @@ class Plugin
             foreach ($pluginsList as $plugin) {
                 //                if (file_exists($GLOBALS['xoops']->path("modules/{$this->helper->getDirname()}/plugins/{$plugin}/{$plugin}.php"))) {
                 $dirname   = $this->helper->getDirname();
-                $className = "\XoopsModules\{$dirname}\Plugins\{$plugin}\PluginItem";
+                $className = "\XoopsModules\\" . ucfirst($dirname) . "\Plugins\\{$plugin}\PluginItem";
                 if (\class_exists($className)) {
                     $this->plugins[] = $plugin;
                 }
@@ -79,7 +79,7 @@ class Plugin
         foreach ($this->plugins as $plugin) {
             //            require $GLOBALS['xoops']->path("modules/{$this->helper->getDirname()}/plugins/{$plugin}/{$plugin}.php");
             $dirname   = $this->helper->getDirname();
-            $className = "\XoopsModules\{$dirname}\Plugins\{$plugin}\PluginItem";
+            $className = "\XoopsModules\\" . ucfirst($dirname) . "\Plugins\\{$plugin}\PluginItem";
             if (!\class_exists($className)) {
                 continue;
             }
