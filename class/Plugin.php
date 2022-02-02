@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Mymenus;
 
@@ -15,7 +15,6 @@ namespace XoopsModules\Mymenus;
 /**
  * @copyright       XOOPS Project (https://xoops.org)
  * @license         https://www.gnu.org/licenses/gpl-2.0.html GNU Public License
- * @package         Mymenus
  * @since           1.0
  * @author          trabis <lusopoemas@gmail.com>
  */
@@ -59,7 +58,7 @@ class Plugin
         return $instance;
     }
 
-    public function setPlugins()
+    public function setPlugins(): void
     {
         if (\is_dir($dir = $GLOBALS['xoops']->path("modules/{$this->helper->getDirname()}/class/Plugins/"))) {
             $pluginsList = \XoopsLists::getDirListAsArray($dir);
@@ -74,7 +73,7 @@ class Plugin
         }
     }
 
-    public function setEvents()
+    public function setEvents(): void
     {
         foreach ($this->plugins as $plugin) {
             //            require $GLOBALS['xoops']->path("modules/{$this->helper->getDirname()}/plugins/{$plugin}/{$plugin}.php");
@@ -98,7 +97,7 @@ class Plugin
      * @param string $eventName
      * @param array  $args
      */
-    public function triggerEvent($eventName, $args = [])
+    public function triggerEvent($eventName, $args = []): void
     {
         $eventName = \mb_strtolower(\str_replace('.', '', $eventName));
         if (isset($this->events[(string)$eventName])) {

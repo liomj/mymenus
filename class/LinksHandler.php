@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Mymenus;
 
@@ -15,7 +15,6 @@ namespace XoopsModules\Mymenus;
 /**
  * @copyright       XOOPS Project (https://xoops.org)
  * @license         https://www.gnu.org/licenses/gpl-2.0.html GNU Public License
- * @package         Mymenus
  * @since           1.0
  * @author          trabis <lusopoemas@gmail.com>
  */
@@ -31,13 +30,9 @@ class LinksHandler extends \XoopsPersistableObjectHandler
 {
     /**
      * @var Mymenus\Helper
-     * @access private
      */
     private $helper;
 
-    /**
-     * @param null|\XoopsDatabase $db
-     */
     public function __construct(\XoopsDatabase $db = null)
     {
         parent::__construct($db, 'mymenus_links', Links::class, 'id', 'title');
@@ -48,7 +43,7 @@ class LinksHandler extends \XoopsPersistableObjectHandler
     /**
      * @param $obj
      */
-    public function updateWeights($obj)
+    public function updateWeights($obj): void
     {
         $sql = 'UPDATE ' . $this->table . ' SET weight = weight+1';
         $sql .= ' WHERE';
@@ -66,7 +61,7 @@ class LinksHandler extends \XoopsPersistableObjectHandler
         $sql    .= ' ORDER BY weight ASC';
         $result = $this->db->query($sql);
         $i      = 1;  //lets start at 1 please!
-        while (list($id) = $this->db->fetchRow($result)) {
+        while ([$id] = $this->db->fetchRow($result)) {
             $sql = 'UPDATE ' . $this->table;
             $sql .= " SET weight = {$i}";
             $sql .= " WHERE id = {$id}";

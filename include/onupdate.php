@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -13,8 +13,7 @@
  * Mymenus module
  *
  * @copyright       XOOPS Project (https://xoops.org)
- * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
- * @package         mymenus
+ * @license         GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @since           1.5
  * @author          Xoops Development Team
  */
@@ -22,17 +21,17 @@
 use XoopsModules\Mymenus\{
     Common\Configurator,
     Helper,
-    Utility,
-    Updater
+    Updater,
+    Utility
 };
+
 /** @var Helper $helper */
 /** @var Utility $utility */
 /** @var Configurator $configurator */
-
 defined('XOOPS_ROOT_PATH') || exit('Restricted access');
 
 //$moduleDirname = \basename(\dirname(__DIR__));
-//require(XOOPS_ROOT_PATH . "/modules/$moduleDirname/include/common.php");
+//require XOOPS_ROOT_PATH . "/modules/$moduleDirname/include/common.php";
 require __DIR__ . '/common.php';
 $helper = Helper::getInstance($debug);
 
@@ -53,7 +52,7 @@ function xoops_module_update_mymenus(\XoopsObject $xoopsModule, $previousVersion
         //update_tables_to_150($xoopsModule);
     }
 
-    $moduleDirName      = \basename(\dirname(__DIR__));
+    $moduleDirName = \basename(\dirname(__DIR__));
 
     $helper       = Helper::getInstance();
     $utility      = new Utility();
@@ -129,10 +128,10 @@ function xoops_module_update_mymenus(\XoopsObject $xoopsModule, $previousVersion
         $GLOBALS['xoopsDB']->queryF($sql);
 
         //delete .tpl entries from the tpl_source table
-//        $sql = 'DELETE FROM ' . $GLOBALS['xoopsDB']->prefix('tplsource') . " WHERE `tpl_source` LIKE '%'" . $xoopsModule->getVar('dirname', 'n') . "'%'";
-//        $GLOBALS['xoopsDB']->queryF($sql);
+        //        $sql = 'DELETE FROM ' . $GLOBALS['xoopsDB']->prefix('tplsource') . " WHERE `tpl_source` LIKE '%'" . $xoopsModule->getVar('dirname', 'n') . "'%'";
+        //        $GLOBALS['xoopsDB']->queryF($sql);
 
-//        return $gpermHandler->deleteByModule($xoopsModule->getVar('mid'), 'item_read');
+        //        return $gpermHandler->deleteByModule($xoopsModule->getVar('mid'), 'item_read');
 
         //TODO replace mymenus_block.html in newblocks table with mymenus_block.tpl
     }

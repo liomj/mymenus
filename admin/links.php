@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -12,7 +12,6 @@
 /**
  * @copyright       XOOPS Project (https://xoops.org)
  * @license         https://www.gnu.org/licenses/gpl-2.0.html GNU Public License
- * @package         Mymenus
  * @since           1.0
  * @author          trabis <lusopoemas@gmail.com>, bleekk <bleekk@outlook.com>
  */
@@ -40,7 +39,7 @@ if (!$menusList) {
 
 $valid_menu_ids = array_keys($menusList);
 $mid            = Request::getInt('mid', Request::getInt('mid', '', 'POST'), 'GET');
-if ($mid && in_array($mid, $valid_menu_ids)) {
+if ($mid && in_array($mid, $valid_menu_ids, true)) {
     $menuTitle = $menusList[$mid];
 } else {
     $keys      = array_keys($menusList);

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Mymenus;
 
@@ -15,13 +15,11 @@ namespace XoopsModules\Mymenus;
 /**
  * @copyright       XOOPS Project (https://xoops.org)
  * @license         https://www.gnu.org/licenses/gpl-2.0.html GNU Public License
- * @package         Mymenus
  * @since           1.0
  * @author          trabis <lusopoemas@gmail.com>
  */
 
 use Xmf\Request;
-use XoopsModules\Mymenus;
 
 //require  \dirname(__DIR__) . '/include/common.php';
 
@@ -32,7 +30,6 @@ class Menus extends \XoopsObject
 {
     /**
      * @var Menus
-     * @access private
      */
     private $helper;
     private $db;
@@ -60,7 +57,7 @@ class Menus extends \XoopsObject
     {
         /** @var \XoopsGroupPermHandler $grouppermHandler */
         $grouppermHandler = \xoops_getHandler('groupperm');
-        //
+
         \xoops_load('XoopsFormLoader');
 
         if (false === $action) {

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Mymenus\Plugins\MyMenus;
 
@@ -15,7 +15,6 @@ namespace XoopsModules\Mymenus\Plugins\MyMenus;
 /**
  * @copyright       XOOPS Project (https://xoops.org)
  * @license         https://www.gnu.org/licenses/gpl-2.0.html GNU Public License
- * @package         Mymenus
  * @since           1.0
  * @author          trabis <lusopoemas@gmail.com>
  */
@@ -28,7 +27,7 @@ use XoopsModules\Mymenus;
  */
 class PluginItem extends Mymenus\PluginItem
 {
-    public static function eventBoot()
+    public static function eventBoot(): void
     {
         $registry = Mymenus\Registry::getInstance();
         /** @var \XoopsMemberHandler $memberHandler */
@@ -59,7 +58,7 @@ class PluginItem extends Mymenus\PluginItem
         $registry->setEntry('get_uid', Request::getInt('uid', 0, 'GET'));
     }
 
-    public static function eventLinkDecoration()
+    public static function eventLinkDecoration(): void
     {
         $registry          = Mymenus\Registry::getInstance();
         $linkArray         = $registry->getEntry('link_array');
@@ -71,7 +70,7 @@ class PluginItem extends Mymenus\PluginItem
         $registry->setEntry('link_array', $linkArray);
     }
 
-    public static function eventImageDecoration()
+    public static function eventImageDecoration(): void
     {
         $registry  = Mymenus\Registry::getInstance();
         $linkArray = $registry->getEntry('link_array');
@@ -83,7 +82,7 @@ class PluginItem extends Mymenus\PluginItem
         }
     }
 
-    public static function eventTitleDecoration()
+    public static function eventTitleDecoration(): void
     {
         $registry           = Mymenus\Registry::getInstance();
         $linkArray          = $registry->getEntry('link_array');
@@ -91,7 +90,7 @@ class PluginItem extends Mymenus\PluginItem
         $registry->setEntry('link_array', $linkArray);
     }
 
-    public static function eventAltTitleDecoration()
+    public static function eventAltTitleDecoration(): void
     {
         $registry  = Mymenus\Registry::getInstance();
         $linkArray = $registry->getEntry('link_array');
@@ -125,7 +124,7 @@ class PluginItem extends Mymenus\PluginItem
 
         if ('user' === $validator) {
             $user   = $registry->getEntry('user');
-            $value  = isset($user[$value]) ? $user[$value] : static::getExtraValue('user', $value);
+            $value  = $user[$value] ?? static::getExtraValue('user', $value);
             $string = \str_replace($expression, $value, $string);
         }
 
@@ -136,20 +135,20 @@ class PluginItem extends Mymenus\PluginItem
 
         if ('owner' === $validator) {
             $owner  = $registry->getEntry('owner');
-            $value  = isset($owner[$value]) ? $owner[$value] : static::getExtraValue('owner', $value);
+            $value  = $owner[$value] ?? static::getExtraValue('owner', $value);
             $string = \str_replace($expression, $value, $string);
         }
 
         return $string;
     }
 
-    public static function eventFormLinkDescription()
+    public static function eventFormLinkDescription(): void
     {
         $registry    = Mymenus\Registry::getInstance();
         $description = $registry->getEntry('form_link_description');
     }
 
-    public static function eventHasAccess()
+    public static function eventHasAccess(): void
     {
         $registry = Mymenus\Registry::getInstance();
         $menu     = $registry->getEntry('menu');
@@ -170,7 +169,7 @@ class PluginItem extends Mymenus\PluginItem
         }
     }
 
-    public static function eventAccessFilter()
+    public static function eventAccessFilter(): void
     {
         static::loadLanguage('mymenus');
         $registry                               = Mymenus\Registry::getInstance();
@@ -212,7 +211,7 @@ class PluginItem extends Mymenus\PluginItem
         $registry = Mymenus\Registry::getInstance();
         $ret      = 0;
         $values   = ['pm_new', 'pm_readed', 'pm_total'];
-        if (!\in_array($value, $values)) {
+        if (!\in_array($value, $values, true)) {
             return $ret;
         }
 

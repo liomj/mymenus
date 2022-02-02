@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Mymenus;
 
@@ -14,11 +14,10 @@ namespace XoopsModules\Mymenus;
 
 /**
  * @copyright    {@link https://xoops.org/ XOOPS Project}
- * @license      {@link http://www.fsf.org/copyleft/gpl.html GNU public license}
- * @author      XOOPS Development Team,
- * @author       GIJ=CHECKMATE (PEAK Corp. http://www.peak.ne.jp/)
+ * @license      {@link https://www.fsf.org/copyleft/gpl.html GNU public license}
+ * @author       XOOPS Development Team,
+ * @author       GIJ=CHECKMATE (PEAK Corp. https://www.peak.ne.jp/)
  */
-
 require_once XOOPS_ROOT_PATH . '/class/xoopsform/formelement.php';
 require_once XOOPS_ROOT_PATH . '/class/xoopsform/formhidden.php';
 require_once XOOPS_ROOT_PATH . '/class/xoopsform/formbutton.php';
@@ -30,7 +29,6 @@ require_once XOOPS_ROOT_PATH . '/class/xoopsform/form.php';
  *
  * @author      Kazumi Ono  <onokazu@myweb.ne.jp>
  * @copyright   copyright (c) 2000-2003 XOOPS.org
- *
  */
 class GroupPermForm extends \XoopsForm
 {
@@ -83,9 +81,8 @@ class GroupPermForm extends \XoopsForm
      * @param string $itemName
      * @param int    $itemId
      * @param int    $itemParent
-     * @access public
      */
-    public function addItem($itemId, $itemName, $itemParent = 0)
+    public function addItem($itemId, $itemName, $itemParent = 0): void
     {
         $this->_itemTree[$itemParent]['children'][] = $itemId;
         $this->_itemTree[$itemId]['parent']         = $itemParent;
@@ -96,12 +93,11 @@ class GroupPermForm extends \XoopsForm
     /**
      * Add appendix
      *
-     * @access public
      * @param $permName
      * @param $itemId
      * @param $itemName
      */
-    public function addAppendix($permName, $itemId, $itemName)
+    public function addAppendix($permName, $itemId, $itemName): void
     {
         $this->_appendix[] = [
             'permname' => $permName,
@@ -116,17 +112,16 @@ class GroupPermForm extends \XoopsForm
      *
      * @param int   $itemId
      * @param array $childIds
-     * @access private
      */
-    public function _loadAllChildItemIds($itemId, &$childIds)
+    public function _loadAllChildItemIds($itemId, &$childIds): void
     {
         if (!empty($this->_itemTree[$itemId]['children'])) {
             $first_child = $this->_itemTree[$itemId]['children'];
             foreach ($first_child as $fcid) {
-                \array_push($childIds, $fcid);
+                $childIds[] = $fcid;
                 if (!empty($this->_itemTree[$fcid]['children'])) {
                     foreach ($this->_itemTree[$fcid]['children'] as $_fcid) {
-                        \array_push($childIds, $_fcid);
+                        $childIds[] = $_fcid;
                         $this->_loadAllChildItemIds($_fcid, $childIds);
                     }
                 }
@@ -138,7 +133,6 @@ class GroupPermForm extends \XoopsForm
      * Renders the form
      *
      * @return string
-     * @access public
      */
     public function render()
     {

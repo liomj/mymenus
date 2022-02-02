@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Mymenus;
 
@@ -15,7 +15,6 @@ namespace XoopsModules\Mymenus;
 /**
  * @copyright       XOOPS Project (https://xoops.org)
  * @license         https://www.gnu.org/licenses/gpl-2.0.html GNU Public License
- * @package         Mymenus
  * @since           1.0
  * @author          trabis <lusopoemas@gmail.com>
  */
@@ -29,13 +28,9 @@ class MenusHandler extends \XoopsPersistableObjectHandler
 {
     /**
      * @var Mymenus\Helper
-     * @access private
      */
     private $helper;
 
-    /**
-     * @param null|\XoopsDatabase $db
-     */
     public function __construct(\XoopsDatabase $db = null)
     {
         parent::__construct($db, 'mymenus_menus', Menus::class, 'id', 'title', 'css');

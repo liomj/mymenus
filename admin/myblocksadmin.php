@@ -1,8 +1,8 @@
-<?php
+<?php declare(strict_types=1);
 // ------------------------------------------------------------------------- //
 //                            myblocksadmin.php                              //
 //                - XOOPS block admin for each modules -                     //
-//                          GIJOE <http://www.peak.ne.jp>                   //
+//                          GIJOE <https://www.peak.ne.jp>                   //
 // ------------------------------------------------------------------------- //
 
 use Xmf\Module\Admin;
@@ -83,7 +83,7 @@ while (false !== ($myrow = $db->fetchArray($result))) {
     $block_arr[] = new \XoopsBlock($myrow);
 }
 
-function list_groups()
+function list_groups(): void
 {
     global $target_mid, $target_mname, $block_arr;
 
@@ -125,5 +125,3 @@ if (file_exists('./mymenu.php')) {
 
 list_groups();
 require_once __DIR__ . '/admin_footer.php';
-
-?>

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 use Xmf\Request;
 
@@ -48,13 +48,13 @@ if (is_array($_POST['perms']) && !empty($_POST['perms'])) {
             if (false !== myDeleteByModule($grouppermHandler->db, $modid, $perm_name, $item_id)) {
                 if (!empty($perm_data['groups'])) {
                     foreach ($perm_data['groups'] as $group_id => $item_ids) {
-                        $selected = isset($item_ids[$item_id]) ? $item_ids[$item_id] : 0;
+                        $selected = $item_ids[$item_id] ?? 0;
                         if (1 == $selected) {
                             // make sure that all parent ids are selected as well
                             if ('' != $perm_data['parents'][$item_id]) {
                                 $parent_ids = explode(':', $perm_data['parents'][$item_id]);
                                 foreach ($parent_ids as $pid) {
-                                    if (0 != $pid && !in_array($pid, array_keys($item_ids))) {
+                                    if (0 != $pid && !in_array($pid, array_keys($item_ids), true)) {
                                         // one of the parent items were not selected, so skip this item
                                         $msg[] = sprintf(_MD_AM_PERMADDNG, '<strong>' . $perm_name . '</strong>', '<strong>' . $perm_data['itemname'][$item_id] . '</strong>', '<strong>' . $group_list[$group_id] . '</strong>') . ' (' . _MD_AM_PERMADDNGP . ')';
                                         continue 2;

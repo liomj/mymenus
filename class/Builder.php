@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Mymenus;
 
@@ -15,7 +15,6 @@ namespace XoopsModules\Mymenus;
 /**
  * @copyright       XOOPS Project (https://xoops.org)
  * @license         https://www.gnu.org/licenses/gpl-2.0.html GNU Public License
- * @package         Mymenus
  * @since           1.0
  * @author          trabis <lusopoemas@gmail.com>
  */
@@ -41,7 +40,7 @@ class Builder
     /**
      * @param $array
      */
-    public function addMenu($array)
+    public function addMenu($array): void
     {
         foreach ($array as $item) {
             $this->add($item);
@@ -51,7 +50,7 @@ class Builder
     /**
      * @param $item
      */
-    public function add($item)
+    public function add($item): void
     {
         $this->parents[$item['pid']][] = $item;
     }
@@ -59,7 +58,7 @@ class Builder
     /**
      * @param int $pid
      */
-    public function buildMenus($pid = 0)
+    public function buildMenus($pid = 0): void
     {
         static $idx = -1;
         static $level = -1;
@@ -67,42 +66,42 @@ class Builder
         $first = true;
 
         foreach ($this->parents[$pid] as $item) {
-                ++$idx;
+            ++$idx;
 
-                $this->output[$idx]['oul']    = false;
-                $this->output[$idx]['oli']    = false;
-                $this->output[$idx]['close']  = '';
-                $this->output[$idx]['cul']    = false;
-                $this->output[$idx]['cli']    = false;
-                $this->output[$idx]['hassub'] = false;
-                $this->output[$idx]['level']  = $level;
+            $this->output[$idx]['oul']    = false;
+            $this->output[$idx]['oli']    = false;
+            $this->output[$idx]['close']  = '';
+            $this->output[$idx]['cul']    = false;
+            $this->output[$idx]['cli']    = false;
+            $this->output[$idx]['hassub'] = false;
+            $this->output[$idx]['level']  = $level;
 
-                if ($first) {
-                    $this->output[$idx]['oul'] = true;
-                    $first                     = false;
-                }
+            if ($first) {
+                $this->output[$idx]['oul'] = true;
+                $first                     = false;
+            }
 
-                $this->output[$idx]['oli'] = true;
+            $this->output[$idx]['oli'] = true;
 
-                $this->output[$idx] = \array_merge($item, $this->output[$idx]);
+            $this->output[$idx] = \array_merge($item, $this->output[$idx]);
 
-                if (isset($this->parents[$item['id']])) {
-                    $this->output[$idx]['hassub'] = true;
-                    $this->buildMenus($item['id']);
-                }
+            if (isset($this->parents[$item['id']])) {
+                $this->output[$idx]['hassub'] = true;
+                $this->buildMenus($item['id']);
+            }
 
-                $this->output[$idx]['cli']   = true;
-                $this->output[$idx]['close'] .= "</li>\n";
+            $this->output[$idx]['cli']   = true;
+            $this->output[$idx]['close'] .= "</li>\n";
         }
-            $this->output[$idx]['cul']   = true;
-            $this->output[$idx]['close'] .= "</ul>\n";
-            --$level;
+        $this->output[$idx]['cul']   = true;
+        $this->output[$idx]['close'] .= "</ul>\n";
+        --$level;
     }
 
     /**
      * @param int $pid
      */
-    public function buildUpDown($pid = 0)
+    public function buildUpDown($pid = 0): void
     {
         static $idx = -1;
         $prevWeight = null;
@@ -122,7 +121,7 @@ class Builder
                 $this->output[$idx]['up_weight'] = $prevWeight;
             }
             if ($down) {
-                $this->output[$idx]['down_weight'] = ($this->output[$idx]['weight']??0) + 2;
+                $this->output[$idx]['down_weight'] = ($this->output[$idx]['weight'] ?? 0) + 2;
             }
 
             $prevWeight = $this->output[$idx]['weight'] ?? 0;
@@ -134,14 +133,14 @@ class Builder
         }
     }
 
-    public function buildSelected()
+    public function buildSelected(): void
     {
         //get the currentpage
         $sel = [];
         //        $queryString = $_SERVER['QUERY_STRING'] ? '?' . $_SERVER['QUERY_STRING'] : '';
         $queryString = Request::getString('QUERY_STRING', '', 'SERVER') ? '?' . Request::getString('QUERY_STRING', '', 'SERVER') : '';
-        //        $self         = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['SCRIPT_NAME'] . $queryString;
-        $self = 'http://' . Request::getString('HTTP_HOST', '', 'SERVER') . Request::getString('SCRIPT_NAME', '', 'SERVER') . $queryString;
+        //        $self         = 'https://' . $_SERVER['HTTP_HOST'] . $_SERVER['SCRIPT_NAME'] . $queryString;
+        $self = 'https://' . Request::getString('HTTP_HOST', '', 'SERVER') . Request::getString('SCRIPT_NAME', '', 'SERVER') . $queryString;
 
         //set a default page in case we don't get matches
         $default = XOOPS_URL . '/index.php';
@@ -150,7 +149,7 @@ class Builder
         foreach ($this->output as $idx => $menu) {
             $selected = 0;
             if (!empty($menu['link'])) {
-                $selected = (false !== stristr($self, $menu['link'])) ? 1 : $selected;
+                $selected = (false !== mb_stristr($self, $menu['link'])) ? 1 : $selected;
             }
             $selected = (isset($menu['link']) && $menu['link'] == $self) ? 1 : $selected;
             $selected = (isset($menu['link']) && $menu['link'] == $default) ? 1 : $selected;
@@ -185,7 +184,7 @@ class Builder
     /**
      * @param $pid
      */
-    public function addSelectedParents($pid)
+    public function addSelectedParents($pid): void
     {
         foreach ($this->output as $idx => $menu) {
             if (isset($menu['id']) && $menu['id'] == $pid) {

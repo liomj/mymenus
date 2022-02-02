@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Mymenus;
 
@@ -14,11 +14,10 @@ namespace XoopsModules\Mymenus;
 
 /**
  * @copyright    {@link https://xoops.org/ XOOPS Project}
- * @license      {@link http://www.fsf.org/copyleft/gpl.html GNU public license}
- * @author      XOOPS Development Team,
- * @author       GIJ=CHECKMATE (PEAK Corp. http://www.peak.ne.jp/)
+ * @license      {@link https://www.fsf.org/copyleft/gpl.html GNU public license}
+ * @author       XOOPS Development Team,
+ * @author       GIJ=CHECKMATE (PEAK Corp. https://www.peak.ne.jp/)
  */
-
 require_once XOOPS_ROOT_PATH . '/class/xoopsform/formelement.php';
 require_once XOOPS_ROOT_PATH . '/class/xoopsform/formhidden.php';
 require_once XOOPS_ROOT_PATH . '/class/xoopsform/formbutton.php';
@@ -30,7 +29,6 @@ require_once XOOPS_ROOT_PATH . '/class/xoopsform/form.php';
  *
  * @author      Kazumi Ono  <onokazu@myweb.ne.jp>
  * @copyright   copyright (c) 2000-2003 XOOPS.org
- *
  */
 class GroupFormCheckBox extends \XoopsFormElement
 {
@@ -76,9 +74,8 @@ class GroupFormCheckBox extends \XoopsFormElement
      * Sets pre-selected values
      *
      * @param mixed $value A group ID or an array of group IDs
-     * @access public
      */
-    public function setValue($value)
+    public function setValue($value): void
     {
         if (\is_array($value)) {
             foreach ($value as $v) {
@@ -93,9 +90,8 @@ class GroupFormCheckBox extends \XoopsFormElement
      * Sets the tree structure of items
      *
      * @param array $optionTree
-     * @access public
      */
-    public function setOptionTree(&$optionTree)
+    public function setOptionTree(&$optionTree): void
     {
         $this->_optionTree = &$optionTree;
     }
@@ -103,10 +99,9 @@ class GroupFormCheckBox extends \XoopsFormElement
     /**
      * Sets appendix of checkboxes
      *
-     * @access public
      * @param $appendix
      */
-    public function setAppendix($appendix)
+    public function setAppendix($appendix): void
     {
         $this->_appendix = $appendix;
     }
@@ -115,7 +110,6 @@ class GroupFormCheckBox extends \XoopsFormElement
      * Renders checkbox options for this group
      *
      * @return string
-     * @access public
      */
     public function render()
     {
@@ -166,9 +160,8 @@ class GroupFormCheckBox extends \XoopsFormElement
      * @param array  $option
      * @param string $prefix
      * @param array  $parentIds
-     * @access private
      */
-    public function _renderOptionTree(&$tree, $option, $prefix, $parentIds = [])
+    public function _renderOptionTree(&$tree, $option, $prefix, $parentIds = []): void
     {
         $tree .= $prefix . '<input type="checkbox" name="' . $this->getName() . '[groups][' . $this->_groupId . '][' . $option['id'] . ']" id="' . $this->getName() . '[groups][' . $this->_groupId . '][' . $option['id'] . ']" onclick="';
         // If there are parent elements, add javascript that will
@@ -187,7 +180,7 @@ class GroupFormCheckBox extends \XoopsFormElement
             $tree      .= "var ele = xoopsGetElementById('" . $child_ele . "'); if (this.checked !== true) {ele.checked = false;}";
         }
         $tree .= '" value="1"';
-        if (isset($this->_value) && \in_array($option['id'], $this->_value)) {
+        if (isset($this->_value) && \in_array($option['id'], $this->_value, true)) {
             $tree .= ' checked';
         }
         $tree .= '>' . $option['name'] . '<input type="hidden" name="' . $this->getName() . '[parents][' . $option['id'] . ']" value="' . \implode(':', $parentIds) . '"><input type="hidden" name="' . $this->getName() . '[itemname][' . $option['id'] . ']" value="' . \htmlspecialchars(
@@ -196,7 +189,7 @@ class GroupFormCheckBox extends \XoopsFormElement
             ) . "\"><br>\n";
         if (isset($option['children'])) {
             foreach ($option['children'] as $child) {
-                \array_push($parentIds, $option['id']);
+                $parentIds[] = $option['id'];
                 $this->_renderOptionTree($tree, $this->_optionTree[$child], $prefix . '&nbsp;-', $parentIds);
             }
         }

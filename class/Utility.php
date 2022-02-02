@@ -1,10 +1,6 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Mymenus;
-
-use XoopsModules\Mymenus;
-use XoopsModules\Mymenus\Common;
-use XoopsModules\Mymenus\Constants;
 
 /**
  * Class Utility

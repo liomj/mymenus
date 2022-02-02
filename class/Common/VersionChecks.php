@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Mymenus\Common;
 
@@ -14,7 +14,7 @@ namespace XoopsModules\Mymenus\Common;
 
 /**
  * @copyright   XOOPS Project (https://xoops.org)
- * @license     http://www.fsf.org/copyleft/gpl.html GNU public license
+ * @license     https://www.fsf.org/copyleft/gpl.html GNU public license
  * @author      mamba <mambax7@gmail.com>
  */
 trait VersionChecks
@@ -86,16 +86,11 @@ trait VersionChecks
     }
 
     /**
-     *
      * compares current module version with the latest GitHub release
      * @static
-     * @param \Xmf\Module\Helper $helper
-     * @param string|null        $source
-     * @param string|null        $default
      *
      * @return string|array info about the latest module version, if newer
      */
-
     public static function checkVerModule(\Xmf\Module\Helper $helper, ?string $source = 'github', ?string $default = 'master'): ?array
     {
         $moduleDirName      = \basename(\dirname(__DIR__, 2));
@@ -114,7 +109,7 @@ trait VersionChecks
                 $curlReturn = \curl_exec($curlHandle);
                 if (false === $curlReturn) {
                     \trigger_error(\curl_error($curlHandle));
-                } elseif (false !== \strpos($curlReturn, 'Not Found')) {
+                } elseif (false !== \mb_strpos($curlReturn, 'Not Found')) {
                     \trigger_error('Repository Not Found: ' . $infoReleasesUrl);
                 } else {
                     $file              = json_decode($curlReturn, false);
@@ -144,6 +139,7 @@ trait VersionChecks
                 \curl_close($curlHandle);
             }
         }
+
         return $ret;
     }
 }

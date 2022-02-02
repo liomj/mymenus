@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -12,7 +12,6 @@
 /**
  * @copyright       XOOPS Project (https://xoops.org)
  * @license         https://www.gnu.org/licenses/gpl-2.0.html GNU Public License
- * @package         Mymenus
  * @since           1.0
  * @author          trabis <lusopoemas@gmail.com>
  */
@@ -21,8 +20,8 @@ defined('XOOPS_ROOT_PATH') || exit('Restricted access');
 use Xmf\Module\Admin;
 use XoopsModules\Mymenus;
 use XoopsModules\Mymenus\Helper;
-/** @var \XoopsModules\Mymenus\Helper $helper */
 
+/** @var \XoopsModules\Mymenus\Helper $helper */
 $moduleDirName      = \basename(\dirname(__DIR__));
 $moduleDirNameUpper = \mb_strtoupper($moduleDirName);
 
@@ -30,8 +29,8 @@ $helper = Helper::getInstance();
 $helper->loadLanguage('common');
 $helper->loadLanguage('feedback');
 
-$pathIcon32 = Admin::menuIconPath('');
-$pathModIcon32 = XOOPS_URL .   '/modules/' . $moduleDirName . '/assets/images/icons/32/';
+$pathIcon32    = Admin::menuIconPath('');
+$pathModIcon32 = XOOPS_URL . '/modules/' . $moduleDirName . '/assets/images/icons/32/';
 if (is_object($helper->getModule()) && false !== $helper->getModule()->getInfo('modicons32')) {
     $pathModIcon32 = $helper->url($helper->getModule()->getInfo('modicons32'));
 }
@@ -88,8 +87,6 @@ $adminmenu[] = [
     'link'  => 'admin/about.php',
     'icon'  => "{$pathIcon32}/about.png",
 ];
-
-
 
 //constant('CO_' . $moduleDirNameUpper . '_' . 'PERMISSIONS')
 //constant('CO_' . $moduleDirNameUpper . '_' . 'BLOCKS')

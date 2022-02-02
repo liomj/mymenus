@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Mymenus;
 
@@ -15,12 +15,9 @@ namespace XoopsModules\Mymenus;
 /**
  * @copyright       XOOPS Project (https://xoops.org)
  * @license         https://www.gnu.org/licenses/gpl-2.0.html GNU Public License
- * @package         Mymenus
  * @since           1.0
  * @author          trabis <lusopoemas@gmail.com>
  */
-
-use XoopsModules\Mymenus;
 
 //require  \dirname(__DIR__) . '/include/common.php';
 
@@ -31,7 +28,6 @@ class Links extends \XoopsObject
 {
     /**
      * @var Links
-     * @access private
      */
     private $helper;
     private $db;

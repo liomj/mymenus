@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Mymenus\Common;
 
@@ -15,9 +15,8 @@ namespace XoopsModules\Mymenus\Common;
  * Breadcrumb Class
  *
  * @copyright   XOOPS Project (https://xoops.org)
- * @license     http://www.fsf.org/copyleft/gpl.html GNU public license
+ * @license     https://www.fsf.org/copyleft/gpl.html GNU public license
  * @author      lucio <lucio.rota@gmail.com>
- * @package     mymenus
  *
  * Example:
  * $breadcrumb = new PedigreeBreadcrumb();
@@ -46,7 +45,7 @@ class Breadcrumb
      * @param string $title
      * @param string $link
      */
-    public function addLink($title = '', $link = '')
+    public function addLink($title = '', $link = ''): void
     {
         $this->bread[] = [
             'link'  => $link,

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Mymenus\Plugins\Dynamic;
 
@@ -15,7 +15,6 @@ namespace XoopsModules\Mymenus\Plugins\Dynamic;
 /**
  * @copyright       XOOPS Project (https://xoops.org)
  * @license         https://www.gnu.org/licenses/gpl-2.0.html GNU Public License
- * @package         Mymenus
  * @since           1.0
  * @author          trabis <lusopoemas@gmail.com>
  */
@@ -28,7 +27,7 @@ use XoopsModules\Mymenus\Helper;
  */
 class PluginItem extends Mymenus\PluginItem
 {
-    public static function eventEnd()
+    public static function eventEnd(): void
     {
         $newmenus = [];
         $registry = Mymenus\Registry::getInstance();

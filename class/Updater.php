@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Mymenus;
 
@@ -143,9 +143,8 @@ class Updater
     }
 
     /**
-     * @param array        $table
-     * @param string       $tablename
-     * @param \XoopsObject $module
+     * @param array  $table
+     * @param string $tablename
      * @return bool|null
      */
     public static function createUpdateTable($table, $tablename, \XoopsObject $module)

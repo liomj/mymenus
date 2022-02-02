@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -10,9 +10,8 @@
  */
 
 /**
- * @copyright       {@link http://sourceforge.net/projects/xoops/ The XOOPS Project}
+ * @copyright       {@link https://xoops.org/ The XOOPS Project}
  * @license         {@link https://www.gnu.org/licenses/gpl-2.0.html GNU Public License}
- * @package         Mymenus
  * @since           1.0
  * @author          trabis <lusopoemas@gmail.com>
  */
@@ -21,8 +20,8 @@ use Xmf\Request;
 use XoopsModules\Mymenus;
 use XoopsModules\Mymenus\Helper;
 use XoopsModules\Mymenus\Utility;
-/** @var Helper $helper */
 
+/** @var Helper $helper */
 defined('XOOPS_ROOT_PATH') || exit('Restricted access');
 
 require \dirname(__DIR__) . '/include/common.php';
@@ -94,7 +93,7 @@ function mymenus_block_show($options)
     $jsArray  = [];
 
     // Get extra files from skins
-    $skinInfo = Utility::getSkinInfo($options[1], $options[2], isset($options[5]) ? $options[5] : '');
+    $skinInfo = Utility::getSkinInfo($options[1], $options[2], $options[5] ?? '');
 
     if (isset($skinInfo['css'])) {
         $cssArray = array_merge($cssArray, $skinInfo['css']);

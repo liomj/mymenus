@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 use XoopsModules\Mymenus\Helper;
 
@@ -45,4 +45,3 @@ $modversion['config'][] = [
     'valuetype'   => 'text',
     'default'     => 'uploads/' . $modversion['dirname'] . '/images',
 ];
-

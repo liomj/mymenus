@@ -8,7 +8,7 @@
     uploads/blank.gif<br>
     <br>
     For linking to external sites you need to use complete url:<br>
-    http://www.xuups.com<br>
+    https://www.xoops.org<br>
     <br>
     <br>
     You can use DECORATORS for links, images, title, and alt_title.<br>

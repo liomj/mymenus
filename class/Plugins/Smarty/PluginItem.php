@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Mymenus\Plugins\Smarty;
 
@@ -15,7 +15,6 @@ namespace XoopsModules\Mymenus\Plugins\Smarty;
 /**
  * @copyright       XOOPS Project (https://xoops.org)
  * @license         https://www.gnu.org/licenses/gpl-2.0.html GNU Public License
- * @package         Mymenus
  * @since           1.0
  * @author          trabis <lusopoemas@gmail.com>
  */
@@ -27,7 +26,7 @@ use XoopsModules\Mymenus;
  */
 class PluginItem extends Mymenus\PluginItem
 {
-    public static function eventLinkDecoration()
+    public static function eventLinkDecoration(): void
     {
         $registry          = Mymenus\Registry::getInstance();
         $linkArray         = $registry->getEntry('link_array');
@@ -35,7 +34,7 @@ class PluginItem extends Mymenus\PluginItem
         $registry->setEntry('link_array', $linkArray);
     }
 
-    public static function eventImageDecoration()
+    public static function eventImageDecoration(): void
     {
         $registry           = Mymenus\Registry::getInstance();
         $linkArray          = $registry->getEntry('link_array');
@@ -43,7 +42,7 @@ class PluginItem extends Mymenus\PluginItem
         $registry->setEntry('link_array', $linkArray);
     }
 
-    public static function eventTitleDecoration()
+    public static function eventTitleDecoration(): void
     {
         $registry           = Mymenus\Registry::getInstance();
         $linkArray          = $registry->getEntry('link_array');
@@ -51,7 +50,7 @@ class PluginItem extends Mymenus\PluginItem
         $registry->setEntry('link_array', $linkArray);
     }
 
-    public static function eventAltTitleDecoration()
+    public static function eventAltTitleDecoration(): void
     {
         $registry               = Mymenus\Registry::getInstance();
         $linkArray              = $registry->getEntry('link_array');

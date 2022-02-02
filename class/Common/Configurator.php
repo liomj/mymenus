@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Mymenus\Common;
 
@@ -15,7 +15,7 @@ namespace XoopsModules\Mymenus\Common;
  * Configurator Class
  *
  * @copyright   XOOPS Project (https://xoops.org)
- * @license     http://www.fsf.org/copyleft/gpl.html GNU public license
+ * @license     https://www.fsf.org/copyleft/gpl.html GNU public license
  * @author      XOOPS Development Team
  * @since       1.05
  */
@@ -46,7 +46,6 @@ class Configurator
      */
     public function __construct()
     {
-
         $config = require \dirname(__DIR__, 2) . '/config/config.php';
 
         $this->name            = $config->name;
@@ -64,6 +63,5 @@ class Configurator
 
         $this->icons = require \dirname(__DIR__, 2) . '/config/icons.php';
         $this->paths = require \dirname(__DIR__, 2) . '/config/paths.php';
-
     }
 }

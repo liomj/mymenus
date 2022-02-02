@@ -1,6 +1,6 @@
-<?php
+<?php declare(strict_types=1);
 //  Author: Trabis
-//  URL: http://www.xuups.com
+//  URL: https://www.xoops.org
 //  E-Mail: lusopoemas@gmail.com
 
 define('_AB_MYMENUS_AUTHOR_INFO', 'Contributors information');

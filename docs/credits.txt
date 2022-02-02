@@ -1,4 +1,4 @@
 Credits
 ===============
 
-Originally developed by Ricardo Costa (Trabis, www.xuups.org)
+Originally developed by Ricardo Costa (Trabis, www.xoops.org)

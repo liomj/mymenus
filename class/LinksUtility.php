@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Mymenus;
 
@@ -15,7 +15,6 @@ namespace XoopsModules\Mymenus;
 /**
  * @copyright       XOOPS Project (https://xoops.org)
  * @license         https://www.gnu.org/licenses/gpl-2.0.html GNU Public License
- * @package         Mymenus
  * @since           1.0
  * @author          trabis <lusopoemas@gmail.com>, bleekk <bleekk@outlook.com>
  */
@@ -70,7 +69,7 @@ class LinksUtility
     /**
      * @param int $mid
      */
-    public static function addLink($mid)
+    public static function addLink($mid): void
     {
         $helper = Helper::getInstance();
 
@@ -129,9 +128,9 @@ class LinksUtility
      * @param int $id
      * @param int $mid
      */
-    public static function saveLink($id, $mid)
+    public static function saveLink($id, $mid): void
     {
-        $helper = Helper::getInstance();
+        $helper       = Helper::getInstance();
         $linksHandler = $helper->getHandler('Links');
 
         if (!$GLOBALS['xoopsSecurity']->check()) {
@@ -302,9 +301,9 @@ class LinksUtility
      * @param int $id of links object
      * @param int $weight
      */
-    public static function moveLink($id, $weight)
+    public static function moveLink($id, $weight): void
     {
-        $helper = Helper::getInstance();
+        $helper       = Helper::getInstance();
         $linksHandler = $helper->getHandler('Links');
 
         $linksObj = $linksHandler->get((int)$id);
@@ -315,11 +314,10 @@ class LinksUtility
 
     /**
      * @param int $id
-     * @param     $visible
      */
-    public static function toggleLinkVisibility($id)
+    public static function toggleLinkVisibility($id): void
     {
-        $helper = Helper::getInstance();
+        $helper       = Helper::getInstance();
         $linksHandler = $helper->getHandler('Links');
         // Disable xoops debugger in dialog window
         \xoops_load('xoopslogger');
@@ -334,9 +332,9 @@ class LinksUtility
         echo $linksObj->getVar('visible');
     }
 
-    public static function cloneLink($id)
+    public static function cloneLink($id): void
     {
-        $helper = Helper::getInstance();
+        $helper       = Helper::getInstance();
         $linksHandler = $helper->getHandler('Links');
 
         $new_id = false;

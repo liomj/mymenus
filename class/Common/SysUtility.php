@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Mymenus\Common;
 
@@ -16,16 +16,12 @@ namespace XoopsModules\Mymenus\Common;
  */
 
 /**
- *
  * @license      https://www.fsf.org/copyleft/gpl.html GNU public license
  * @copyright    https://xoops.org 2000-2020 &copy; XOOPS Project
  * @author       ZySpec <zyspec@yahoo.com>
  * @author       Mamba <mambax7@gmail.com>
  */
 
-use MyTextSanitizer;
-use XoopsFormDhtmlTextArea;
-use XoopsFormTextArea;
 use XoopsModules\Mymenus\Helper;
 
 /**
@@ -191,10 +187,8 @@ class SysUtility
     /**
      * @param $fieldname
      * @param $table
-     *
-     * @return bool
      */
-    public static function fieldExists($fieldname, $table)
+    public static function fieldExists(string $fieldname, string $table): bool
     {
         global $xoopsDB;
         $result = $xoopsDB->queryF("SHOW COLUMNS FROM   $table LIKE '$fieldname'");
@@ -213,8 +207,8 @@ class SysUtility
     {
         $new_id = false;
         $table  = $GLOBALS['xoopsDB']->prefix($tableName);
-        // copy content of the record you wish to clone 
-        $sql       = "SELECT * FROM $table WHERE $idField ='" . $id . "' ";
+        // copy content of the record you wish to clone
+        $sql    = "SELECT * FROM $table WHERE $idField ='" . $id . "' ";
         $result = $GLOBALS['xoopsDB']->query($sql);
         if ($result instanceof \mysqli_result) {
             $tempTable = $GLOBALS['xoopsDB']->fetchArray($result, \MYSQLI_ASSOC);
@@ -224,7 +218,7 @@ class SysUtility
         }
         // set the auto-incremented id's value to blank.
         unset($tempTable[$idField]);
-        // insert cloned copy of the original  record 
+        // insert cloned copy of the original  record
         $sql    = "INSERT INTO $table (" . \implode(', ', \array_keys($tempTable)) . ") VALUES ('" . \implode("', '", \array_values($tempTable)) . "')";
         $result = $GLOBALS['xoopsDB']->queryF($sql);
         if (!$result) {

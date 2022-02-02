@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 /*
  * You may not change or alter any portion of this comment or credits
  * of supporting developers from this source code or any supporting source code
@@ -15,7 +15,6 @@
  * @since
  * @author        XOOPS Development Team
  */
-
 $usespaw = empty($_GET['usespaw']) ? false : true;
 
 xoops_load('XoopsFormLoader');
@@ -128,7 +127,7 @@ function check_browser_can_use_spaw()
     // check if msie
     if (preg_match('/MSIE[^;]*/i', $browser, $msie)) {
         // get version
-        if (preg_match("/[0-9]+\.[0-9]+/i", $msie[0], $version)) {
+        if (preg_match('/[0-9]+\.[0-9]+/i', $msie[0], $version)) {
             // check version
             if ((float)$version[0] >= 5.5) {
                 // finally check if it's not opera impersonating ie

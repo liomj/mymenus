@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -12,7 +12,6 @@
 /**
  * @copyright       XOOPS Project (https://xoops.org)
  * @license         https://www.gnu.org/licenses/gpl-2.0.html GNU Public License
- * @package         Mymenus
  * @since           1.0
  * @author          trabis <lusopoemas@gmail.com>, bleekk <bleekk@outlook.com>
  */
@@ -30,10 +29,10 @@ $modversion = [
     'release_date'        => '2021/11/22', // YYYY/mm/dd
     'name'                => _MI_MYMENUS_MD_NAME,
     'description'         => _MI_MYMENUS_MD_DESC,
-    'author'              => 'Trabis (www.xuups.com), contributors: Mamba, Bleek, Zyspec, Luciorota',
+    'author'              => 'Trabis (www.xoops.org), contributors: Mamba, Bleek, Zyspec, Luciorota',
     //    'author_mail'         => " ",
-    'author_website_url'  => 'http://xuups.com',
-    'author_website_name' => 'XUUPS',
+    'author_website_url'  => 'https://xoops.org',
+    'author_website_name' => 'XOOPS',
     'credits'             => 'XOOPS Development Team',
     'license'             => 'GPL 2.0 or later',
     'license_url'         => 'www.gnu.org/licenses/gpl-2.0.html/',
@@ -43,7 +42,7 @@ $modversion = [
     'release_file'        => XOOPS_URL . "/modules/{$moduleDirName}/docs/release_info file",
     'manual'              => 'link to manual file',
     'manual_file'         => XOOPS_URL . "/modules/{$moduleDirName}/docs/install.txt",
-    'min_php'             => '7.3',
+    'min_php'             => '7.4',
     'min_xoops'           => '2.5.10',
     'min_admin'           => '1.2',
     'min_db'              => ['mysql' => '5.5'],
