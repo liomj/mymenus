@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Mymenus;
 
@@ -15,7 +15,6 @@ namespace XoopsModules\Mymenus;
 /**
  * @copyright       XOOPS Project (https://xoops.org)
  * @license         https://www.gnu.org/licenses/gpl-2.0.html GNU Public License
- * @package         Mymenus
  * @since           1.0
  * @author          trabis <lusopoemas@gmail.com>
  */
@@ -70,7 +69,7 @@ class Registry
     /**
      * @param $key
      */
-    public function unsetEntry($key)
+    public function unsetEntry($key): void
     {
         unset($this->entries[$key]);
     }
@@ -113,7 +112,7 @@ class Registry
     /**
      * @param $key
      */
-    public function unlockEntry($key)
+    public function unlockEntry($key): void
     {
         unset($this->locks[$key]);
     }
@@ -128,7 +127,7 @@ class Registry
         return (true === isset($this->locks[$key]));
     }
 
-    public function unsetAll()
+    public function unsetAll(): void
     {
         $this->entries = [];
         $this->locks   = [];
