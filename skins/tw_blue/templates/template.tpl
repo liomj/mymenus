@@ -8,10 +8,10 @@
                         <{assign var=myStr value="["|cat:$xoops_langcode|cat:"]"}>
                         <{if ($xlanguage && (($menu.title|strstr:$myStr) || ($menu.image|strstr:$myStr)) || !$xlanguage)}>
                             <{if 0 == $menu.level}>
-                                <li<{if $menu.css || $menu.selected}> class="<{/if}>
-                                    <{if $menu.selected}>active<{/if}>
+                                <li<{if $menu.css || !empty($menu.selected)}> class="<{/if}>
+                                    <{if !empty($menu.selected)}>active<{/if}>
                                     <{if $menu.css}> <{$menu.css}><{/if}>
-                                    <{if $menu.css || $menu.selected}>"<{/if}>>
+                                    <{if $menu.css || !empty($menu.selected)}>"<{/if}>>
                                     <a href="<{$menu.link}>" target="<{$menu.target}>" title="<{$menu.alt_title}>">
                                         <span class="menu-left"></span>
                                         <span class="menu-mid">
@@ -28,7 +28,7 @@
                                                 <{foreach item=sub from=$block}>
                                                     <{if $sub.pid == $menu.id}>
                                                         <{if ($xlanguage && (($menu.title|strstr:$myStr) || ($menu.image|strstr:$myStr)) || !$xlanguage)}>
-                                                            <li<{if $sub.class}> class="<{$sub.css}>"<{/if}>>
+                                                            <li<{if !empty($sub.class)}> class="<{$sub.css}>"<{/if}>>
                                                                 <a href="<{$sub.link}>" target="<{$sub.target}>"
                                                                    title="<{$sub.alt_title}>">
                                                                     <{if $sub.image}><img src="<{$sub.image}>"

@@ -20,7 +20,7 @@
                 <{assign var=myStr value="["|cat:$xoops_langcode|cat:"]"}>
                 <{if ($xlanguage && (($menu.title|strstr:$myStr) || ($menu.image|strstr:$myStr)) || !$xlanguage)}>
                     <{if 0 == $menu.level}>
-                        <a href="<{$menu.link}>" class="default_top_link<{if $menu.selected}> default_selected<{/if}>"
+                        <a href="<{$menu.link}>" class="default_top_link<{if !empty($menu.selected)}> default_selected<{/if}>"
                            target="<{$menu.target}>" title="<{$menu.alt_title}>">
                             <span<{if $menu.hassub}> class="default_down"<{/if}>><{if $menu.image}><img
                                     src="<{$menu.image}>" alt="<{$menu.alt_title}>"><{/if}><{$menu.title}></span></a>
