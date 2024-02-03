@@ -17,9 +17,13 @@
  */
 
 use Xmf\Request;
-use XoopsModules\Mymenus;
-use XoopsModules\Mymenus\Helper;
-use XoopsModules\Mymenus\Utility;
+use XoopsModules\Mymenus\{
+    Builder,
+    Helper,
+    Plugin,
+    Registry,
+    Utility
+};
 
 /** @var Helper $helper */
 defined('XOOPS_ROOT_PATH') || exit('Restricted access');
@@ -45,8 +49,8 @@ function mymenus_block_show($options)
     $xoopsLogger->startTime('My Menus Block');
     $myts = \MyTextSanitizer::getInstance();
 
-    $registry = Mymenus\Registry::getInstance();
-    $plugin   = Mymenus\Plugin::getInstance();
+    $registry = Registry::getInstance();
+    $plugin   = Plugin::getInstance();
     $plugin->triggerEvent('Boot');
 
     $mid = $options[0];
@@ -84,7 +88,7 @@ function mymenus_block_show($options)
     $plugin->triggerEvent('End');
     $linksArray = $registry->getEntry('menus');
 
-    $menuBuilder = new Mymenus\Builder($linksArray);
+    $menuBuilder = new Builder($linksArray);
     $block       = $menuBuilder->render();
 
     /*--------------------------------------------------------------*/
@@ -113,7 +117,7 @@ function mymenus_block_show($options)
         if (isset($skinInfo['header'])) {
             $tpl_vars .= "\n{$skinInfo['header']}";
         }
-        $GLOBALS['xoopsTpl']->assign('xoops_module_header', $tpl_vars . @$GLOBALS['xoopsTpl']->get_template_vars('xoops_module_header'));
+        $GLOBALS['xoopsTpl']->assign('xoops_module_header', $tpl_vars . @$GLOBALS['xoopsTpl']->getTemplateVars('xoops_module_header'));
     } else {
         foreach ($cssArray as $file) {
             $GLOBALS['xoTheme']->addStylesheet($file);
@@ -122,7 +126,7 @@ function mymenus_block_show($options)
             $GLOBALS['xoTheme']->addScript($file);
         }
         if (isset($skinInfo['header'])) {
-            $GLOBALS['xoopsTpl']->assign('xoops_footer', @$GLOBALS['xoopsTpl']->get_template_vars('xoops_footer') . "\n" . $skinInfo['header']);
+            $GLOBALS['xoopsTpl']->assign('xoops_footer', @$GLOBALS['xoopsTpl']->getTemplateVars('xoops_footer') . "\n" . $skinInfo['header']);
         }
     }
 

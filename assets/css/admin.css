@@ -34,19 +34,16 @@ ol.sortable {
     margin: 0;
     cursor: move;
     background: #f6f6f6;
-    background: -webkit-gradient(linear, left top, left bottom, from(#ffffff), color-stop(47%, #f6f6f6), to(#ededed));
     background: linear-gradient(to bottom, #ffffff 0%, #f6f6f6 47%, #ededed 100%);
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#ededed', GradientType=0);
 }
 
 .sortable li.mjs-nestedSortable-branch div {
-    background: -webkit-gradient(linear, left top, left bottom, from(#ffffff), color-stop(47%, #f6f6f6), to(#f0ece9));
     background: linear-gradient(#ffffff 0%, #f6f6f6 47%, #f0ece9 100%);
 
 }
 
 .sortable li.mjs-nestedSortable-leaf div {
-    background: -webkit-gradient(linear, left top, left bottom, from(#ffffff), color-stop(47%, #f6f6f6), to(#bcccbc));
     background: linear-gradient(#ffffff 0%, #f6f6f6 47%, #bcccbc 100%);
 
 }
@@ -111,17 +108,13 @@ li.ui-state-default > div {
     background: #FFFFFF none;
     border: 1px solid #D3D3D3 !important;
     border-radius: 4px;
-    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .075) inset;
             box-shadow: 0 1px 1px rgba(0, 0, 0, .075) inset;
     color: #555555;
     font-size: 12px;
     height: 30px;
     line-height: 1.42857;
     padding: 6px 12px;
-    -webkit-transition: border-color 0.15s ease-in-out 0s, -webkit-box-shadow 0.15s ease-in-out 0s;
-    transition: border-color 0.15s ease-in-out 0s, -webkit-box-shadow 0.15s ease-in-out 0s;
     transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
-    transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s, -webkit-box-shadow 0.15s ease-in-out 0s;
     vertical-align: middle;
     display: block;
     margin-bottom: 3px;

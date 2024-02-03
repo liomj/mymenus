@@ -18,14 +18,19 @@
 defined('XOOPS_ROOT_PATH') || exit('Restricted access');
 
 use Xmf\Module\Admin;
-use XoopsModules\Mymenus;
-use XoopsModules\Mymenus\Helper;
+use XoopsModules\Mymenus\{
+    Helper
+};
 
-/** @var \XoopsModules\Mymenus\Helper $helper */
+/** @var Helper $helper */
+
+include \dirname(__DIR__) . '/preloads/autoloader.php';
+
 $moduleDirName      = \basename(\dirname(__DIR__));
 $moduleDirNameUpper = \mb_strtoupper($moduleDirName);
 
 $helper = Helper::getInstance();
+$helper->loadLanguage('modinfo');
 $helper->loadLanguage('common');
 $helper->loadLanguage('feedback');
 

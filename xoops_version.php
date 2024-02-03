@@ -25,8 +25,8 @@ $moduleDirNameUpper = \mb_strtoupper($moduleDirName);
 // ------------------- Information ------------------- /
 $modversion = [
     'version'             => '1.54.0',
-    'module_status'       => 'Beta 5',
-    'release_date'        => '2021/11/22', // YYYY/mm/dd
+    'module_status'       => 'Beta 6',
+    'release_date'        => '2024/02/03', // YYYY/mm/dd
     'name'                => _MI_MYMENUS_MD_NAME,
     'description'         => _MI_MYMENUS_MD_DESC,
     'author'              => 'Trabis (www.xoops.org), contributors: Mamba, Bleek, Zyspec, Luciorota',
@@ -43,7 +43,7 @@ $modversion = [
     'manual'              => 'link to manual file',
     'manual_file'         => XOOPS_URL . "/modules/{$moduleDirName}/docs/install.txt",
     'min_php'             => '7.4',
-    'min_xoops'           => '2.5.10',
+    'min_xoops'           => '2.5.11',
     'min_admin'           => '1.2',
     'min_db'              => ['mysql' => '5.5'],
     'image'               => 'assets/images/logoModule.png', // Path and name of the module’s logo

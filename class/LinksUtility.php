@@ -242,8 +242,8 @@ class LinksUtility
         //
         //$form->addElement($formparent);
         // links: visible
-        $statontxt  = "&nbsp;<img src='{$pathIcon16}/1.png' alt='" . _YES . "'>&nbsp;" . _YES . '&nbsp;&nbsp;&nbsp;';
-        $statofftxt = "&nbsp;<img src='{$pathIcon16}/0.png' alt='" . _NO . "'>&nbsp;" . _NO . '&nbsp;';
+        $statontxt  = "&nbsp;<img src='{$pathIcon16}1.png' alt='" . _YES . "'>&nbsp;" . _YES . '&nbsp;&nbsp;&nbsp;';
+        $statofftxt = "&nbsp;<img src='{$pathIcon16}0.png' alt='" . _NO . "'>&nbsp;" . _NO . '&nbsp;';
         $formvis    = new \XoopsFormRadioYN(\_AM_MYMENUS_MENU_VISIBLE, 'visible', $linksObj->getVar('visible'), $statontxt, $statofftxt);
         $form->addElement($formvis);
         // links: target

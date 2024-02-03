@@ -101,6 +101,12 @@
             if (!this.options.axis || this.options.axis != "y") this.helper[0].style.left = this.position.left + 'px';
             if (!this.options.axis || this.options.axis != "x") this.helper[0].style.top = this.position.top + 'px';
 
+            // dragDirection object is required by jquery.ui.sortable.js 1.13+
+            this.dragDirection = {
+                vertical: this._getDragVerticalDirection(),
+                horizontal: this._getDragHorizontalDirection()
+            };
+
             //Rearrange
             for (var i = this.items.length - 1; i >= 0; i--) {
 

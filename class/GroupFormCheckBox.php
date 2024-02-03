@@ -126,7 +126,7 @@ class GroupFormCheckBox extends \XoopsFormElement
                 $checked = $append['selected'] ? 'checked' : '';
                 $name    = 'perms[' . $append['permname'] . ']';
                 $itemid  = $append['itemid'];
-                $itemid  = $append['itemid'];
+//                $itemid  = $append['itemid'];
                 $ret     .= "<td class=\"odd\"><input type=\"checkbox\" name=\"{$name}[groups][$this->_groupId][$itemid]\" id=\"{$name}[groups][$this->_groupId][$itemid]\" value=\"1\" $checked>{$append['itemname']}<input type=\"hidden\" name=\"{$name}[parents][$itemid]\" value=\"\"><input type=\"hidden\" name=\"{$name}[itemname][$itemid]\" value=\"{$append['itemname']}\"><br></td>";
                 ++$cols;
             }

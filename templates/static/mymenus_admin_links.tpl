@@ -6,7 +6,7 @@
     .icon-1 {
         width: 16px;
         height: 16px;
-        background: url('<{xoModuleIcons16 1.png}>') 0 0 no-repeat transparent !important;
+        background: url("<{xoModuleIcons16 '1.png'}>") 0 0 no-repeat transparent !important;
         border: 0 none !important;
         padding: 0;
         margin: 1px 2px 0 0 !important;
@@ -16,7 +16,7 @@
     .icon-0 {
         width: 16px;
         height: 16px;
-        background: url('<{xoModuleIcons16 0.png}>') 0 0 no-repeat transparent !important;
+        background: url("<{xoModuleIcons16 '0.png'}>") 0 0 no-repeat transparent !important;
         border: 0 none !important;
         padding: 0;
         margin: 1px 2px 0 0 !important;
@@ -87,15 +87,15 @@
                                 </td>
                                 <td width="3%" class="discrete">
                                     <a href="#" onclick="showWindow(<{$menu.id}>, <{$mid}>)">
-                                        <img style="padding: 1px 2px 0 0;" src="<{xoModuleIcons16 edit.png}>"
+                                        <img style="padding: 1px 2px 0 0;" src="<{xoModuleIcons16 'edit.png'}>"
                                              title="<{$smarty.const._EDIT}>" alt="<{$smarty.const._EDIT}>">
                                     </a>
                                     <a href="links.php?mid=<{$menu_id}>&amp;op=delete&amp;id=<{$menu.id}>">
-                                        <img style="padding: 1px 2px 0 0;" src="<{xoModuleIcons16 delete.png}>"
+                                        <img style="padding: 1px 2px 0 0;" src="<{xoModuleIcons16 'delete.png'}>"
                                              title="<{$smarty.const._DELETE}>" alt="<{$smarty.const._DELETE}>">
                                     </a>
                                     <a href="links.php?mid=<{$menu_id}>&amp;op=clone&amp;id=<{$menu.id}>">
-                                        <img style="padding: 1px 2px 0 0;" src="<{xoModuleIcons16 editcopy.png}>"
+                                        <img style="padding: 1px 2px 0 0;" src="<{xoModuleIcons16 'editcopy.png'}>"
                                              title="<{$smarty.const._CLONE}>" alt="<{$smarty.const._CLONE}>">
                                     </a>
                                 </td>
@@ -140,18 +140,18 @@
                                                 <td width="3%" class="discrete">
                                                     <a href="#" onclick="showWindow(<{$smenu.id}>)">
                                                         <img style="padding: 1px 2px 0 0;"
-                                                             src="<{xoModuleIcons16 edit.png}>"
+                                                             src="<{xoModuleIcons16 'edit.png'}>"
                                                              title="<{$smarty.const._EDIT}>"
                                                              alt="<{$smarty.const._EDIT}>">
                                                     </a>
                                                     <a href="links.php?mid=<{$smenu_id}>&amp;op=delete&amp;id=<{$smenu.id}>">
                                                         <img style="padding: 1px 2px 0 0;"
-                                                             src="<{xoModuleIcons16 delete.png}>"
+                                                             src="<{xoModuleIcons16 'delete.png'}>"
                                                              title="<{$smarty.const._DELETE}>"
                                                              alt="<{$smarty.const._DELETE}>">
                                                     </a>
                                                     <a href="links.php?mid=<{$smenu_id}>&amp;op=clone&amp;id=<{$smenu.id}>">
-                                                        <img style="padding: 1px 2px 0 0;" src="<{xoModuleIcons16 editcopy.png}>"
+                                                        <img style="padding: 1px 2px 0 0;" src="<{xoModuleIcons16 'editcopy.png'}>"
                                                              title="<{$smarty.const._CLONE}>" alt="<{$smarty.const._CLONE}>">
                                                     </a>
                                                 </td>
@@ -196,18 +196,18 @@
                                                                 <td width="3%" class="discrete">
                                                                     <a href="#" onclick="showWindow(<{$ssmenu.id}>)">
                                                                         <img style="padding: 1px 2px 0 0;"
-                                                                             src="<{xoModuleIcons16 edit.png}>"
+                                                                             src="<{xoModuleIcons16 'edit.png'}>"
                                                                              title="<{$smarty.const._EDIT}>"
                                                                              alt="<{$smarty.const._EDIT}>">
                                                                     </a>
                                                                     <a href="links.php?mid=<{$ssmenu_id}>&amp;op=delete&amp;id=<{$ssmenu.id}>">
                                                                         <img style="padding: 1px 2px 0 0;"
-                                                                             src="<{xoModuleIcons16 delete.png}>"
+                                                                             src="<{xoModuleIcons16 'delete.png'}>"
                                                                              title="<{$smarty.const._DELETE}>"
                                                                              alt="<{$smarty.const._DELETE}>">
                                                                     </a>
                                                                     <a href="links.php?mid=<{$ssmenu_id}>&amp;op=clone&amp;id=<{$ssmenu.id}>">
-                                                                        <img style="padding: 1px 2px 0 0;" src="<{xoModuleIcons16 editcopy.png}>"
+                                                                        <img style="padding: 1px 2px 0 0;" src="<{xoModuleIcons16 'editcopy.png'}>"
                                                                              title="<{$smarty.const._CLONE}>" alt="<{$smarty.const._CLONE}>">
                                                                     </a>
                                                                 </td>
