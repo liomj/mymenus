@@ -15,11 +15,14 @@
  * @since           1.0
  * @author          trabis <lusopoemas@gmail.com>
  */
+
+use Xmf\Module\Admin;
+
 require_once __DIR__ . '/admin_header.php';
 xoops_cp_header();
 
 $adminObject->displayNavigation(basename(__FILE__));
-$adminObject::setPaypal('xoopsfoundation@gmail.com');
+Admin::setPaypal('xoopsfoundation@gmail.com');
 $adminObject->displayAbout(false);
 
 require_once __DIR__ . '/admin_footer.php';
