@@ -119,21 +119,6 @@ function xoops_module_update_mymenus(\XoopsObject $xoopsModule, $previousVersion
             }
         }
 
-        //delete .html entries from the tpl table
-        $sql = 'DELETE FROM ' . $GLOBALS['xoopsDB']->prefix('tplfile') . " WHERE `tpl_module` = '" . $xoopsModule->getVar('dirname', 'n') . "' AND `tpl_file` LIKE '%.html%'";
-        $GLOBALS['xoopsDB']->queryF($sql);
-
-        //delete .tpl entries from the tpl table
-        $sql = 'DELETE FROM ' . $GLOBALS['xoopsDB']->prefix('tplfile') . " WHERE `tpl_module` = '" . $xoopsModule->getVar('dirname', 'n') . "' AND `tpl_file` LIKE '%.tpl%'";
-        $GLOBALS['xoopsDB']->queryF($sql);
-
-        //delete .tpl entries from the tpl_source table
-        //        $sql = 'DELETE FROM ' . $GLOBALS['xoopsDB']->prefix('tplsource') . " WHERE `tpl_source` LIKE '%'" . $xoopsModule->getVar('dirname', 'n') . "'%'";
-        //        $GLOBALS['xoopsDB']->queryF($sql);
-
-        //        return $gpermHandler->deleteByModule($xoopsModule->getVar('mid'), 'item_read');
-
-        //TODO replace mymenus_block.html in newblocks table with mymenus_block.tpl
     }
 
     return true;
