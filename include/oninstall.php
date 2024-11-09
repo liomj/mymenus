@@ -15,9 +15,13 @@
  * @author       XOOPS Development Team
  */
 
-use XoopsModules\Mymenus;
-use XoopsModules\Mymenus\Helper;
-use XoopsModules\Mymenus\Utility;
+
+use XoopsModules\Mymenus\{
+    Common\Configurator,
+    Helper,
+    Utility
+};
+
 
 //require __DIR__ . '/setup.php';
 
@@ -69,8 +73,8 @@ function xoops_module_install_mymenus(\XoopsModule $module)
     $helper->loadLanguage('admin');
     $helper->loadLanguage('modinfo');
 
-    $configurator = new Mymenus\Common\Configurator();
-    /** @var Mymenus\Utility $utility */
+    $configurator = new Configurator();
+    /** @var \XoopsModules\Mymenus\Utility $utility */
     $utility = new Utility();
 
     // default Permission Settings ----------------------
