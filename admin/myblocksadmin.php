@@ -19,25 +19,16 @@ require_once XOOPS_ROOT_PATH . '/class/xoopsblock.php';
 
 $xoops_system_path = XOOPS_ROOT_PATH . '/modules/system';
 
-// language files
-$language = $xoopsConfig['language'];
-if (!file_exists("{$xoops_system_path}/language/{$language}/admin/blocksadmin.php")) {
-    $language = 'english';
-}
-
-// to prevent from notice that constants already defined
+// to prevent notice that constants already defined
 $error_reporting_level = error_reporting(0);
 require_once "{$xoops_system_path}/constants.php";
-require_once "{$xoops_system_path}/language/{$language}/admin.php";
-require_once "{$xoops_system_path}/language/{$language}/admin/blocksadmin.php";
-error_reporting($error_reporting_level);
 
-$group_defs = file("{$xoops_system_path}/language/{$language}/admin/groups.php");
-foreach ($group_defs as $def) {
-    if (false !== mb_strpos($def, '_AM_MYLINKS_ACCESSRIGHTS') || false !== mb_strpos($def, '_AM_MYLINKS_ACTIVERIGHTS')) {
-        eval($def);
-    }
-}
+// language files
+\xoops_loadLanguage('admin', 'system');
+\xoops_loadLanguage('admin/blocksadmin', 'system');
+\xoops_loadLanguage('admin/groups', 'system');
+
+error_reporting($error_reporting_level);
 
 // check $xoopsModule
 if (!is_object($xoopsModule)) {
