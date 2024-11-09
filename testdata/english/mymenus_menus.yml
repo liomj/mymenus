@@ -4,13 +4,13 @@
     css: sf-menu
 -
     id: '2'
-    title: 'Menu2'
+    title: Menu2
     css: ''
 -
     id: '3'
-    title: 'Menu 3'
+    title: Menu3
     css: ''
 -
     id: '4'
-    title: 'MEGA'
+    title: MEGA
     css: sf-mega

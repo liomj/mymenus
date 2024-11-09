@@ -2,12 +2,12 @@
     id: '1'
     pid: '2'
     mid: '1'
-    title: 's2 aaaaaa'
-    alt_title: ntshsnthntshtnh
+    title: 'S2 XOOPS'
+    alt_title: XOOPS
     visible: '1'
-    link: xoops.org
+    link: https://xoops.org
     weight: '3'
-    target: _self
+    target: _blank
     groups: 'a:3:{i:0;s:1:"1";i:1;s:1:"2";i:2;s:1:"3";}'
     hooks: ''
     image: ''
@@ -16,12 +16,12 @@
     id: '2'
     pid: '5'
     mid: '1'
-    title: 's1 subtopic1'
-    alt_title: snthsnthsnth
+    title: 'M1 Sub1 PHP'
+    alt_title: PHP
     visible: '1'
-    link: xoops.org
+    link: https://php.net
     weight: '2'
-    target: _self
+    target: _blank
     groups: 'a:3:{i:0;s:1:"1";i:1;s:1:"2";i:2;s:1:"3";}'
     hooks: ''
     image: ''
@@ -30,13 +30,13 @@
     id: '3'
     pid: '0'
     mid: '2'
-    title: cccccccccc
-    alt_title: ''
+    title: 'Webmaster only'
+    alt_title: 'Webmaster only'
     visible: '1'
-    link: ''
+    link: https://xoops.org
     weight: '3'
-    target: ''
-    groups: ''
+    target: _blank
+    groups: 'a:1:{i:0;s:1:"1";}'
     hooks: ''
     image: ''
     css: ''
@@ -44,13 +44,13 @@
     id: '4'
     pid: '0'
     mid: '2'
-    title: ggggggggggg
-    alt_title: ''
+    title: 'Menu1 XOOPS'
+    alt_title: XOOPS
     visible: '1'
-    link: ''
+    link: https://xoops.org
     weight: '2'
-    target: ''
-    groups: ''
+    target: _blank
+    groups: 'a:3:{i:0;s:1:"1";i:1;s:1:"2";i:2;s:1:"3";}'
     hooks: ''
     image: ''
     css: ''
@@ -58,12 +58,12 @@
     id: '5'
     pid: '0'
     mid: '1'
-    title: 'Topic 1'
-    alt_title: ntshsnthnth
+    title: 'Menu 1'
+    alt_title: XOOPS
     visible: '1'
-    link: xoops.org
+    link: https://xoops.org
     weight: '1'
-    target: _self
+    target: _blank
     groups: 'a:3:{i:0;s:1:"1";i:1;s:1:"2";i:2;s:1:"3";}'
     hooks: ''
     image: ''
@@ -89,9 +89,9 @@
     title: Aaaaa
     alt_title: Aaaaa
     visible: '1'
-    link: xooops.org
+    link: https://xoops.org
     weight: '12'
-    target: _self
+    target: _blank
     groups: 'a:3:{i:0;s:1:"1";i:1;s:1:"2";i:2;s:1:"3";}'
     hooks: ''
     image: ''
@@ -240,12 +240,12 @@
     id: '17'
     pid: '0'
     mid: '3'
-    title: zzzz
-    alt_title: sssss
+    title: 'Menu3 XOOPS'
+    alt_title: XOOPS
     visible: '1'
-    link: xoops.org
+    link: 'http://xoops.org'
     weight: '1'
-    target: _self
+    target: _blank
     groups: 'a:3:{i:0;s:1:"1";i:1;s:1:"2";i:2;s:1:"3";}'
     hooks: 'a:0:{}'
     image: ''
@@ -254,12 +254,12 @@
     id: '18'
     pid: '17'
     mid: '3'
-    title: ssss
-    alt_title: nnnnnn
+    title: 'M3 Sub1 PHP'
+    alt_title: PHP
     visible: '1'
-    link: xoops.org
+    link: https://php.net
     weight: '2'
-    target: _self
+    target: _blank
     groups: 'a:3:{i:0;s:1:"1";i:1;s:1:"2";i:2;s:1:"3";}'
     hooks: 'a:0:{}'
     image: ''
@@ -282,8 +282,8 @@
     id: '22'
     pid: '0'
     mid: '4'
-    title: Aaaaa
-    alt_title: Aaaaa
+    title: XOOPS
+    alt_title: XOOPS
     visible: '1'
     link: xooops.org
     weight: '14'
@@ -296,12 +296,12 @@
     id: '23'
     pid: '18'
     mid: '3'
-    title: nnnnn
-    alt_title: nnnnnn
+    title: 'S2 PHP Docs'
+    alt_title: 'PHP Documentation'
     visible: '1'
-    link: xoops.org
+    link: 'https://www.php.net/docs.php'
     weight: '3'
-    target: _self
+    target: _blank
     groups: 'a:3:{i:0;s:1:"1";i:1;s:1:"2";i:2;s:1:"3";}'
     hooks: 'a:0:{}'
     image: ''
@@ -310,12 +310,12 @@
     id: '24'
     pid: '2'
     mid: '1'
-    title: 's2 bbbbbbbbb'
-    alt_title: ntshsnthntshtnh
+    title: 'S2 non-visible'
+    alt_title: Non-visible
     visible: '0'
-    link: xoops.org
+    link: https://xoops.org
     weight: '3'
-    target: _self
+    target: _blank
     groups: 'a:3:{i:0;s:1:"1";i:1;s:1:"2";i:2;s:1:"3";}'
     hooks: ''
     image: ''
@@ -324,12 +324,12 @@
     id: '25'
     pid: '2'
     mid: '1'
-    title: 's2 cccc'
-    alt_title: ntshsnthntshtnh
+    title: 'S2 PHP'
+    alt_title: title
     visible: '1'
-    link: xoops.org
+    link: https://php.net
     weight: '3'
-    target: _self
+    target: _blank
     groups: 'a:3:{i:0;s:1:"1";i:1;s:1:"2";i:2;s:1:"3";}'
     hooks: ''
     image: ''
@@ -338,12 +338,12 @@
     id: '26'
     pid: '18'
     mid: '3'
-    title: nnnnn
-    alt_title: nnnnnn
+    title: 'S2 PHP Downloads'
+    alt_title: 'PHP Downloads'
     visible: '1'
-    link: xoops.org
+    link: 'https://www.php.net/downloads.php'
     weight: '3'
-    target: _self
+    target: _blank
     groups: 'a:3:{i:0;s:1:"1";i:1;s:1:"2";i:2;s:1:"3";}'
     hooks: 'a:0:{}'
     image: ''
@@ -352,12 +352,12 @@
     id: '27'
     pid: '18'
     mid: '3'
-    title: nnnnn
-    alt_title: nnnnnn
+    title: 'S2 PHP Help'
+    alt_title: 'PHP Help'
     visible: '1'
-    link: xoops.org
+    link: 'https://www.php.net/support.php'
     weight: '3'
-    target: _self
+    target: _blank
     groups: 'a:3:{i:0;s:1:"1";i:1;s:1:"2";i:2;s:1:"3";}'
     hooks: 'a:0:{}'
     image: ''
