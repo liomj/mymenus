@@ -31,7 +31,7 @@ class MenusHandler extends \XoopsPersistableObjectHandler
      */
     private $helper;
 
-    public function __construct(\XoopsDatabase $db = null)
+    public function __construct(?\XoopsDatabase $db = null)
     {
         parent::__construct($db, 'mymenus_menus', Menus::class, 'id', 'title', 'css');
         /** @var \XoopsModules\Mymenus\Helper $this ->helper */

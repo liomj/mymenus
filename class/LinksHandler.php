@@ -33,7 +33,7 @@ class LinksHandler extends \XoopsPersistableObjectHandler
      */
     private $helper;
 
-    public function __construct(\XoopsDatabase $db = null)
+    public function __construct(?\XoopsDatabase $db = null)
     {
         parent::__construct($db, 'mymenus_links', Links::class, 'id', 'title');
         /** @var \XoopsModules\Mymenus\Helper $this ->helper */
