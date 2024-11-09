@@ -4,8 +4,6 @@
 [![Software License](https://img.shields.io/badge/license-GPL-brightgreen.svg?style=flat)](https://www.gnu.org/licenses/gpl-2.0.html) 
 
 [![Scrutinizer Code Quality](https://img.shields.io/scrutinizer/g/XoopsModules25x/mymenus.svg?style=flat)](https://scrutinizer-ci.com/g/XoopsModules25x/mymenus/?branch=master)
-[![Codacy Badge](https://api.codacy.com/project/badge/grade/85bf1ab3f36743a9bd285398ebbd3c3d)](https://www.codacy.com/app/mambax7/mymenus_2)
-[![Code Climate](https://img.shields.io/codeclimate/github/XoopsModules25x/mymenus.svg?style=flat)](https://codeclimate.com/github/XoopsModules25x/mymenus)
 [![Latest Pre-Release](https://img.shields.io/github/tag/XoopsModules25x/mymenus.svg?style=flat)](https://github.com/XoopsModules25x/mymenus/tags/)
 [![Latest Version](https://img.shields.io/github/release/XoopsModules25x/mymenus.svg?style=flat)](https://github.com/XoopsModules25x/mymenus/releases/)
 
