@@ -7,6 +7,9 @@
 
 use Xmf\Module\Admin;
 use Xmf\Request;
+use XoopsModules\Mymenus\{
+    GroupPermForm
+};
 
 require_once __DIR__ . '/admin_header.php';
 //require_once XOOPS_ROOT_PATH."/modules/" . $xoopsModule->getVar("dirname") . "/class/admin.php";
@@ -95,7 +98,7 @@ function list_groups(): void
         $item_list[$block_arr[$i]->getVar('bid')] = $block_arr[$i]->getVar('title');
     }
 
-    $form = new \XoopsModules\Mymenus\GroupPermForm(constant('CO_' . $moduleDirNameUpper . '_' . 'AGDS'), 1, 'block_read', '');
+    $form = new GroupPermForm(constant('CO_' . $moduleDirNameUpper . '_' . 'AGDS'), 1, 'block_read', '');
     if ($target_mid > 1) {
         $form->addAppendix('module_admin', $target_mid, $target_mname . ' ' . constant('CO_' . $moduleDirNameUpper . '_' . 'ACTIVERIGHTS'));
         $form->addAppendix('module_read', $target_mid, $target_mname . ' ' . constant('CO_' . $moduleDirNameUpper . '_' . 'ACCESSRIGHTS'));
