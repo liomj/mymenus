@@ -74,22 +74,30 @@ class Links extends \XoopsObject
     /**
      * @return array
      */
-    public function getHooks()
+    public function getHooks(): array
     {
         $ret  = [];
         $data = $this->getVar('hooks', 'n');
-        if (!$data) {
+    if (empty($data)) {
             return $ret;
         }
+
         $lines = \explode("\n", $data);
-        foreach ($lines as $line) {
-            $line   = \trim($line);
-            $line   = \explode('|', $line);
-            $hook   = \trim($line[0]);
-            $method = isset($line[1]) ? \trim($line[1]) : '';
-            //$info = explode(',', trim($line[0]));
+        foreach ($lines as $lineStr) {
+            $trimmedLine = \trim($lineStr);
+        if ('' === $trimmedLine) {
+            continue;
+        }
+
+            $parts       = \explode('|', $trimmedLine);
+        [$hook, $method] = \array_pad($parts, 2, '');
+            $hook   = \trim($hook);
+            $method = \trim($method);
+
+        if ('' !== $hook) {
             $ret[$hook][] = $method;
         }
+    }
 
         return $ret;
     }
