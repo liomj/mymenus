@@ -83,7 +83,12 @@ class Builder
 
             $this->output[$idx]['oli'] = true;
 
-            $this->output[$idx] = \array_merge($item, $this->output[$idx]);
+//            $this->output[$idx] = \array_merge($item, $this->output[$idx]);
+            // Directly assign values from $item to $this->output[$idx]
+            foreach ($item as $key => $value) {
+                $this->output[$idx][$key] = $value;
+            }
+
 
             if (isset($this->parents[$item['id']])) {
                 $this->output[$idx]['hassub'] = true;
