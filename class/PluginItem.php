@@ -36,15 +36,7 @@ class PluginItem
     {
         /** @var \XoopsModules\Mymenus\Helper $helper */
         $helper   = Helper::getInstance();
-        $language = $GLOBALS['xoopsConfig']['language'];
-        //        $path     = $GLOBALS['xoops']->path("modules/{$mymenus->dirname}/plugins/{$name}/language");
-        //        if (!($ret = @require "{$path}/{$language}/{$name}.php")) {
-        //            $ret = @require "{$path}/english/{$name}.php";
-        //        }
-        //        return $ret;
-
-        $path2 = "{$helper->getDirname()}/plugins/{$name}/{$language}/";
-        \xoops_loadLanguage($name, $path2);
+        $helper->loadLanguage($name);
 
         return true;
     }
