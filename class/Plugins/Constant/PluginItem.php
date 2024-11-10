@@ -19,16 +19,18 @@ namespace XoopsModules\Mymenus\Plugins\Constant;
  * @author          trabis <lusopoemas@gmail.com>
  */
 
-use XoopsModules\Mymenus;
+use XoopsModules\Mymenus\{
+    Registry
+};
 
 /**
  * Class PluginItem
  */
-class PluginItem extends Mymenus\PluginItem
+class PluginItem extends \XoopsModules\Mymenus\PluginItem
 {
     public static function eventLinkDecoration(): void
     {
-        $registry          = Mymenus\Registry::getInstance();
+        $registry          = Registry::getInstance();
         $linkArray         = $registry->getEntry('link_array');
         $linkArray['link'] = self::doDecoration($linkArray['link']);
         $registry->setEntry('link_array', $linkArray);
@@ -36,7 +38,7 @@ class PluginItem extends Mymenus\PluginItem
 
     public static function eventImageDecoration(): void
     {
-        $registry           = Mymenus\Registry::getInstance();
+        $registry           = Registry::getInstance();
         $linkArray          = $registry->getEntry('link_array');
         $linkArray['image'] = self::doDecoration($linkArray['image']);
         $registry->setEntry('link_array', $linkArray);
@@ -44,7 +46,7 @@ class PluginItem extends Mymenus\PluginItem
 
     public static function eventTitleDecoration(): void
     {
-        $registry           = Mymenus\Registry::getInstance();
+        $registry           = Registry::getInstance();
         $linkArray          = $registry->getEntry('link_array');
         $linkArray['title'] = self::doDecoration($linkArray['title']);
         $registry->setEntry('link_array', $linkArray);
@@ -52,7 +54,7 @@ class PluginItem extends Mymenus\PluginItem
 
     public static function eventAltTitleDecoration(): void
     {
-        $registry               = Mymenus\Registry::getInstance();
+        $registry               = Registry::getInstance();
         $linkArray              = $registry->getEntry('link_array');
         $linkArray['alt_title'] = self::doDecoration($linkArray['alt_title']);
         $registry->setEntry('link_array', $linkArray);
@@ -65,7 +67,7 @@ class PluginItem extends Mymenus\PluginItem
      */
     protected static function doDecoration($string)
     {
-        $registry = Mymenus\Registry::getInstance();
+        $registry = Registry::getInstance();
         //        $string = '';
 
         if (!\preg_match('/{(.*\|.*)}/i', $string, $reg)) {

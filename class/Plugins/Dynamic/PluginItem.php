@@ -19,18 +19,21 @@ namespace XoopsModules\Mymenus\Plugins\Dynamic;
  * @author          trabis <lusopoemas@gmail.com>
  */
 
-use XoopsModules\Mymenus;
-use XoopsModules\Mymenus\Helper;
+use XoopsModules\Mymenus\{
+    Helper,
+    Registry
+};
+
 
 /**
  * Class PluginItem
  */
-class PluginItem extends Mymenus\PluginItem
+class PluginItem extends \XoopsModules\Mymenus\PluginItem
 {
     public static function eventEnd(): void
     {
         $newmenus = [];
-        $registry = Mymenus\Registry::getInstance();
+        $registry = Registry::getInstance();
         $menus    = $registry->getEntry('menus');
         foreach ($menus as $menu) {
             if (!\preg_match('/{(MODULE\|.*)}/i', $menu['title'], $reg)) {

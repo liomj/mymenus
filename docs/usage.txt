@@ -1,11 +1,11 @@
 Important to know:
 
-Links and images are relative to the root of your site:
+Local links and images are relative to the root of your site:
 modules/profile
 search.php
 uploads/blank.gif
 
-For linking to external sites you need to use complete url:
+For links to external sites you need to use the complete URL:
 http://www.xoops.org
 
 
@@ -37,7 +37,7 @@ The same is valid for OWNER:
 {OWNER|UID}
 etc..
 
-And you can get any parameter on the uri with:
+And you can get any parameter on the URI with:
 {URI|UID}
 {URI|ID}
 {URI|SEARCH}

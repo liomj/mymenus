@@ -1,7 +1,7 @@
 Theory of operation:
 
 Mymenus separates logic from presentation almost 100%!
-It is mymenus task to generate an array with menus information and let each skin
+It is Mymenus task to generate an array with menus information and let each skin
 decide what to do with that information.
 
 How can skin know when to open a new <li> or <ul> and when to close it?
