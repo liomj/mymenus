@@ -38,7 +38,7 @@ class Plugin
     {
         $this->plugins  = [];
         $this->events   = [];
-        $this->registry = Mymenus\Registry::getInstance();
+        $this->registry = Registry::getInstance();
         /** @var \XoopsModules\Mymenus\Helper $this ->helper */
         $this->helper = Helper::getInstance();
         $this->setPlugins();

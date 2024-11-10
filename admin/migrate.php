@@ -22,8 +22,10 @@ declare(strict_types=1);
 
 use Xmf\Module\Admin;
 use Xmf\Request;
-use XoopsModules\Mymenus;
-use XoopsModules\Mymenus\Common\Migrate;
+use XoopsModules\Mymenus\{
+    Common\Configurator,
+    Common\Migrate
+};
 
 /** @var Admin $adminObject */
 require_once __DIR__ . '/admin_header.php';
@@ -47,8 +49,8 @@ echo <<<EOF
 
 //XoopsLoad::load('migrate', 'newbb');
 
-/** @var Mymenus\Common\Configurator $configurator */
-$configurator = new Mymenus\Common\Configurator();
+/** @var \XoopsModules\Mymenus\Common\Configurator $configurator */
+$configurator = new Configurator();
 
 /** @var \XoopsModules\Mymenus\Common\Migrate $migrator */
 $migrator = new Migrate($configurator);
