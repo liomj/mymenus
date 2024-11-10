@@ -31,34 +31,30 @@ class PluginItem extends \XoopsModules\Mymenus\PluginItem
 {
     public static function eventLinkDecoration(): void
     {
-        $registry          = Registry::getInstance();
-        $linkArray         = $registry->getEntry('link_array');
+        $linkArray = self::getLinkArray();
         $linkArray['link'] = self::doDecoration($linkArray['link']);
-        $registry->setEntry('link_array', $linkArray);
+        self::setLinkArray($linkArray);
     }
 
     public static function eventImageDecoration(): void
     {
-        $registry           = Registry::getInstance();
-        $linkArray          = $registry->getEntry('link_array');
+        $linkArray = self::getLinkArray();
         $linkArray['image'] = self::doDecoration($linkArray['image']);
-        $registry->setEntry('link_array', $linkArray);
+        self::setLinkArray($linkArray);
     }
 
     public static function eventTitleDecoration(): void
     {
-        $registry           = Registry::getInstance();
-        $linkArray          = $registry->getEntry('link_array');
+        $linkArray = self::getLinkArray();
         $linkArray['title'] = self::doDecoration($linkArray['title']);
-        $registry->setEntry('link_array', $linkArray);
+        self::setLinkArray($linkArray);
     }
 
     public static function eventAltTitleDecoration(): void
     {
-        $registry               = Registry::getInstance();
-        $linkArray              = $registry->getEntry('link_array');
+        $linkArray = self::getLinkArray();
         $linkArray['alt_title'] = self::doDecoration($linkArray['alt_title']);
-        $registry->setEntry('link_array', $linkArray);
+        self::setLinkArray($linkArray);
     }
 
     /**
@@ -68,7 +64,6 @@ class PluginItem extends \XoopsModules\Mymenus\PluginItem
      */
     protected static function doDecoration($string)
     {
-        $registry = Registry::getInstance();
         if (!\preg_match('/{(.*\|.*)}/i', $string, $reg)) {
             return $string;
         }
@@ -83,5 +78,27 @@ class PluginItem extends \XoopsModules\Mymenus\PluginItem
         }
 
         return $string;
+    }
+
+    /**
+     * Get the link array from the registry.
+     *
+     * @return array
+     */
+    private static function getLinkArray(): array
+    {
+        $registry = Registry::getInstance();
+        return $registry->getEntry('link_array');
+    }
+
+    /**
+     * Set the link array in the registry.
+     *
+     * @param array $linkArray
+     */
+    private static function setLinkArray(array $linkArray): void
+    {
+        $registry = Registry::getInstance();
+        $registry->setEntry('link_array', $linkArray);
     }
 }
