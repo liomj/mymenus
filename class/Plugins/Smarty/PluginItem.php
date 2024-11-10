@@ -88,7 +88,9 @@ class PluginItem extends \XoopsModules\Mymenus\PluginItem
     private static function getLinkArray(): array
     {
         $registry = Registry::getInstance();
-        return $registry->getEntry('link_array');
+        $result = $registry->getEntry('link_array');
+
+        return $result ?? array();
     }
 
     /**
