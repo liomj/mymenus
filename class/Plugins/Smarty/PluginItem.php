@@ -90,7 +90,7 @@ class PluginItem extends \XoopsModules\Mymenus\PluginItem
         $registry = Registry::getInstance();
         $result = $registry->getEntry('link_array');
 
-        return $result ?? array();
+        return $result ?? [];
     }
 
     /**
