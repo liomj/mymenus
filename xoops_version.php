@@ -24,8 +24,8 @@ $moduleDirNameUpper = \mb_strtoupper($moduleDirName);
 
 // ------------------- Information ------------------- /
 $modversion = [
-    'version'             => '1.54.0-Beta.8',
-    'module_status'       => 'Beta.8',
+    'version'             => '1.54.0-Beta.9',
+    'module_status'       => 'Beta.9',
     'release_date'        => '2024/11/14', // YYYY/mm/dd
     'name'                => _MI_MYMENUS_MD_NAME,
     'description'         => _MI_MYMENUS_MD_DESC,

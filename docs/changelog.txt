@@ -1,3 +1,6 @@
+<h5>1.54.0 Beta 9  [2024-11-14]</h5>  Dev: XOOPS 2.5.12, PHP 7.4, PHP 8.3.13, PHP 8.4 RC4
+- fix for call to Registry (liomj/mamba)
+
 <h5>1.54.0 Beta 8  [2024-11-14]</h5>  Dev: XOOPS 2.5.12, PHP 7.4, PHP 8.3.13, PHP 8.4 RC4
 - fix for links defaulting to first menu (liomj/mamba)
 
