@@ -39,7 +39,7 @@ if (!$menusList) {
 
 $valid_menu_ids = array_keys($menusList);
 $mid = Request::getInt('mid', Request::getInt('mid', '', 'POST'), 'GET');
-if ($mid && in_array((string)$mid, $valid_menu_ids, true)) {
+if ($mid && in_array($mid, $valid_menu_ids, true)) {
     $menuTitle = (string)$menusList[$mid];
 } else {
     $keys = array_keys($menusList);
