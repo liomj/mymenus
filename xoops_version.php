@@ -24,9 +24,9 @@ $moduleDirNameUpper = \mb_strtoupper($moduleDirName);
 
 // ------------------- Information ------------------- /
 $modversion = [
-    'version'             => '1.54.0-Beta.7',
-    'module_status'       => 'Beta.7',
-    'release_date'        => '2024/02/03', // YYYY/mm/dd
+    'version'             => '1.54.0-Beta.8',
+    'module_status'       => 'Beta.8',
+    'release_date'        => '2024/11/14', // YYYY/mm/dd
     'name'                => _MI_MYMENUS_MD_NAME,
     'description'         => _MI_MYMENUS_MD_DESC,
     'author'              => 'Trabis (www.xoops.org), contributors: Mamba, Bleek, Zyspec, Luciorota',
