@@ -75,7 +75,7 @@ class PluginItem extends \XoopsModules\Mymenus\PluginItem
 
     public static function eventImageDecoration(): void
     {
-        $registry  = Mymenus\Registry::getInstance();
+        $registry  = Registry::getInstance();
         $linkArray = $registry->getEntry('link_array');
         if ($linkArray['image'] && !\filter_var($linkArray['image'], \FILTER_VALIDATE_URL)) {
             $linkArray['image'] = XOOPS_URL . '/' . $linkArray['image'];
