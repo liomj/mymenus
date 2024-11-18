@@ -77,10 +77,20 @@ class PluginItem extends \XoopsModules\Mymenus\PluginItem
     {
         $registry  = Registry::getInstance();
         $linkArray = $registry->getEntry('link_array');
-        if ($linkArray['image'] && !\filter_var($linkArray['image'], \FILTER_VALIDATE_URL)) {
+
+        if ($linkArray['image']) {
+            // Check if the image value starts with a known icon class prefix
+            if (preg_match('/^(fa|fas|far|fab|bi|material-icons)/i', $linkArray['image'])) {
+                // If it's an icon class, don't modify the path
+                $linkArray['image'] = self::doDecoration($linkArray['image']);
+            } elseif (!\filter_var($linkArray['image'], \FILTER_VALIDATE_URL)) {
+                // If it's not a full URL and not an icon class, prepend XOOPS_URL
             $linkArray['image'] = XOOPS_URL . '/' . $linkArray['image'];
-            //Do not do this in other decorators
             $linkArray['image'] = self::doDecoration($linkArray['image']);
+            } else {
+                // It's a full URL, apply decoration if needed
+                $linkArray['image'] = self::doDecoration($linkArray['image']);
+            }
             $registry->setEntry('link_array', $linkArray);
         }
     }
