@@ -11,7 +11,7 @@
   border-radius: 0;
   -webkit-box-shadow: none !important;
   box-shadow: none !important;
-  background-color: #ffffff; /* White background for dropdown */
+  background-color: #ffffff; /* Ensuring white background for dropdown */
   color: #222222; /* Black text color */
 }
 
@@ -37,8 +37,8 @@
 .navbar-default .navbar-nav > .show > a,
 .navbar-default .navbar-nav > .show > a:focus,
 .navbar-default .navbar-nav > .show > a:hover {
-  color: #000000; /* Active and hover state */
-  background: #FFFFFF;
+  color: #fff; /* Active and hover state remain white text */
+  background: #222222;
   outline: 0;
   text-decoration: none;
 }
@@ -53,11 +53,20 @@
 }
 
 /* Submenu items when hovered */
-.custom-nav .collapse ul > li:hover > a,
-.custom-nav .collapse ul ul > li:hover > a,
+.custom-nav .collapse ul > li:hover > a {
+  background: #222222; /* Black background for top-level items */
+  color: #fff; /* White text for hover state */
+}
+
+.custom-nav .collapse ul ul > li:hover > a {
+  background: #222222; /* Black background for nested items on hover */
+  color: #fff; /* White text for hover state */
+}
+
+/* Deeper submenus */
 .custom-nav .collapse ul ul ul > li:hover > a {
-  background: #FFFFFF; 
-  color: #000000; /* Black text on hover */
+  background: #222222; /* Black background */
+  color: #fff; /* White text */
 }
 
 /* Default background color for nested submenus */
@@ -70,15 +79,15 @@
 /* Deeper nested submenus */
 .custom-nav .collapse ul ul ul, 
 .custom-nav .collapse ul ul ul.dropdown-menu {
-  background: #FFFFFF; 
-  color: #000000; 
+  background: #1E88E5; /* Blue background */
+  color: #fff; /* White text */
 }
 
 /* Further nested submenus */
 .custom-nav .collapse ul ul ul ul, 
 .custom-nav .collapse ul ul ul ul.dropdown-menu {
-  background: #FFFFFF; 
-  color: #000000; 
+  background: #64B5F6; /* Lighter blue background */
+  color: #fff; /* White text */
 }
 
 /****************************** Drop-down menu on hover **********************************/
