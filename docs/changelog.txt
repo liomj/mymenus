@@ -4,6 +4,7 @@
 - fix return to the same menu after delete of links (mamba)
 - escape column names with backticks (mamba)
 - fix pagination of menus (liomj/mamba)
+- add new skins: imageonly, xswatch4 (liomj)
 
 <h5>1.54.0 Beta 9  [2024-11-14]</h5>  Dev: XOOPS 2.5.12, PHP 7.4, PHP 8.3.13, PHP 8.4 RC4
 - fix for call to Registry (liomj/mamba)
