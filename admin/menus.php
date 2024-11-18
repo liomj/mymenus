@@ -94,7 +94,7 @@ switch ($op) {
                 $linklist   = "op={$op}";
                 $linklist   .= "&filter_menus_title_condition={$filter_menus_title_condition}";
                 $linklist   .= "&filter_menus_title={$filter_menus_title}";
-                $pagenavObj = new \XoopsPageNav($itemFilterCount, $limit, $start, 'start', $linklist);
+                $pagenavObj = new \XoopsPageNav($menusFilterCount, $limit, $start, 'start', $linklist);
                 $pagenav    = $pagenavObj->renderNav(4);
             } else {
                 $pagenav = '';

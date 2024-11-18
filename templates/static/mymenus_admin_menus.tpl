@@ -55,6 +55,8 @@
                 </tr>
             <{/foreach}>
         </table>
-        <{$pagenav}>
+        <{if !empty($pagenav)}>
+                <{$pagenav}>
+        <{/if}>
     <{/if}>
 </fieldset>
