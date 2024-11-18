@@ -1,0 +1,32 @@
+.menu-area{background: #006fd7}
+.dropdown-menu{padding:0;margin:0;border:0 solid transition!important;border:0 solid rgba(0,0,0,.15);border-radius:0;-webkit-box-shadow:none!important;box-shadow:none!important}
+.custom-nav a, .navbar-default .navbar-nav > li > a, .custom-nav ul li a , .navbar-expand-lg .navbar-nav .nav-link{color:#fff;font-size:16px;text-transform:uppercase;padding:16px 15px;font-family:'Roboto',sans-serif;display: block !important;}
+.custom-nav .active a,.custom-nav .active a:focus,.custom-nav .active a:hover,.custom-nav li a:hover,.custom-nav li a:focus ,.navbar-default .navbar-nav>.show>a, .navbar-default .navbar-nav>.show>a:focus, .navbar-default .navbar-nav>.show>a:hover{color: #fff;background: #4CAF50;outline: 0;text-decoration: none;}
+/*==========Sub Menu=v==========*/
+.custom-nav .collapse ul > li:hover > a{background: #ed3039;color: #fff;}
+.custom-nav .collapse ul ul > li:hover > a, .navbar-default .navbar-nav .show .dropdown-menu > li > a:focus, .navbar-default .navbar-nav .show .dropdown-menu > li > a:hover{background: #ed3039;color: #fff;}
+.custom-nav .collapse ul ul ul > li:hover > a{background: #ed3039;color: #fff;}
+
+.custom-nav .collapse ul ul, .custom-nav .collapse ul ul.dropdown-menu{background:#1565C0;}
+.custom-nav .collapse ul ul ul, .custom-nav .collapse ul ul ul.dropdown-menu{background:#1E88E5}
+.custom-nav .collapse ul ul ul ul, .custom-nav .collapse ul ul ul ul.dropdown-menu{background:#64B5F6}
+
+/******************************Drop-down menu work on hover**********************************/
+.custom-nav{background: none;border: 0 solid;margin: 0;padding: 0;min-height:20px;width: 100%;}
+@media only screen and (min-width: 767px) {
+.custom-nav .collapse ul li:hover> ul{display:block}
+.custom-nav .collapse ul ul{position:absolute;top:100%;left:0;min-width:250px;display:none}
+/*******/
+.custom-nav .collapse ul ul li{position:relative}
+.custom-nav .collapse ul ul li:hover> ul{display:block}
+.custom-nav .collapse ul ul ul{position:absolute;top:0;left:100%;min-width:250px;display:none}
+/*******/
+.custom-nav .collapse ul ul ul li{position:relative}
+.custom-nav .collapse ul ul ul li:hover ul{display:block}
+.custom-nav .collapse ul ul ul ul{position:absolute;top:0;left:-100%;min-width:250px;display:none;z-index:1}
+
+}
+@media only screen and (max-width: 767px) {
+.navbar-nav .show .dropdown-menu .dropdown-menu > li > a{padding:16px 15px 16px 35px}
+.navbar-nav .show .dropdown-menu .dropdown-menu .dropdown-menu > li > a{padding:16px 15px 16px 45px}
+}
