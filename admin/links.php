@@ -78,7 +78,7 @@ switch ($op) {
         LinksUtility::addLink($mid);
         break;
     case 'clone':
-        LinksUtility::cloneLink($id);
+        LinksUtility::cloneLink($id, $mid);
         break;
     case 'save':
         LinksUtility::saveLink($id, $mid);
@@ -86,6 +86,7 @@ switch ($op) {
     case 'delete':
         $id       = Request::getInt('id', null);
         $linksObj = $helper->getHandler('Links')->get($id);
+        $mid2 = $mid;
         if (true === Request::getBool('ok', false, 'POST')) {
             if (!$GLOBALS['xoopsSecurity']->check()) {
                 redirect_header($currentFile, 3, implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
@@ -105,7 +106,7 @@ switch ($op) {
                 xoops_cp_footer();
                 exit();
             }
-            redirect_header($currentFile, 3, _AM_MYMENUS_MSG_DELETE_LINK_SUCCESS);
+            redirect_header($currentFile. '?op=list&mid=' . $mid, 3, _AM_MYMENUS_MSG_DELETE_LINK_SUCCESS);
         } else {
             xoops_cp_header();
             xoops_confirm(

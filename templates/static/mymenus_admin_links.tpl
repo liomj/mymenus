@@ -90,11 +90,11 @@
                                         <img style="padding: 1px 2px 0 0;" src="<{xoModuleIcons16 'edit.png'}>"
                                              title="<{$smarty.const._EDIT}>" alt="<{$smarty.const._EDIT}>">
                                     </a>
-                                    <a href="links.php?mid=<{$menu_id}>&amp;op=delete&amp;id=<{$menu.id}>">
+                                    <a href="links.php?mid=<{$mid}>&amp;op=delete&amp;id=<{$menu.id}>">
                                         <img style="padding: 1px 2px 0 0;" src="<{xoModuleIcons16 'delete.png'}>"
                                              title="<{$smarty.const._DELETE}>" alt="<{$smarty.const._DELETE}>">
                                     </a>
-                                    <a href="links.php?mid=<{$menu_id}>&amp;op=clone&amp;id=<{$menu.id}>">
+                                    <a href="links.php?mid=<{$mid}>&amp;op=clone&amp;id=<{$menu.id}>">
                                         <img style="padding: 1px 2px 0 0;" src="<{xoModuleIcons16 'editcopy.png'}>"
                                              title="<{$smarty.const._CLONE}>" alt="<{$smarty.const._CLONE}>">
                                     </a>
@@ -144,13 +144,13 @@
                                                              title="<{$smarty.const._EDIT}>"
                                                              alt="<{$smarty.const._EDIT}>">
                                                     </a>
-                                                    <a href="links.php?mid=<{$smenu_id}>&amp;op=delete&amp;id=<{$smenu.id}>">
+                                                    <a href="links.php?mid=<{$mid}>&amp;op=delete&amp;id=<{$smenu.id}>">
                                                         <img style="padding: 1px 2px 0 0;"
                                                              src="<{xoModuleIcons16 'delete.png'}>"
                                                              title="<{$smarty.const._DELETE}>"
                                                              alt="<{$smarty.const._DELETE}>">
                                                     </a>
-                                                    <a href="links.php?mid=<{$smenu_id}>&amp;op=clone&amp;id=<{$smenu.id}>">
+                                                    <a href="links.php?mid=<{$mid}>&amp;op=clone&amp;id=<{$smenu.id}>">
                                                         <img style="padding: 1px 2px 0 0;" src="<{xoModuleIcons16 'editcopy.png'}>"
                                                              title="<{$smarty.const._CLONE}>" alt="<{$smarty.const._CLONE}>">
                                                     </a>
@@ -200,13 +200,13 @@
                                                                              title="<{$smarty.const._EDIT}>"
                                                                              alt="<{$smarty.const._EDIT}>">
                                                                     </a>
-                                                                    <a href="links.php?mid=<{$ssmenu_id}>&amp;op=delete&amp;id=<{$ssmenu.id}>">
+                                                                    <a href="links.php?mid=<{$mid}>&amp;op=delete&amp;id=<{$ssmenu.id}>">
                                                                         <img style="padding: 1px 2px 0 0;"
                                                                              src="<{xoModuleIcons16 'delete.png'}>"
                                                                              title="<{$smarty.const._DELETE}>"
                                                                              alt="<{$smarty.const._DELETE}>">
                                                                     </a>
-                                                                    <a href="links.php?mid=<{$ssmenu_id}>&amp;op=clone&amp;id=<{$ssmenu.id}>">
+                                                                    <a href="links.php?mid=<{$mid}>&amp;op=clone&amp;id=<{$ssmenu.id}>">
                                                                         <img style="padding: 1px 2px 0 0;" src="<{xoModuleIcons16 'editcopy.png'}>"
                                                                              title="<{$smarty.const._CLONE}>" alt="<{$smarty.const._CLONE}>">
                                                                     </a>

@@ -332,7 +332,7 @@ class LinksUtility
         echo $linksObj->getVar('visible');
     }
 
-    public static function cloneLink($id): void
+    public static function cloneLink($id, $mid): void
     {
         $helper       = Helper::getInstance();
         $linksHandler = $helper->getHandler('Links');
@@ -340,11 +340,22 @@ class LinksUtility
         $new_id = false;
         $table  = $GLOBALS['xoopsDB']->prefix('mymenus_links');
         // copy content of the record you wish to clone
-        $tempTable = $GLOBALS['xoopsDB']->fetchArray($GLOBALS['xoopsDB']->query("SELECT * FROM $table WHERE id='$id' "), \MYSQLI_ASSOC) or exit('Could not select record');
+        $sql = "SELECT * FROM $table WHERE id='$id' ";
+        $tempTable = $GLOBALS['xoopsDB']->fetchArray($GLOBALS['xoopsDB']->query($sql), \MYSQLI_ASSOC) or exit('Could not select record');
         // set the auto-incremented id's value to blank.
         unset($tempTable['id']);
+
+        // Escape column names with backticks
+        $columns = array_map(function ($col) {
+            return "`" . $col . "`";
+        }, array_keys($tempTable));
+
+        // Prepare the SQL statement for insertion
+        $sql = "INSERT INTO $table (" . \implode(', ', $columns) . ") VALUES ('" . \implode("', '", \array_map([$GLOBALS['xoopsDB'], 'escape'], array_values($tempTable))) . "')";
+
+
         // insert cloned copy of the original  record
-        $result = $GLOBALS['xoopsDB']->queryF("INSERT INTO $table (" . \implode(', ', \array_keys($tempTable)) . ") VALUES ('" . \implode("', '", \array_values($tempTable)) . "')") or \trigger_error($GLOBALS['xoopsDB']->error());
+        $result = $GLOBALS['xoopsDB']->queryF($sql) or \trigger_error($GLOBALS['xoopsDB']->error());
 
         if ($result) {
             // Return the new id
@@ -354,6 +365,6 @@ class LinksUtility
             $msg = \_AM_MYMENUS_MSG_ERROR;
         }
 
-        \redirect_header($GLOBALS['mymenusAdminPage'] . '?op=list&amp;mid=' . $new_id, 2, $msg);
+        \redirect_header($GLOBALS['mymenusAdminPage'] . '?op=list&amp;mid=' . $mid, 2, $msg);
     }
 }
